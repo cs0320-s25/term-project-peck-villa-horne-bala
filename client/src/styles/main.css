@@ -1,0 +1,105 @@
+/* CSS for Main Select interface */
+
+.select {
+  position: relative;
+  min-height: 95vh;
+}
+
+.select-history {
+  height: 55vh;
+  margin: auto;
+  display: block;
+  overflow: scroll;
+}
+
+.graph-container {
+  height: 75vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  color: #ff4527;
+}
+
+.table {
+  height: 65vh;
+  margin: auto;
+  display: flex;
+  overflow: scroll;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.table th, .table td {
+  border: 1px solid gray;
+  font-size: min(2vw, 2vh);
+  padding: 1vw;
+}
+
+.table th {
+  background-color: #990101;
+}
+
+.dropdown {
+  width: 20vw;
+  margin: 2vw;
+  font-size: min(2vw, 2vh);
+  cursor: pointer;
+}
+
+.dropdown > option {
+  font-size: min(3vw, 3vh);
+  text-align: center;
+}
+
+.repl-input {        
+  margin: auto;    
+  height:10vh;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements */
+}
+.repl-command-box {
+  width: 90%;            
+  margin: auto;
+  display: block;
+}
+
+fieldset {
+  flex: 1; /* Makes fieldsets take equal width */
+  min-width: 150px; /* Ensures responsiveness */
+}
+.red-outline-button {
+  background-color: transparent;
+  color: rgb(242, 242, 242);
+  border: 6px solid rgb(122, 3, 3); /* Thicker border */
+  padding: 15px 30px; /* Larger padding */
+  font-size: 20px; /* Larger text */
+  font-weight: bold; /* Make text stand out */
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  border-radius: 8px; /* Slightly rounded edges */
+  margin-top: 20px;
+}
+
+.red-outline-button:hover {
+  border-color: lightcoral; /* Lighter red on hover */
+  color: lightcoral;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.sign-in {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;  
+  align-items: center;
+}
+
+@media (prefers-color-scheme: light) {
+  .table th {
+    background-color: aqua;
+  }
+}
