@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../styles/App.css";
 import {
+  ClerkProvider,
   SignedIn,
   SignedOut,
   SignInButton,
@@ -16,20 +17,28 @@ import {
  *  else it will stay at the screen prompting for log in
  */
 
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
+
 function App() {
   return (
-    <div className="App">
-      <SignedOut>
-        <SignInButton fallbackRedirectUrl="/dashboard" />
-      </SignedOut>
-      <SignedIn>
-        <SignOutButton />
-        <div className="App-header">
-          <h1 aria-label="Mosaic Learning+">Mosaic Learning+</h1>
-        </div>
-        <div id="modal-root"></div>
-      </SignedIn>
-    </div>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <div className="App">
+        <SignedOut>
+          <SignInButton fallbackRedirectUrl="/dashboard" />
+        </SignedOut>
+        <SignedIn>
+          <SignOutButton />
+          <div className="App-header">
+            <h1 aria-label="Mosaic Learning+">Mosaic Learning+</h1>
+          </div>
+          <div id="modal-root"></div>
+        </SignedIn>
+      </div>
+    </ClerkProvider>
   );
 }
 
