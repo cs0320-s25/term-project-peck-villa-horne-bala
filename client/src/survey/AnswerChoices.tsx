@@ -3,12 +3,12 @@ import React, { Component, Dispatch, SetStateAction, useState } from "react";
 interface AnsChoiceProps {
   answerChoices: string[];
   onOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedAnswer: number;
 }
 
 class AnswerChoices extends Component<AnsChoiceProps> {
   render() {
-    const { answerChoices, onOptionChange} = this.props;
-    
+    const { answerChoices, onOptionChange,  selectedAnswer} = this.props;
 
     return (
       <div className="options">
@@ -17,7 +17,8 @@ class AnswerChoices extends Component<AnsChoiceProps> {
             <input
               type="radio"
               name="answerChoice"
-              value={ansChoice}
+              value={index}
+              checked={selectedAnswer=== index}
               onChange={onOptionChange}
               className="form-check-input"
             />

@@ -13,7 +13,7 @@ export interface FormatQ {
 export function SurveyManager() {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);
   const [responses, setResponses] = useState<number[]>([]);
-  const [currQ, setCurrQ] = useState<FormatQ>();
+  const [currQ, setCurrQ] = useState<FormatQ| null>();
   const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
 
   //populates the question bank upon refresh
@@ -29,34 +29,40 @@ export function SurveyManager() {
     }
   }, [questionBank]);
 
+  // // this is used to ensure everything is updating properly
+  // useEffect(() => {
+  //   console.log("update to responses: " + responses);
+  // }, [responses]);
+
+  // useEffect(() => {
+  //   console.log("update to currQ: " + currQ?.question);
+  // }, [currQ?.question]);
+  
+  // useEffect(()=>{
+  //   console.log("update to the curr selected option: "+ selectedAnswer)
+  // }, [selectedAnswer])
+
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currQ != undefined) {
-      const chosenAnswer = e.target.value;
-      for (let i = 0; i < currQ.answerChoices.length; i++) {
-        if (currQ.answerChoices[i] == chosenAnswer) {
-          setSelectedAnswer(i);
-          break;
-        }
-      }
+      setSelectedAnswer(Number(e.target.value));
     }
   };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     setResponses([...responses, selectedAnswer]);
-    {handleNextQuestion}
-    console.log("Form submitted!");
+    handleNextQuestion();
   };
 
   const handleNextQuestion = () => {
-    console.log("next question called")
     if (currQ != undefined) {
       let currQuestionID = currQ.id;
-      if(currQuestionID < questionBank.length){
-        currQuestionID = currQuestionID+1
-        setCurrQ(questionBank[currQuestionID])
-      } else{
-        return(<h1> survey done!</h1>)
+      if (currQuestionID < questionBank.length) {
+        setCurrQ(questionBank[currQuestionID]);
+        setSelectedAnswer(-1)
+      } else {
+        setCurrQ(null)
+        // query right here
       }
     }
   };
@@ -69,6 +75,7 @@ export function SurveyManager() {
           currQ={currQ}
           onOptionChange={handleOptionChange}
           onSubmit={onSubmit}
+          selectedAnswer={selectedAnswer}
         ></Question>
       )}
     </div>

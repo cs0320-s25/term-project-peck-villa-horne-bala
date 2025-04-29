@@ -6,11 +6,12 @@ interface QuestionProps {
   currQ: FormatQ;
   onOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: FormEventHandler<HTMLFormElement>
+  selectedAnswer: number;
 }
 
 class Question extends Component<QuestionProps>{
     render() {
-        const { currQ, onOptionChange, onSubmit } = this.props;
+        const { currQ, onOptionChange, onSubmit, selectedAnswer } = this.props;
 
         return (
           <div className="">
@@ -19,6 +20,7 @@ class Question extends Component<QuestionProps>{
               <AnswerChoices
                 answerChoices={currQ.answerChoices}
                 onOptionChange={onOptionChange}
+                selectedAnswer={selectedAnswer}
               />
               <button type="submit">SUBMIT</button>
             </form>
