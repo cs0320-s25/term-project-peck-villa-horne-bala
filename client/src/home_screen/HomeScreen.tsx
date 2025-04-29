@@ -1,7 +1,7 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import { UserButton } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-
+import ModulePopulator from "./module_assembler/ModulePopulator";
 
 export function Homescreen() {
   const navigate= useNavigate();
@@ -14,7 +14,8 @@ export function Homescreen() {
       <div className="home-screen-head-bar">
         <h1> Home </h1>
         <UserButton></UserButton>
-        <button onClick={takeSurvey}> take survey!</button>
+        <ModulePopulator></ModulePopulator>
+        {/* <button onClick={takeSurvey}> take survey!</button> */}
       </div>
       <div className="home-screen-module-container"></div>
     </div>
