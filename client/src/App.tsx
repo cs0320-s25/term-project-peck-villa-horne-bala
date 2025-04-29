@@ -9,15 +9,11 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Homescreen from "./home_screen/HomeScreen";
-import SurveyManager from "./survey/SurveyManager";
-
+import SurveyManager from "./survey/routers/SurveyManager";
+import SurveyResults from "./survey/routers/SurveyResults";
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
@@ -35,7 +31,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Homescreen />} />
-            <Route path="/survey" element={<SurveyManager/>}/>
+            <Route path="/survey" element={<SurveyManager />} />
+            <Route path="/surveyResults" element={<SurveyResults />} />
           </Routes>
         </Router>
       </SignedIn>

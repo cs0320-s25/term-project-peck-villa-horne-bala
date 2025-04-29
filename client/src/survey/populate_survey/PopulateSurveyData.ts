@@ -1,5 +1,22 @@
-import { FormatQ } from "../SurveyManager";
-import { Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15, Q16 } from "./SurveyQuestions";
+import { FormatQ } from "../routers/SurveyManager";
+import {
+  Q1,
+  Q2,
+  Q3,
+  Q4,
+  Q5,
+  Q6,
+  Q7,
+  Q8,
+  Q9,
+  Q10,
+  Q11,
+  Q12,
+  Q13,
+  Q14,
+  Q15,
+  Q16,
+} from "./SurveyQuestions";
 
 export const populateSurvey = (): FormatQ[] => {
   const surveyList: FormatQ[] = [];

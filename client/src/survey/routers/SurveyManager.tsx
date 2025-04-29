@@ -1,6 +1,7 @@
-import { populateSurvey } from "./populate_survey/PopulateSurveyData";
+import { populateSurvey } from "../populate_survey/PopulateSurveyData";
 import { useState, useEffect, FormEventHandler } from "react";
-import Question from "./Question";
+import Question from "../components/Question";
+import { useNavigate } from "react-router-dom";
 
 export interface FormatQ {
   id: number;
@@ -13,8 +14,10 @@ export interface FormatQ {
 export function SurveyManager() {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);
   const [responses, setResponses] = useState<number[]>([]);
-  const [currQ, setCurrQ] = useState<FormatQ| null>();
+  const [currQ, setCurrQ] = useState<FormatQ | null>();
   const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
+
+  const navigate = useNavigate();
 
   //populates the question bank upon refresh
   useEffect(() => {
@@ -28,19 +31,6 @@ export function SurveyManager() {
       setCurrQ(questionBank[0]);
     }
   }, [questionBank]);
-
-  // // this is used to ensure everything is updating properly
-  // useEffect(() => {
-  //   console.log("update to responses: " + responses);
-  // }, [responses]);
-
-  // useEffect(() => {
-  //   console.log("update to currQ: " + currQ?.question);
-  // }, [currQ?.question]);
-  
-  // useEffect(()=>{
-  //   console.log("update to the curr selected option: "+ selectedAnswer)
-  // }, [selectedAnswer])
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currQ != undefined) {
@@ -59,9 +49,10 @@ export function SurveyManager() {
       let currQuestionID = currQ.id;
       if (currQuestionID < questionBank.length) {
         setCurrQ(questionBank[currQuestionID]);
-        setSelectedAnswer(-1)
+        setSelectedAnswer(-1);
       } else {
-        setCurrQ(null)
+        setCurrQ(null);
+        navigate("/surveyResults");
         // query right here
       }
     }

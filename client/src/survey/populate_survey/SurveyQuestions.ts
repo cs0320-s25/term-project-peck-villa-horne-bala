@@ -1,4 +1,4 @@
-import { FormatQ } from "../SurveyManager";
+import { FormatQ } from "../routers/SurveyManager";
 export const Q1: FormatQ = {
   id: 1,
   question:
@@ -92,7 +92,7 @@ export const Q7: FormatQ = {
     "The super key can be used to invoke the parent class constructor",
   ],
   correctAnswerContent: "Java allows multiple class inheritance using extends",
-  correctAnswerIndex: 1
+  correctAnswerIndex: 1,
 };
 
 export const Q8: FormatQ = {
@@ -199,5 +199,3 @@ export const Q16: FormatQ = {
   correctAnswerContent: "Array",
   correctAnswerIndex: 2,
 };
-
-
