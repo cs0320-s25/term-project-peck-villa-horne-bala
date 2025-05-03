@@ -1,7 +1,15 @@
-import { populateSurvey } from "../populate_survey/PopulateSurveyData";
-import { useState, useEffect, FormEventHandler } from "react";
-import Question from "../components/Question";
+import { populateSurvey } from "./populate_survey/PopulateSurveyData";
+import {
+  useState,
+  useEffect,
+  FormEventHandler,
+  Dispatch,
+  SetStateAction,
+} from "react";
+import Question from "./components/Question";
 import { useNavigate } from "react-router-dom";
+import { Status } from "../EntryLogic";
+import { SurveyStatus } from "./SurveyManager";
 
 export interface FormatQ {
   id: number;
@@ -11,13 +19,15 @@ export interface FormatQ {
   correctAnswerIndex: number;
 }
 
-export function SurveyManager() {
+interface SurveyManagerProps {
+  setSurveyMode: Dispatch<SetStateAction<SurveyStatus>>;
+}
+
+export function SurveyQuestionManager(props: SurveyManagerProps) {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);
   const [responses, setResponses] = useState<number[]>([]);
   const [currQ, setCurrQ] = useState<FormatQ | null>();
   const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
-
-  const navigate = useNavigate();
 
   //populates the question bank upon refresh
   useEffect(() => {
@@ -40,8 +50,12 @@ export function SurveyManager() {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    setResponses([...responses, selectedAnswer]);
-    handleNextQuestion();
+    if (selectedAnswer == -1) {
+      alert("Please Select An Answer Before Submitting!");
+    } else {
+      setResponses([...responses, selectedAnswer]);
+      handleNextQuestion();
+    }
   };
 
   const handleNextQuestion = () => {
@@ -52,15 +66,14 @@ export function SurveyManager() {
         setSelectedAnswer(-1);
       } else {
         setCurrQ(null);
-        navigate("/surveyResults");
-        // query right here
+        props.setSurveyMode(SurveyStatus.Complete);
       }
     }
   };
 
   // we only render IF the question bank and the currQ have been updated and are not undefined
   return (
-    <div>
+    <div className="curr-question">
       {questionBank.length != 0 && currQ != undefined && (
         <Question
           currQ={currQ}
@@ -73,4 +86,4 @@ export function SurveyManager() {
   );
 }
 
-export default SurveyManager;
+export default SurveyQuestionManager;

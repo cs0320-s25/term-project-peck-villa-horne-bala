@@ -1,4 +1,4 @@
-import { FormatQ } from "../routers/SurveyManager";
+import { FormatQ } from "../SurveyQuesManager";
 import React, {
   Component,
   FormEventHandler,
@@ -6,6 +6,9 @@ import React, {
   SetStateAction,
 } from "react";
 import AnswerChoices from "./AnswerChoices";
+import Card from "react-bootstrap/Card";
+
+import "../../styles/Card.css";
 
 interface QuestionProps {
   currQ: FormatQ;
@@ -19,9 +22,11 @@ class Question extends Component<QuestionProps> {
     const { currQ, onOptionChange, onSubmit, selectedAnswer } = this.props;
 
     return (
-      <div className="">
-        <h5 className="question_index">{currQ.question}</h5>
-        <form onSubmit={onSubmit} className="mt-2 mb-2">
+      <Card className="card">
+        <Card.Title className="question-card-title">
+          {currQ.question}
+        </Card.Title>
+        <form onSubmit={onSubmit} className="question-form">
           <AnswerChoices
             answerChoices={currQ.answerChoices}
             onOptionChange={onOptionChange}
@@ -29,7 +34,7 @@ class Question extends Component<QuestionProps> {
           />
           <button type="submit">SUBMIT</button>
         </form>
-      </div>
+      </Card>
     );
   }
 }

@@ -39,10 +39,19 @@
   color: white;
 }
 
-
-
 .card-body {
   color: #ddd;
   font-size: 1rem;
   padding: 16px;
+}
+
+/*This the question card */
+.card {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  color: white;
+  max-width: 500px;
+  margin: auto;
 }

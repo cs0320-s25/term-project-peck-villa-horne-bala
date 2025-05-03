@@ -1,4 +1,4 @@
-import { FormatQ } from "../routers/SurveyManager";
+import { FormatQ } from "../SurveyQuesManager";
 import {
   Q1,
   Q2,

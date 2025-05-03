@@ -12,10 +12,18 @@ import {
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Homescreen from "./home_screen/HomeScreen";
-import SurveyManager from "./survey/routers/SurveyManager";
-import SurveyResults from "./survey/routers/SurveyResults";
-import MOneLTwo from "./home_screen/routers/module1/levelTwo";
-import MOneLOne from "./home_screen/routers/module1/levelOne";
+import Intro from "./EntryLogic";
+import SurveyManager from "./survey/SurveyQuesManager";
+
+import MoneLvlOne from "./module_routers/module1/mOneLvlOne";
+import MOneLvlTwo from "./module_routers/module1/mOneLvlTwo";
+import MoneLvlThree from "./module_routers/module1/mOneLvlThree";
+import MOneLvlFour from "./module_routers/module1/mOneLvlFour";
+
+import MTwoLvlOne from "./module_routers/module2/mTwoLvlOne";
+import MTwoLvlTwo from "./module_routers/module2/mTwoLvlTwo";
+import MTwoLvlThree from "./module_routers/module2/mTwoLvlThree";
+import MTwoLvlFour from "./module_routers/module2/mTwoLvlFour";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -30,14 +38,20 @@ function App() {
         <SignInButton fallbackRedirectUrl="/dashboard" />
       </SignedOut>
       <SignedIn>
-        {/* <SignOutButton /> */}
         <Router>
           <Routes>
-            <Route path="/" element={<Homescreen />} />
-            <Route path="/survey" element={<SurveyManager />} />
-            <Route path="/surveyResults" element={<SurveyResults />} />
-            <Route path="/MOneLTwo" element={<MOneLTwo />} />
-            <Route path="/MOneLOne" element={<MOneLOne />} />
+            <Route path="/" element={<Intro />} />
+            <Route path="/Home" element={<Homescreen />} />
+
+            <Route path="/MoneLvlOne" element={<MoneLvlOne />} />
+            <Route path="/MOneLTwo" element={<MOneLvlTwo />} />
+            <Route path="/MoneLvlThree" element={<MoneLvlThree />} />
+            <Route path="/MOneLvlFour" element={<MOneLvlFour />} />
+
+            <Route path="/MTwoLvlOne" element={<MTwoLvlOne />} />
+            <Route path="/MTwoLvlTwo" element={<MTwoLvlTwo />} />
+            <Route path="/MTwoLvlThree" element={<MTwoLvlThree />} />
+            <Route path="/MTwoLvlFour" element={<MTwoLvlFour />} />
           </Routes>
         </Router>
       </SignedIn>

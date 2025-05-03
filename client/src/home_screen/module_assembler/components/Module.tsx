@@ -1,11 +1,9 @@
-import { useState} from "react";
-import {ModuleInfo} from "./ModulePopulator";
+import { useState } from "react";
+import { ModuleInfo } from "../populate_modules/ModulePopulator";
 import Level from "./Level";
 
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Nav from "react-bootstrap/Nav";
-import "../../styles/Card.css";
+import "../../../styles/Card.css";
 
 interface ModuleProps {
   module: ModuleInfo;

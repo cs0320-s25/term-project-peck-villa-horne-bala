@@ -1,4 +1,4 @@
-import { FormatQ } from "../routers/SurveyManager";
+import { FormatQ } from "../SurveyQuesManager";
 export const Q1: FormatQ = {
   id: 1,
   question:

@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { LevelInfo } from "./ModulePopulator";
+import { LevelInfo } from "../populate_modules/ModulePopulator";
 import { useNavigate } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { FaLock, FaUnlock} from "react-icons/fa";
 
-import "../../styles/Card.css"
+import "../../../styles/Card.css"
 
 interface LevelProp {
   level: LevelInfo;
@@ -39,6 +39,5 @@ export function Level(props: LevelProp){
 
 }
 
-//color="#900"
 export default Level
 
