@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@clerk/clerk-react": "^5.30.0",
+    "@monaco-editor/react": "^4.7.0",
     "bootstrap": "^5.3.5",
     "chart.js": "^4.4.4",
     "firebase": "^11.6.1",

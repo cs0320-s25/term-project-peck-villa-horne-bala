@@ -17,7 +17,6 @@ public class RunCodeHandler implements Route {
   public Object handle(Request request, Response response) throws Exception {
     response.type("application/json");
 
-    // Parse incoming JSON
     JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
     String userCode = reqBody.get("code").getAsString();
 
@@ -39,11 +38,10 @@ public class RunCodeHandler implements Route {
     // Execute code using Piston
     String output = runWithPiston(payload.toString());
 
-    // Validate output
     String expectedOutput = "Hello, World!";
     boolean outputCorrect = output.trim().equals(expectedOutput);
 
-    // Build result JSON
+
     JsonObject result = new JsonObject();
     result.addProperty("passed", hasPrint && outputCorrect);
     result.addProperty("output", output);
