@@ -17,7 +17,7 @@ public class RunCodeHandler implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     response.type("application/json");
-    String code = request.queryParams("question");
+    String question = request.queryParams("question");
 
     JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
     String userCode = reqBody.get("code").getAsString();
