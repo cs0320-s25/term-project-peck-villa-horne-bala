@@ -1,5 +1,6 @@
 package Server;
 
+import Query.QuestionsDirectory;
 import com.google.gson.*;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -16,6 +17,7 @@ public class RunCodeHandler implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     response.type("application/json");
+    String code = request.queryParams("question");
 
     JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
     String userCode = reqBody.get("code").getAsString();
@@ -38,6 +40,7 @@ public class RunCodeHandler implements Route {
     // Execute code using Piston
     String output = runWithPiston(payload.toString());
 
+    QuestionsDirectory questionsDirectory = new QuestionsDirectory();
     String expectedOutput = "Hello, World!";
     boolean outputCorrect = output.trim().equals(expectedOutput);
 
