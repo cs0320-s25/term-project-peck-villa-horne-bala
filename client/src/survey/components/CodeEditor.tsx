@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 
 interface CodeEditorProps {
-  initialCode?: string;
+  initialCode: string;
   questionId?: string;
 }
 
@@ -39,7 +39,15 @@ const CodeEditor = (props: CodeEditorProps) => {
         value={code}
         onChange={(value) => setCode(value ?? "")}
       />
-      <button onClick={() => setCode("")}>Clear Code</button>
+      <button
+        onClick={() =>
+          setCode(
+            `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
+          )
+        }
+      >
+        Clear Code
+      </button>
       <button onClick={handleRun}>Run Code</button>
       <pre>{output}</pre>
     </div>
