@@ -3,7 +3,7 @@ import CodeEditor from "../../survey/components/CodeEditor";
 
 export function MoneLvlOne() {
   return (
-    <div>
+   <div>
       <h1> Module 1: Variables & Primitives - Level 1: What is a variable?</h1>
       <p>
         In Java, variables are containers that store data in memory.
@@ -21,14 +21,13 @@ export function MoneLvlOne() {
           Task: Try on your own creating an int type variable called num that stores
           the value 1000!{" "}
         </strong>
-        
       </p>
       <CodeEditor initialCode="" questionId="1" />
-        Task: Try on your own creating an
-        int type variable called num that stores the value 1000!
+      <p>
+        Task: Try on your own creating an int type variable called num that stores the value 1000!
       </p>
-      <CodeEditor />
-    </div>
+      <CodeEditor initialCode="" />
+   </div>
   );
 }
 
