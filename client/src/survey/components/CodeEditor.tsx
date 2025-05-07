@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 
-const CodeEditor = () => {
-  const [code, setCode] = useState("// write your Java code here");
+interface CodeEditorProps {
+  initialCode?: string;
+  questionId?: string;
+}
+
+const CodeEditor = (props: CodeEditorProps) => {
+  const [code, setCode] = useState(
+    `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
+  );
   const [output, setOutput] = useState("");
 
   const handleRun = async () => {
     try {
-      const response = await fetch("http://localhost:3232/run", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
-      });
+      const response = await fetch(
+        `http://localhost:3232/run?questionId=${props.questionId}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code }),
+        }
+      );
 
       const data = await response.json();
       setOutput(`✅ Passed: ${data.passed}\n🖨️ Output:\n${data.output}`);
@@ -29,6 +39,7 @@ const CodeEditor = () => {
         value={code}
         onChange={(value) => setCode(value ?? "")}
       />
+      <button onClick={() => setCode("")}>Clear Code</button>
       <button onClick={handleRun}>Run Code</button>
       <pre>{output}</pre>
     </div>
