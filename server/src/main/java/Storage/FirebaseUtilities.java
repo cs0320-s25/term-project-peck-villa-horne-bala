@@ -110,8 +110,6 @@ public class FirebaseUtilities implements StorageInterface {
     }
   }
 
-
-
   private void deleteDocument(DocumentReference doc) {
     // for each subcollection, run deleteCollection()
     Iterable<CollectionReference> collections = doc.listCollections();

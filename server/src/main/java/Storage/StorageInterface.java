@@ -13,5 +13,4 @@ public interface StorageInterface {
       throws InterruptedException, ExecutionException;
 
   void clearUser(String uid) throws InterruptedException, ExecutionException;
-
 }

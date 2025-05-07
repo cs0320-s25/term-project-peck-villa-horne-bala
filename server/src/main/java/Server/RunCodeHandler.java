@@ -2,12 +2,11 @@ package Server;
 
 import Query.QuestionsDirectory;
 import com.google.gson.*;
+import java.util.Scanner;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-
-import java.util.Scanner;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -44,7 +43,6 @@ public class RunCodeHandler implements Route {
     String expectedOutput = "Hello, World!";
     boolean outputCorrect = output.trim().equals(expectedOutput);
 
-
     JsonObject result = new JsonObject();
     result.addProperty("passed", hasPrint && outputCorrect);
     result.addProperty("output", output);
@@ -54,24 +52,26 @@ public class RunCodeHandler implements Route {
 
   private String runWithPiston(String jsonPayload) throws Exception {
     try (CloseableHttpClient client = HttpClients.createDefault()) {
-      //sends http post request to the piston API via a client
+      // sends http post request to the piston API via a client
       HttpPost request = new HttpPost("https://emkc.org/api/v2/piston/execute");
 
-      //tells server it is being sent a JSON
+      // tells server it is being sent a JSON
       request.setHeader("Content-Type", "application/json");
       request.setEntity(new StringEntity(jsonPayload));
 
-      //executes post request
-      return client.execute(request, response -> {
-        String responseBody = new Scanner(response.getEntity().getContent())
-            .useDelimiter("\\A").next();
+      // executes post request
+      return client.execute(
+          request,
+          response -> {
+            String responseBody =
+                new Scanner(response.getEntity().getContent()).useDelimiter("\\A").next();
 
-        //extracts the run object
+            // extracts the run object
 
-        JsonObject pistonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
-        JsonObject runObject = pistonResponse.getAsJsonObject("run");
-        return runObject.get("output").getAsString();
-      });
+            JsonObject pistonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
+            JsonObject runObject = pistonResponse.getAsJsonObject("run");
+            return runObject.get("output").getAsString();
+          });
     }
   }
-  }
+}
