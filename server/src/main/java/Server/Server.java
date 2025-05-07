@@ -37,6 +37,8 @@ public class Server {
       firebaseUtils = new FirebaseUtilities();
       // Set up handlers
       Spark.get("SurveyResults", new SurveyResultsHandler());
+      Spark.get("Survey", new SurveyHandler(firebaseUtils));
+
       Spark.post("run", new RunCodeHandler());
       Spark.init();
       Spark.awaitInitialization();
@@ -45,7 +47,7 @@ public class Server {
     } catch (IOException e) {
       e.printStackTrace();
       System.err.println(
-          "Error: Could not initialize Firebase. Likely due to firebase_config.json not being found. Exiting.");
+          "Error: Could not initialize Firebase. Likely due to firebase_config.json.json not being found. Exiting.");
       System.exit(1);
     }
   }

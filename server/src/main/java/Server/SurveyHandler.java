@@ -1,6 +1,5 @@
-package Server.Handlers;
+package Server;
 
-import Server.Utils;
 import Storage.StorageInterface;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +27,8 @@ public class SurveyHandler implements Route {
     Map<String, Object> responseMap = new HashMap<>();
     try {
       String uid = request.queryParams("uid");
-      Boolean isUserSurvey = true;
+
+      Boolean isUserSurvey = this.storage.isUserCollection(uid);
 
       System.out.println("boolean result survey: " + isUserSurvey);
       responseMap.put("response_type", "success");
