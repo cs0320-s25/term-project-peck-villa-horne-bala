@@ -25,7 +25,7 @@ public class RunCodeHandler implements Route {
     String userCode = reqBody.get("code").getAsString();
 
     // Check for required structure
-    boolean hasPrint = userCode.contains("System.out.println");
+    boolean hasPrint = userCode.contains(questionsDirectory.getCodeContains());
 
     // Build Piston API payload
     JsonObject payload = new JsonObject();
@@ -42,16 +42,20 @@ public class RunCodeHandler implements Route {
     // Execute code using Piston
     String output = runWithPiston(payload.toString());
 
-
-    String expectedOutput = "Hello, World!";
+    questionsDirectory.setAnswerAndContains(questionId);
+    String expectedOutput = questionsDirectory.getCodeAnswer();
     boolean outputCorrect = output.trim().equals(expectedOutput);
 
 
     JsonObject result = new JsonObject();
 
-
+    if (outputCorrect && hasPrint) {
       result.addProperty("passed", hasPrint);
       result.addProperty("output", output);
+    }
+    else {
+      result.addProperty("failed", false);
+    }
 
 
     return result.toString();
