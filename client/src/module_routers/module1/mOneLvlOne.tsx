@@ -14,11 +14,20 @@ export function MoneLvlOne() {
         “int age = 19;”, where int is the type, age in the name of the variable
         and 19 is value that the variable is storing. Also remember that we use
         the equal sign to assign a value to a variable and almost every
-        statement should end with a semicolon. Task: Try on your own creating an
+        statement should end with a semicolon.
+        <br></br>{" "}
+        <strong>
+          {" "}
+          Task: Try on your own creating an int type variable called num that stores
+          the value 1000!{" "}
+        </strong>
+        
+      </p>
+      <CodeEditor initialCode="" questionId="1" />
+        Task: Try on your own creating an
         int type variable called num that stores the value 1000!
       </p>
       <CodeEditor />
-      Module 1: Level 1
     </div>
   );
 }

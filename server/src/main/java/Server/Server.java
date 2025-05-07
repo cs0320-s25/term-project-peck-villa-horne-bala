@@ -17,28 +17,25 @@ public class Server {
           response.header("Access-Control-Allow-Origin", "*");
           response.header("Access-Control-Allow-Methods", "*");
         });
-    options(
-        "/*",
-        (request, response) -> {
-          String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-          if (accessControlRequestHeaders != null) {
-            response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-          }
+    options("/*", (request, response) -> {
+      String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+      if (accessControlRequestHeaders != null) {
+        response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+      }
 
-          String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-          if (accessControlRequestMethod != null) {
-            response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-          }
-          return "OK";
-        });
+      String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+      if (accessControlRequestMethod != null) {
+        response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+      }
+
+      return "OK";
+    });
 
     StorageInterface firebaseUtils;
     try {
       firebaseUtils = new FirebaseUtilities();
       // Set up handlers
       Spark.get("SurveyResults", new SurveyResultsHandler());
-      Spark.get("Survey", new SurveyHandler(firebaseUtils));
-
       Spark.post("run", new RunCodeHandler());
       Spark.init();
       Spark.awaitInitialization();
@@ -47,8 +44,9 @@ public class Server {
     } catch (IOException e) {
       e.printStackTrace();
       System.err.println(
-          "Error: Could not initialize Firebase. Likely due to firebase_config.json.json not being found. Exiting.");
+          "Error: Could not initialize Firebase. Likely due to firebase_config.json not being found. Exiting.");
       System.exit(1);
     }
   }
 }
+

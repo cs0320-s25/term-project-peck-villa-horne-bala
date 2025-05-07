@@ -2,11 +2,12 @@ package Server;
 
 import Query.QuestionsDirectory;
 import com.google.gson.*;
-import java.util.Scanner;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+
+import java.util.Scanner;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -16,7 +17,9 @@ public class RunCodeHandler implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     response.type("application/json");
-    String question = request.queryParams("question");
+    QuestionsDirectory questionsDirectory = new QuestionsDirectory();
+    String questionId = request.queryParams("questionId");
+    questionsDirectory.setAnswerAndContains(questionId);
 
     JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
     String userCode = reqBody.get("code").getAsString();
@@ -39,16 +42,21 @@ public class RunCodeHandler implements Route {
     // Execute code using Piston
     String output = runWithPiston(payload.toString());
 
-    QuestionsDirectory questionsDirectory = new QuestionsDirectory();
+
     String expectedOutput = "Hello, World!";
     boolean outputCorrect = output.trim().equals(expectedOutput);
 
+
     JsonObject result = new JsonObject();
-    result.addProperty("passed", hasPrint && outputCorrect);
-    result.addProperty("output", output);
+
+
+      result.addProperty("passed", hasPrint);
+      result.addProperty("output", output);
+
 
     return result.toString();
   }
+
 
   private String runWithPiston(String jsonPayload) throws Exception {
     try (CloseableHttpClient client = HttpClients.createDefault()) {
