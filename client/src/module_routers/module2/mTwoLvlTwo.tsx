@@ -5,7 +5,7 @@ export function MTwoLvlTwo() {
   return (
     <div>
       <h2>Module 2: Operators - Level 2: Multiplication/Divison</h2>
-      <CodeEditor initialCode="" questionId="two" />
+      <CodeEditor initialCode="" questionId="six" />
       <p>
         Multiplying (*) and dividing (/) numbers lets us solve more kinds of
         problems like calculating the area of a rectangle or splitting a bill.
