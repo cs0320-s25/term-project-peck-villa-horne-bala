@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 
 const CodeEditor = () => {
-  const [code, setCode] = useState("// write your Java code here");
+  const [code, setCode] = useState("public class Main {\n public static void main(String[] args) {\n System.out.println(\"Hello, World!\"); \n}      \n}");
   const [output, setOutput] = useState("");
 
   const handleRun = async () => {
