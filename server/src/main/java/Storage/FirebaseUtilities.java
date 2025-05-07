@@ -110,22 +110,7 @@ public class FirebaseUtilities implements StorageInterface {
     }
   }
 
-  public void clearPins(String uid) throws IllegalArgumentException {
-    if (uid == null) {
-      throw new IllegalArgumentException("removeUser: uid cannot be null");
-    }
-    try {
-      // removes all data for user 'uid'
-      Firestore db = FirestoreClient.getFirestore();
-      // 1: Get a ref to the user document
-      CollectionReference pinsCollection = db.collection("users").document(uid).collection("pin");
-      // 2: Delete the user document
-      deleteCollection(pinsCollection);
-    } catch (Exception e) {
-      System.err.println("Error removing user : " + uid);
-      System.err.println(e.getMessage());
-    }
-  }
+
 
   private void deleteDocument(DocumentReference doc) {
     // for each subcollection, run deleteCollection()

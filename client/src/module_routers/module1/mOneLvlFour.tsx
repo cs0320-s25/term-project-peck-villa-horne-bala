@@ -1,7 +1,10 @@
 import { useState, useEffect, FormEventHandler } from "react";
+import CodeEditor from "../../survey/components/CodeEditor";
 
 export function MOneLvlFour() {
-  return <div> Module 1: Level 4</div>;
+  return <div> 
+    <CodeEditor/>
+    Module 1: Level 4</div>;
 }
 
 export default MOneLvlFour;

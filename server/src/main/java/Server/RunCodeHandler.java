@@ -54,12 +54,24 @@ public class RunCodeHandler implements Route {
 
   private String runWithPiston(String jsonPayload) throws Exception {
     try (CloseableHttpClient client = HttpClients.createDefault()) {
+      //sends http post request to the piston API via a client
       HttpPost request = new HttpPost("https://emkc.org/api/v2/piston/execute");
+
+      //tells server it is being sent a JSON
       request.setHeader("Content-Type", "application/json");
       request.setEntity(new StringEntity(jsonPayload));
-      return client.execute(request, response ->
-          new Scanner(response.getEntity().getContent()).useDelimiter("\\A").next()
-      );
+
+      //executes post request
+      return client.execute(request, response -> {
+        String responseBody = new Scanner(response.getEntity().getContent())
+            .useDelimiter("\\A").next();
+
+        //extracts the run object
+
+        JsonObject pistonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
+        JsonObject runObject = pistonResponse.getAsJsonObject("run");
+        return runObject.get("output").getAsString();
+      });
     }
   }
-}
+  }
