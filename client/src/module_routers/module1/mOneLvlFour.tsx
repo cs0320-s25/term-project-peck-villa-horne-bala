@@ -1,7 +1,31 @@
 import { useState, useEffect, FormEventHandler } from "react";
+import CodeEditor from "../../survey/components/CodeEditor";
 
 export function MOneLvlFour() {
-  return <div> Module 1: Level 4</div>;
+  return (
+    <div>
+      <h2> Module 1: Variables & Primitives - Level 4: Boolean Types</h2>
+      <CodeEditor initialCode="" questionId="four" />
+      <p>
+        In Java, a boolean is a data type that can hold one of two values: true
+        or false. It is commonly used for conditional statements and logical
+        operations. For example, you can use a boolean variable to check if a
+        condition is met or to control the flow of a program. Booleans are
+        essential for making decisions in your code, such as in if statements or
+        loops. This variable can then be used in conditional statements to determine the flow of your program. Booleans
+        are often used in conjunction with comparison operators (like ==, !=,{" "}
+        {">"}, {"<"}) to evaluate conditions and make decisions based on the
+        results. For instance, you can check if a number is greater than another
+        number and store the result in a boolean variable: "boolean isGreater =
+        (5 {">"} 3);".
+        <br></br>
+        <strong>
+          Task: Create a boolean called isJavaFun and set it to true. Print it
+          to show your excitement for coding!
+        </strong>
+      </p>
+    </div>
+  );
 }
 
 export default MOneLvlFour;
