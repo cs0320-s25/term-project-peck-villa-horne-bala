@@ -24,7 +24,10 @@ export function MoneLvlOne() {
         
       </p>
       <CodeEditor initialCode="" questionId="1" />
-      Module 1: Level 1
+        Task: Try on your own creating an
+        int type variable called num that stores the value 1000!
+      </p>
+      <CodeEditor />
     </div>
   );
 }

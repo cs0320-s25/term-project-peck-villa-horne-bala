@@ -5,7 +5,7 @@
   "description": "Brown CSCI0320 Sprint 3 Gearup for Fall 2023",
   "license": "UNLICENSED",
   "dependencies": {
-    "@clerk/clerk-react": "^5.31.0",
+    "@clerk/clerk-react": "^5.31.1",
     "@monaco-editor/react": "^4.7.0",
     "bootstrap": "^5.3.6",
     "chart.js": "^4.4.4",

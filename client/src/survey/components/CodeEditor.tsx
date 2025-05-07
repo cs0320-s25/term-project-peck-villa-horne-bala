@@ -10,6 +10,8 @@ const CodeEditor = (props: CodeEditorProps) => {
   const [code, setCode] = useState(
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
+const CodeEditor = () => {
+  const [code, setCode] = useState("public class Main {\n public static void main(String[] args) {\n System.out.println(\"Hello, World!\"); \n}      \n}");
   const [output, setOutput] = useState("");
 
   const handleRun = async () => {

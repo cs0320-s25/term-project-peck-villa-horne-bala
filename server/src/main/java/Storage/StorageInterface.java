@@ -14,5 +14,5 @@ public interface StorageInterface {
 
   void clearUser(String uid) throws InterruptedException, ExecutionException;
 
-  public void clearPins(String uid);
+  boolean isUserCollection(String uid) throws InterruptedException, ExecutionException;
 }

@@ -24,13 +24,13 @@ public class FirebaseUtilities implements StorageInterface {
 
   public FirebaseUtilities() throws IOException {
     // TODO: FIRESTORE PART 0:
-    // Create /resources/ folder with firebase_config.json and
+    // Create /resources/ folder with firebase_config.json.json and
     // add your admin SDK from Firebase. see:
     // https://docs.google.com/document/d/10HuDtBWjkUoCaVj_A53IFm5torB_ws06fW3KYFZqKjc/edit?usp=sharing
     String workingDirectory = System.getProperty("user.dir");
     Path firebaseConfigPath =
-        Paths.get(workingDirectory, "server", "src", "main", "resources", "firebase_config.json");
-    // ^-- if your /resources/firebase_config.json exists but is not found,
+        Paths.get(workingDirectory, "src", "main", "resources", "firebase_config.json");
+    // ^-- if your /resources/firebase_config.json.json exists but is not found,
     // try printing workingDirectory and messing around with this path.
     FileInputStream serviceAccount = new FileInputStream(firebaseConfigPath.toString());
 
@@ -110,21 +110,25 @@ public class FirebaseUtilities implements StorageInterface {
     }
   }
 
-  public void clearPins(String uid) throws IllegalArgumentException {
+  @Override
+  public boolean isUserCollection(String uid) throws InterruptedException, ExecutionException {
     if (uid == null) {
-      throw new IllegalArgumentException("removeUser: uid cannot be null");
+      throw new IllegalArgumentException("isUserCollection: uid cannot be null");
     }
     try {
-      // removes all data for user 'uid'
-      Firestore db = FirestoreClient.getFirestore();
-      // 1: Get a ref to the user document
-      CollectionReference pinsCollection = db.collection("users").document(uid).collection("pin");
-      // 2: Delete the user document
-      deleteCollection(pinsCollection);
+      List<Map<String, Object>> surveyDocs = getCollection(uid, "survey");
+
+      if (surveyDocs.isEmpty()) {
+        System.out.println("No survey document found for uid: " + uid);
+        return false;
+      } else {
+        System.out.println("Survey document found for uid: " + uid);
+        return true;
+      }
     } catch (Exception e) {
-      System.err.println("Error removing user : " + uid);
-      System.err.println(e.getMessage());
+      System.out.println("isUserCollection caught an exception");
     }
+    return false;
   }
 
   private void deleteDocument(DocumentReference doc) {
