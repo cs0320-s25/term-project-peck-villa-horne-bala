@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { LevelInfo } from "../populate_modules/ModulePopulator";
+import { LevelInfo } from "../../../types";
 import { useNavigate } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { FaLock, FaUnlock} from "react-icons/fa";
+import { LevelProp } from "../../../types";
 
 import "../../../styles/Card.css"
 
-interface LevelProp {
-  level: LevelInfo;
-}
+
 
 export function Level(props: LevelProp){
     const navigate= useNavigate();
 
     const goToLesson =()=>{
         const path: string= props.level.routerPath;
-        navigate(path)
+        navigate(path);
     }
 
     return (

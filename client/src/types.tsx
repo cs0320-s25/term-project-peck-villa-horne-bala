@@ -1,3 +1,6 @@
+import { Dispatch, FormEventHandler, SetStateAction } from "react";
+import { SurveyStatus } from "./survey/SurveyManager";
+
 export enum CompletionStatus {
     Complete = "Complete",
     Incomplete = "Incomplete"
@@ -21,3 +24,41 @@ export enum Status {
   InBetween = "INBETWEEN",
 }
 
+export interface LevelInfo {
+  levelName: string;
+  locked: boolean;
+  routerPath: string;
+  descriptor: string;
+}
+
+export interface ModuleInfo {
+  name: string;
+  levels: LevelInfo[];
+}
+
+export interface ModuleProps {
+  module: ModuleInfo;
+}
+
+export interface LevelProp {
+  level: LevelInfo;
+}
+
+export interface FormatQ {
+  id: number;
+  question: string;
+  answerChoices: string[];
+  correctAnswerContent: string;
+  correctAnswerIndex: number;
+}
+
+export interface QuestionProps {
+  currQ: FormatQ;
+  onOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+  selectedAnswer: number;
+}
+
+export interface SurveyManagerProps {
+  setSurveyMode: Dispatch<SetStateAction<SurveyStatus>>;
+}

@@ -1,4 +1,4 @@
-import CodeEditor from "../../survey/components/CodeEditor";
+import CodeEditor from "../../components/CodeEditor";
 
 export function MThreeLvlFour() {
   return (

@@ -1,18 +1,7 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import Module from "../components/Module";
 import populateModuleList from "./ModuleData";
-
-export interface ModuleInfo {
-  name: string;
-  levels: LevelInfo[];
-}
-
-export interface LevelInfo {
-  levelName: string;
-  locked: boolean;
-  routerPath: string;
-  descriptor: string;
-}
+import { ModuleInfo } from "../../../types";
 
 export function ModulePopulator() {
   const [modules, setModules] = useState<ModuleInfo[]>([]);

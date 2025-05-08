@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { ModuleInfo } from "../populate_modules/ModulePopulator";
+import { ModuleInfo } from "../../../types";
 import Level from "./Level";
+import { ModuleProps } from "../../../types";
 
 import Card from "react-bootstrap/Card";
 import "../../../styles/Card.css";
 
-interface ModuleProps {
-  module: ModuleInfo;
-}
+
 
 export function Module(props: ModuleProps) {
   return (

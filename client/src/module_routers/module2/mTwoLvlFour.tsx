@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEventHandler } from "react";
-import CodeEditor from "../../survey/components/CodeEditor";
+import CodeEditor from "../../components/CodeEditor";
 
 export function MTwoLvlFour() {
   return (

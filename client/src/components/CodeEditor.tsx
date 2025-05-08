@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
-import { CompletionStatus } from "../../types";
+import { CompletionStatus } from "../types";
 
 interface CodeEditorProps {
   initialCode: string;
   questionId?: string;
   setCompletionStatus?: (status: CompletionStatus) => void;
-
 }
 
 const CodeEditor = (props: CodeEditorProps) => {
