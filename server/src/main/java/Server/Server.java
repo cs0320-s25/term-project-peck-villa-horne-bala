@@ -17,19 +17,21 @@ public class Server {
           response.header("Access-Control-Allow-Origin", "*");
           response.header("Access-Control-Allow-Methods", "*");
         });
-    options("/*", (request, response) -> {
-      String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-      if (accessControlRequestHeaders != null) {
-        response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-      }
+    options(
+        "/*",
+        (request, response) -> {
+          String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+          if (accessControlRequestHeaders != null) {
+            response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+          }
 
-      String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-      if (accessControlRequestMethod != null) {
-        response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-      }
+          String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+          if (accessControlRequestMethod != null) {
+            response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+          }
 
-      return "OK";
-    });
+          return "OK";
+        });
 
     StorageInterface firebaseUtils;
     try {
@@ -50,4 +52,3 @@ public class Server {
     }
   }
 }
-

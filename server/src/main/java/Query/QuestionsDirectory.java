@@ -7,8 +7,8 @@ public class QuestionsDirectory {
   public QuestionsDirectory() {
     this.codeContains = "System.out.println";
     this.answer = "";
-
   }
+
   public void setAnswerAndContains(String question) {
     if (question.equals("one")) {
       this.answer = "Hello, World!";
@@ -19,8 +19,8 @@ public class QuestionsDirectory {
   public String getCodeContains() {
     return this.codeContains;
   }
-  public String getCodeAnswer(){
+
+  public String getCodeAnswer() {
     return this.answer;
   }
-
 }
