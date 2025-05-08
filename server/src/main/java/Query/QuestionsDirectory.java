@@ -10,9 +10,9 @@ public class QuestionsDirectory {
 
   }
   public void setAnswerAndContains(String question) {
-    String answer = "";
-    if (question.equals("1")) {
-      answer = "Hello, World!";
+    if (question.equals("one")) {
+      this.answer = "Hello, World!";
+      this.codeContains = "System.out.println";
     }
   }
 

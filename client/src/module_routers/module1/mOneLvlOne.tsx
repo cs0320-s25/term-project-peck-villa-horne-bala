@@ -23,10 +23,6 @@ export function MoneLvlOne() {
         </strong>
       </p>
       <CodeEditor initialCode="" questionId="1" />
-      <p>
-        Task: Try on your own creating an int type variable called num that stores the value 1000!
-      </p>
-      <CodeEditor initialCode="" />
    </div>
   );
 }

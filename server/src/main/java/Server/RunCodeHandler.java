@@ -48,13 +48,12 @@ public class RunCodeHandler implements Route {
 
 
     JsonObject result = new JsonObject();
-
     if (outputCorrect && hasPrint) {
       result.addProperty("passed", hasPrint);
       result.addProperty("output", output);
     }
     else {
-      result.addProperty("failed", false);
+      result.addProperty("passed", false);
     }
 
 

@@ -36,6 +36,7 @@ public class Server {
       firebaseUtils = new FirebaseUtilities();
       // Set up handlers
       Spark.get("SurveyResults", new SurveyResultsHandler());
+      Spark.get("Survey", new SurveyHandler(firebaseUtils));
       Spark.post("run", new RunCodeHandler());
       Spark.init();
       Spark.awaitInitialization();
