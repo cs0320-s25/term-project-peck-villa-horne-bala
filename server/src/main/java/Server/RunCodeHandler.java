@@ -44,6 +44,9 @@ public class RunCodeHandler implements Route {
 
     questionsDirectory.setAnswerAndContains(questionId);
     String expectedOutput = questionsDirectory.getCodeAnswer();
+    System.out.println(expectedOutput);
+    System.out.println(questionId);
+    System.out.println(questionsDirectory.getCodeContains());
     boolean outputCorrect = output.trim().equals(expectedOutput);
 
 
@@ -54,6 +57,7 @@ public class RunCodeHandler implements Route {
     }
     else {
       result.addProperty("passed", false);
+      result.addProperty("output", output);
     }
 
 
