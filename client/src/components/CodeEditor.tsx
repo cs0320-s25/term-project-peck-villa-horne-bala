@@ -30,14 +30,14 @@ const CodeEditor = (props: CodeEditorProps) => {
 
       const data = await response.json();
       setOutput(`✅ Passed: ${data.passed}\n🖨️ Output:\n${data.output}`);
-      if (data.passed) {
-        props.setCompletionStatus?.(CompletionStatus.Complete);
-        if (user) {
-        localStorage.setItem(user?.id, progressMap[props.questionId].status);
-        }
-      } else {
-        props.setCompletionStatus?.(CompletionStatus.Incomplete);
-      }
+      // if (data.passed) {
+      //   props.setCompletionStatus?.(CompletionStatus.Complete);
+      //   if (user) {
+      //   localStorage.setItem(user?.id, progressMap[props.questionId].status);
+      //   }
+      // } else {
+      //   props.setCompletionStatus?.(CompletionStatus.Incomplete);
+      // }
     } catch (err) {
       setOutput(`❌ Error: ${err}`);
     }

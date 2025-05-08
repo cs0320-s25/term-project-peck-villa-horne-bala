@@ -1,5 +1,6 @@
 package Parser;
 
+import Storage.FileStorage;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,7 +33,14 @@ public class FileParser {
    * @throws IOException, FactoryFailureException
    */
   private List<List<String>> parseFileInfo(String filepath) throws IOException {
-    return new Parser(filepath).parse();
+    FileStorage fileStorage = FileStorage.getInstance();
+    if (fileStorage.checkFile(filepath)) {
+      return fileStorage.getFile(filepath);
+    } else {
+      List<List<String>> parsed = new Parser(filepath).parse();
+      fileStorage.addFile(filepath, parsed);
+      return parsed;
+    }
   }
 
   /**

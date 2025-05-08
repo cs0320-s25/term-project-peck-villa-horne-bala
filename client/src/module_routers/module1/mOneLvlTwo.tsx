@@ -11,29 +11,24 @@ export function MOneLvlTwo() {
   const navigate = useNavigate();
   return (
     <div>
-      <h2> Module 1: Variables & Primitives - Level 2: What is a Variable</h2>
+      <h2> Module 1: Variables & Primitives - Level 2: Int vs Double</h2>
       <button onClick={() => navigate("/Home")}>Back</button>
       <button onClick={() => navigate("/MOneLvlOne")}>Previous Level</button>
       <p>
-        In Java, variables are In Java, variables are containers that store data
-        in memory. Understanding variables plays a very important role as it
-        defines how data is stored, accessed, and manipulated. The next module
-        we will learn about types but for this demonstration we will start with
-        the “int” type which tells java that you are trying to store a non
-        decimal number. Ex: “int age = 19;”, where int is the type, age in the
-        name of the variable and 19 is value that the variable is storing. Also
-        remember that we use the equal sign to assign a value to a variable and
-        almost every statement should end with a semicolon.
+      Java is a statically typed language which means most things need a type. 
+      You can create your own types but some types are already created in the language which are called primitive types. 
+      Last level we talked about int which is a primitive type for storing not decimal numbers. 
+      Another type is a double which is for storing decimal values. 
+      If you try to store a decimal in an int then java will return an error so make sure to always have a type and stick to it.
+
         <br></br>
         <strong>
-          Task: Try on your own creating an int type variable called num that
-          stores the value 1000!
+      Task: Try creating a variable called “amount” that stores the value 123 and a variable called “price” that stores the value 19.99. Print out price value!
         </strong>
       </p>
-
       <CodeEditor
         initialCode=""
-        questionId="two"
+        questionId="module01_level02"
         setCompletionStatus={setCompletionStatus}
       />
       {completionStatus === CompletionStatus.Complete && (
