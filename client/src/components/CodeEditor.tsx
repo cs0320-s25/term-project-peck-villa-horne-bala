@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
-import { CompletionStatus } from "../types";
+import { CompletionStatus, UserQuestionHashMap } from "../types";
+import { useUser } from "@clerk/clerk-react";
 
 interface CodeEditorProps {
   initialCode: string;
-  questionId?: string;
+  questionId: string;
   setCompletionStatus?: (status: CompletionStatus) => void;
 }
 
@@ -13,6 +14,8 @@ const CodeEditor = (props: CodeEditorProps) => {
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
+  const { user } = useUser();
+  const progressMap: UserQuestionHashMap = {};
 
   const handleRun = async () => {
     try {
@@ -29,6 +32,9 @@ const CodeEditor = (props: CodeEditorProps) => {
       setOutput(`✅ Passed: ${data.passed}\n🖨️ Output:\n${data.output}`);
       if (data.passed) {
         props.setCompletionStatus?.(CompletionStatus.Complete);
+        if (user) {
+        localStorage.setItem(user?.id, progressMap[props.questionId].status);
+        }
       } else {
         props.setCompletionStatus?.(CompletionStatus.Incomplete);
       }

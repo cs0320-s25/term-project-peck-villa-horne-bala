@@ -14,7 +14,6 @@ export interface LevelProps  {
 export type UserQuestionHashMap = {
         [questionId: string]: {
             status: CompletionStatus;
-            answer?: string;
         };
     };
 
