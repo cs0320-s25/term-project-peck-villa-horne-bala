@@ -22,7 +22,7 @@ export function MoneLvlOne() {
           the value 1000!{" "}
         </strong>
       </p>
-      <CodeEditor initialCode="" questionId="1" />
+      <CodeEditor initialCode="" questionId="one" />
    </div>
   );
 }
