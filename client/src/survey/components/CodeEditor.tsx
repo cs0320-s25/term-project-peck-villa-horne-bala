@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
+import { CompletionStatus } from "../../types";
 
 interface CodeEditorProps {
   initialCode: string;
   questionId?: string;
+  setCompletionStatus?: (status: CompletionStatus) => void;
+
 }
 
 const CodeEditor = (props: CodeEditorProps) => {
@@ -25,6 +28,11 @@ const CodeEditor = (props: CodeEditorProps) => {
 
       const data = await response.json();
       setOutput(`✅ Passed: ${data.passed}\n🖨️ Output:\n${data.output}`);
+      if (data.passed) {
+        props.setCompletionStatus?.(CompletionStatus.Complete);
+      } else {
+        props.setCompletionStatus?.(CompletionStatus.Incomplete);
+      }
     } catch (err) {
       setOutput(`❌ Error: ${err}`);
     }

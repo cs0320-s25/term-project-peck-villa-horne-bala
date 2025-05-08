@@ -2,12 +2,7 @@ import { useState, useEffect, FormEventHandler } from "react";
 import Homescreen from "./home_screen/HomeScreen";
 import { Survey } from "./survey/SurveyManager";
 import { useUser } from "@clerk/clerk-react";
-
-export enum Status {
-  Survey = "SURVEY",
-  Homescreen = "HOMESCREEN",
-  InBetween = "INBETWEEN",
-}
+import { Status } from "./types";
 
 export function Intro() {
   const { user } = useUser();

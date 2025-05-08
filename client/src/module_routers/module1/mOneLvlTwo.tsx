@@ -1,11 +1,16 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../survey/components/CodeEditor";
+import { CompletionStatus } from "../../types";
+import { LevelProps } from "../../types";
+import { useNavigate } from "react-router-dom";
 
-export function MOneLvlTwo() {
+export function MOneLvlTwo(props: LevelProps) {
+   const [completionStatus, setCompletionStatus] = useState<CompletionStatus>(
+      CompletionStatus.Incomplete
+    );
+      const navigate = useNavigate();
   return (
     <div>
-      <h2> Module 1: Variables & Primitives - Level 2: What is a Variable</h2>
-      <CodeEditor initialCode="" questionId="two" />
       <p>
         In Java, variables are In Java, variables are containers that store data
         in memory. Understanding variables plays a very important role as it
@@ -22,6 +27,11 @@ export function MOneLvlTwo() {
           stores the value 1000!
         </strong>
       </p>
+      <h2> Module 1: Variables & Primitives - Level 2: What is a Variable</h2>
+      <CodeEditor initialCode="" questionId="two" setCompletionStatus={setCompletionStatus}/>
+      {completionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/MoneLvlThree")}>Next Level</button>
+      )}
     </div>
   );
 }
