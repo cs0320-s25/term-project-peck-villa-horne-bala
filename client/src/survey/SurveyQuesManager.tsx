@@ -6,22 +6,10 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import Question from "./components/Question";
-import { useNavigate } from "react-router-dom";
-import { Status } from "../EntryLogic";
+import Question from "../components/Question";
 import { SurveyStatus } from "./SurveyManager";
-
-export interface FormatQ {
-  id: number;
-  question: string;
-  answerChoices: string[];
-  correctAnswerContent: string;
-  correctAnswerIndex: number;
-}
-
-interface SurveyManagerProps {
-  setSurveyMode: Dispatch<SetStateAction<SurveyStatus>>;
-}
+import { SurveyManagerProps } from "../types";
+import { FormatQ } from "../types";
 
 export function SurveyQuestionManager(props: SurveyManagerProps) {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);

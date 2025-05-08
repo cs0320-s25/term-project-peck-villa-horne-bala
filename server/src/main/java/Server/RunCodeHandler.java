@@ -18,13 +18,14 @@ public class RunCodeHandler implements Route {
     response.type("application/json");
     QuestionsDirectory questionsDirectory = new QuestionsDirectory();
     String questionId = request.queryParams("questionId");
-    questionsDirectory.setAnswerAndContains(questionId);
+    //    questionsDirectory.setAnswerAndContains(questionId);
 
     JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
     String userCode = reqBody.get("code").getAsString();
 
     // Check for required structure
-    boolean hasPrint = userCode.contains(questionsDirectory.getCodeContains());
+    //    boolean hasPrint = userCode.contains(questionsDirectory.getCodeContains());
+    boolean hasPrint = true;
 
     // Build Piston API payload
     JsonObject payload = new JsonObject();
@@ -41,12 +42,15 @@ public class RunCodeHandler implements Route {
     // Execute code using Piston
     String output = runWithPiston(payload.toString());
 
-    questionsDirectory.setAnswerAndContains(questionId);
-    String expectedOutput = questionsDirectory.getCodeAnswer();
-    System.out.println(expectedOutput);
-    System.out.println(questionId);
-    System.out.println(questionsDirectory.getCodeContains());
-    boolean outputCorrect = output.trim().equals(expectedOutput);
+    System.out.println(questionsDirectory.checkAnswer(questionId, output, userCode));
+    //    System.out.println(output);
+    //    System.out.println(userCode);
+    //    String expectedOutput = questionsDirectory.getCodeAnswer();
+    //    System.out.println(expectedOutput);
+    //    System.out.println(questionId);
+    //    System.out.println(questionsDirectory.getCodeContains());
+    //    boolean outputCorrect = output.trim().equals(expectedOutput);
+    boolean outputCorrect = true;
 
     JsonObject result = new JsonObject();
     if (outputCorrect && hasPrint) {

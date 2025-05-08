@@ -1,11 +1,19 @@
 import { useState, useEffect, FormEventHandler } from "react";
-import CodeEditor from "../../survey/components/CodeEditor";
+import CodeEditor from "../../components/CodeEditor";
+import { CompletionStatus } from "../../types";
+import { LevelProps } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 export function MOneLvlThree() {
+  const [completionStatus, setCompletionStatus] = useState<CompletionStatus>(
+    CompletionStatus.Incomplete
+  );
+  const navigate = useNavigate();
   return (
     <div>
+      <button onClick={() => navigate("/Home")}>Back</button>
+      <button onClick={() => navigate("/MOneLvlOne")}>Previous Level</button>;
       <h2> Module 1: Variables & Primitives - Level 3: String Types</h2>
-      <CodeEditor initialCode="" questionId="three" />
       <p>
         In Java, a string is a sequence of characters. Strings are used to
         represent text and can be created using double quotes. For example,
@@ -18,6 +26,14 @@ export function MOneLvlThree() {
           "Hello, Java!". Print it in the sandbox!
         </strong>
       </p>
+      <CodeEditor
+        initialCode=""
+        questionId="module01_level03"
+        setCompletionStatus={setCompletionStatus}
+      />
+      {completionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/MOneLvlFour")}>Next Level</button>
+      )}
       <br></br>
     </div>
   );

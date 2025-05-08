@@ -6,7 +6,7 @@ import {
   SetStateAction,
 } from "react";
 import SurveyQuestionManager from "./SurveyQuesManager"
-import {Status} from "../EntryLogic"
+import { Status } from "../types";
 
 export enum SurveyStatus {
   Intro,

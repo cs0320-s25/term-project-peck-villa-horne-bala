@@ -1,11 +1,11 @@
 import { useState, useEffect, FormEventHandler } from "react";
-import CodeEditor from "../../survey/components/CodeEditor";
+import CodeEditor from "../../components/CodeEditor";
 
 export function MTwoLvlThree() {
   return (
     <div>
       <h2>Module 2: Operators - Level 3: Modulus</h2>
-      <CodeEditor initialCode="" questionId="seven" />
+      <CodeEditor initialCode="" questionId="module02_level03" />
       <p>
         The modulus operator (%) is used to find the remainder of a division
         operation. It is useful for determining if a number is even or odd, or
@@ -23,6 +23,5 @@ export function MTwoLvlThree() {
     </div>
   );
 }
-
 
 export default MTwoLvlThree;

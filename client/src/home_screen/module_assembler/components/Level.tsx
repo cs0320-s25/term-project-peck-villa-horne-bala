@@ -1,23 +1,35 @@
 import { useState } from "react";
-import { LevelInfo } from "../populate_modules/ModulePopulator";
+import { LevelInfo } from "../../../types";
 import { useNavigate } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { FaLock, FaUnlock} from "react-icons/fa";
+import { LevelProp } from "../../../types";
+import { useUser } from "@clerk/clerk-react";
 
 import "../../../styles/Card.css"
 
-interface LevelProp {
-  level: LevelInfo;
-}
+
 
 export function Level(props: LevelProp){
+    const { user } = useUser();
+    if (user) {
+    const userProgressMap = localStorage.getItem(`${user.id}`);
+    if(userProgressMap){
+        const progress = JSON.parse(userProgressMap);
+        console.log(progress);
+        if (progress[props.level.routerPath] === "Complete") {
+            props.level.locked = false;
+        }
+    }
+  }
+
     const navigate= useNavigate();
 
     const goToLesson =()=>{
         const path: string= props.level.routerPath;
-        navigate(path)
+        navigate(path);
     }
 
     return (

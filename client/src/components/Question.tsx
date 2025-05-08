@@ -1,4 +1,4 @@
-import { FormatQ } from "../SurveyQuesManager";
+
 import React, {
   Component,
   FormEventHandler,
@@ -7,15 +7,8 @@ import React, {
 } from "react";
 import AnswerChoices from "./AnswerChoices";
 import Card from "react-bootstrap/Card";
+import { QuestionProps } from "../types";
 
-import "../../styles/Card.css";
-
-interface QuestionProps {
-  currQ: FormatQ;
-  onOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: FormEventHandler<HTMLFormElement>;
-  selectedAnswer: number;
-}
 
 class Question extends Component<QuestionProps> {
   render() {
