@@ -1,6 +1,8 @@
 package Query;
 
+import Parser.CSVFile;
 import Parser.FileParser;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,13 +17,13 @@ public class QuestionsDirectory {
 
   public boolean checkAnswer(String filepath, String output, String code) throws IOException {
     ClassLoader classLoader = getClass().getClassLoader();
-    java.net.URL resourceUrl = classLoader.getResource("level_answers/" + filepath + ".csv");
+    CSVFile file = new CSVFile("server/src/main/java/level_answers/" + filepath + ".csv");
 
-    if (resourceUrl == null) {
+    if (file == null) {
       System.err.println("Could not find resource: level_answers/" + filepath + ".csv");
       return false;
     }
-    List<String> parsed = new FileParser(resourceUrl.getPath()).getRows().get(0);
+    List<String> parsed = new FileParser(file.getFilePath()).getRows().get(0);
     for (int i = 0; i < parsed.size() - 1; i++) {
       if (!code.contains(parsed.get(i))) {
         System.out.println(code + " " + parsed.get(i));
