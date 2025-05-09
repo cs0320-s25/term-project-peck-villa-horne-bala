@@ -28,12 +28,10 @@ import MTwoLvlFour from "./module_routers/module2/mTwoLvlFour";
 import MThreeLvlOne from "./module_routers/module3/mThreeLvlOne";
 import MThreeLvlTwo from "./module_routers/module3/mThreeLvlTwo";
 import MThreeLvlThree from "./module_routers/module3/mThreeLvlThree";
-import MThreeLvlFour from "./module_routers/module3/mThreeLvlFour";
 
 import MFourLvlOne from "./module_routers/module4/mFourLvlOne";
 import MFourLvlTwo from "./module_routers/module4/mFourLvlTwo";
 import MFourLvlThree from "./module_routers/module4/mFourLvlThree";
-import MFourLvlFour from "./module_routers/module4/mFourLvlFour";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -66,12 +64,10 @@ function App() {
             <Route path="/MThreeLvlOne" element={<MThreeLvlOne />} />
             <Route path="/MThreeLvlTwo" element={<MThreeLvlTwo />} />
             <Route path="/MThreeLvlThree" element={<MThreeLvlThree />} />
-            <Route path="/MThreeLvlFour" element={<MThreeLvlFour />} />
 
             <Route path="/MFourLvlOne" element={<MFourLvlOne />} />
             <Route path="/MFourLvlTwo" element={<MFourLvlTwo />} />
             <Route path="/MFourLvlThree" element={<MFourLvlThree />} />
-            <Route path="/MFourLvlFour" element={<MFourLvlFour />} />
           </Routes>
         </Router>
       </SignedIn>
