@@ -2,7 +2,6 @@ package Query;
 
 import Parser.CSVFile;
 import Parser.FileParser;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,7 @@ public class QuestionsDirectory {
     return cleaned.equals(outputTrimmed);
   }
 
-  //this is just a placeholder in case we are not checking std output correctly
+  // this is just a placeholder in case we are not checking std output correctly
 
   public void populateStdOutput() throws IOException {
     this.stdOutputMap.put("module01_level01.csv", "");
@@ -57,6 +56,7 @@ public class QuestionsDirectory {
     this.stdOutputMap.put("module04_level02.csv", "You are years old");
     this.stdOutputMap.put("module04_level03.csv", "");
   }
+
   public HashMap<String, String> getStdOutput() {
     return this.stdOutputMap;
   }

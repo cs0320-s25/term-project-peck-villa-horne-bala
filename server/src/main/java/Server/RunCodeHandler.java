@@ -25,7 +25,6 @@ public class RunCodeHandler implements Route {
       JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
       String userCode = reqBody.get("code").getAsString();
 
-
       boolean hasPrint = userCode.contains("System.out.println");
 
       // Build Piston API payload
@@ -64,7 +63,6 @@ public class RunCodeHandler implements Route {
       result.addProperty("error", "Internal Server Error");
       return result.toString();
     }
-
   }
 
   private String runWithPiston(String jsonPayload) throws Exception {
