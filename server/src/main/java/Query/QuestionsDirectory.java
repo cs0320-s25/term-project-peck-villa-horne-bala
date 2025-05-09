@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class QuestionsDirectory {
-  //  private String codeContains;
-  //  private String answer;
-  private String stdOutput;
   private HashMap<String, String> stdOutputMap;
 
   public QuestionsDirectory() throws IOException {
@@ -21,7 +18,6 @@ public class QuestionsDirectory {
   }
 
   public boolean checkAnswer(String filepath, String output, String code) throws IOException {
-    ClassLoader classLoader = getClass().getClassLoader();
     CSVFile file = new CSVFile("server/src/main/java/level_answers/" + filepath + ".csv");
 
     if (file == null) {
@@ -38,27 +34,30 @@ public class QuestionsDirectory {
     }
     String cleaned = parsed.get(parsed.size() - 1).replaceAll("\\r?\\n", "").trim();
     String outputTrimmed = output.replaceAll("\\r?\\n", "").trim();
-    //    System.out.println(outputTrimmed);
-    //    System.out.println(cleaned);
+    System.out.println(outputTrimmed);
+    System.out.println(cleaned);
     return cleaned.equals(outputTrimmed);
   }
 
+  //this is just a placeholder in case we are not checking std output correctly
+
   public void populateStdOutput() throws IOException {
-    this.stdOutputMap.put("module01_level01.csv", null);
-    this.stdOutputMap.put("module01_level02.csv", null);
+    this.stdOutputMap.put("module01_level01.csv", "");
+    this.stdOutputMap.put("module01_level02.csv", "");
     this.stdOutputMap.put("module01_level03.csv", "Hello, Java!");
     this.stdOutputMap.put("module01_level04.csv", "true");
-    this.stdOutputMap.put("module02_level01.csv", null);
-    this.stdOutputMap.put("module02_level02.csv", null);
-    this.stdOutputMap.put("module02_level03.csv", null);
-    this.stdOutputMap.put("module02_level04.csv", null);
-    this.stdOutputMap.put("module03_level01.csv", null);
-    this.stdOutputMap.put("module03_level02.csv", null);
-    this.stdOutputMap.put("module03_level03.csv", null);
-    this.stdOutputMap.put("module03_level04.csv", null);
-    this.stdOutputMap.put("module04_level01.csv", null);
-    this.stdOutputMap.put("module04_level02.csv", null);
-    this.stdOutputMap.put("module04_level03.csv", null);
-    this.stdOutputMap.put("module04_level04.csv", null);
+    this.stdOutputMap.put("module02_level01.csv", "105 95");
+    this.stdOutputMap.put("module02_level02.csv", "70 3 3.0");
+    this.stdOutputMap.put("module02_level03.csv", "1 0 4 9");
+    this.stdOutputMap.put("module02_level04.csv", "11 21");
+    this.stdOutputMap.put("module03_level01.csv", "You are eligible to vote");
+    this.stdOutputMap.put("module03_level02.csv", "Grade: B");
+    this.stdOutputMap.put("module03_level03.csv", "You can enter the concert");
+    this.stdOutputMap.put("module04_level01.csv", "Welcome to Java");
+    this.stdOutputMap.put("module04_level02.csv", "You are years old");
+    this.stdOutputMap.put("module04_level03.csv", "");
+  }
+  public HashMap<String, String> getStdOutput() {
+    return this.stdOutputMap;
   }
 }

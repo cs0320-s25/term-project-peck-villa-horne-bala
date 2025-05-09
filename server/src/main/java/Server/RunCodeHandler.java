@@ -2,6 +2,7 @@ package Server;
 
 import Query.QuestionsDirectory;
 import com.google.gson.*;
+import java.util.HashMap;
 import java.util.Scanner;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -18,6 +19,8 @@ public class RunCodeHandler implements Route {
     try {
       response.type("application/json");
       QuestionsDirectory questionsDirectory = new QuestionsDirectory();
+      questionsDirectory.populateStdOutput();
+      HashMap<String, String> map = questionsDirectory.getStdOutput();
       String questionId = request.queryParams("questionId");
       JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
       String userCode = reqBody.get("code").getAsString();
