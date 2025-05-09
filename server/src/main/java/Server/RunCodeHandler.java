@@ -2,6 +2,7 @@ package Server;
 
 import Query.QuestionsDirectory;
 import com.google.gson.*;
+import java.util.HashMap;
 import java.util.Scanner;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -15,53 +16,55 @@ public class RunCodeHandler implements Route {
 
   @Override
   public Object handle(Request request, Response response) throws Exception {
-    response.type("application/json");
-    QuestionsDirectory questionsDirectory = new QuestionsDirectory();
-    String questionId = request.queryParams("questionId");
-    //    questionsDirectory.setAnswerAndContains(questionId);
+    try {
+      response.type("application/json");
+      QuestionsDirectory questionsDirectory = new QuestionsDirectory();
+      questionsDirectory.populateStdOutput();
+      HashMap<String, String> map = questionsDirectory.getStdOutput();
+      String questionId = request.queryParams("questionId");
+      JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
+      String userCode = reqBody.get("code").getAsString();
 
-    JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
-    String userCode = reqBody.get("code").getAsString();
 
-    // Check for required structure
-    //    boolean hasPrint = userCode.contains(questionsDirectory.getCodeContains());
-    boolean hasPrint = true;
+      boolean hasPrint = userCode.contains("System.out.println");
 
-    // Build Piston API payload
-    JsonObject payload = new JsonObject();
-    payload.addProperty("language", "java");
-    payload.addProperty("version", "15.0.2");
+      // Build Piston API payload
+      JsonObject payload = new JsonObject();
+      payload.addProperty("language", "java");
+      payload.addProperty("version", "15.0.2");
 
-    JsonArray files = new JsonArray();
-    JsonObject file = new JsonObject();
-    file.addProperty("name", "Main.java");
-    file.addProperty("content", userCode);
-    files.add(file);
-    payload.add("files", files);
+      JsonArray files = new JsonArray();
+      JsonObject file = new JsonObject();
+      file.addProperty("name", "Main.java");
+      file.addProperty("content", userCode);
+      files.add(file);
+      payload.add("files", files);
 
-    // Execute code using Piston
-    String output = runWithPiston(payload.toString());
+      // Execute code using Piston
+      String output = runWithPiston(payload.toString());
+      boolean outputCorrect = questionsDirectory.checkAnswer(questionId, output, userCode);
+      System.out.println(outputCorrect);
 
-    System.out.println(questionsDirectory.checkAnswer(questionId, output, userCode));
-    //    System.out.println(output);
-    //    System.out.println(userCode);
-    //    String expectedOutput = questionsDirectory.getCodeAnswer();
-    //    System.out.println(expectedOutput);
-    //    System.out.println(questionId);
-    //    System.out.println(questionsDirectory.getCodeContains());
-    //    boolean outputCorrect = output.trim().equals(expectedOutput);
-    boolean outputCorrect = true;
+      JsonObject result = new JsonObject();
+      if (outputCorrect && hasPrint) {
+        result.addProperty("passed", hasPrint);
+        result.addProperty("output", output);
+      } else {
+        result.addProperty("passed", false);
+        result.addProperty("output", output);
+      }
 
-    JsonObject result = new JsonObject();
-    if (outputCorrect && hasPrint) {
-      result.addProperty("passed", hasPrint);
-      result.addProperty("output", output);
-    } else {
-      result.addProperty("passed", false);
-      result.addProperty("output", output);
+      return result.toString();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      response.status(500);
+      response.type("application/json");
+      JsonObject result = new JsonObject();
+      result.addProperty("error", "Internal Server Error");
+      return result.toString();
     }
 
-    return result.toString();
   }
 
   private String runWithPiston(String jsonPayload) throws Exception {
