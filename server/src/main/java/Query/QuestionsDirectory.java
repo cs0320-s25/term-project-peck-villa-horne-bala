@@ -4,15 +4,20 @@ import Parser.CSVFile;
 import Parser.FileParser;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class QuestionsDirectory {
   //  private String codeContains;
   //  private String answer;
+  private String stdOutput;
+  private HashMap<String, String> stdOutputMap;
 
-  public QuestionsDirectory() {
+  public QuestionsDirectory() throws IOException {
     //    this.codeContains = "System.out.println";
     //    this.answer = "";
+    this.stdOutputMap = new HashMap<>();
+    this.populateStdOutput();
   }
 
   public boolean checkAnswer(String filepath, String output, String code) throws IOException {
@@ -36,5 +41,24 @@ public class QuestionsDirectory {
     //    System.out.println(outputTrimmed);
     //    System.out.println(cleaned);
     return cleaned.equals(outputTrimmed);
+  }
+
+  public void populateStdOutput() throws IOException {
+    this.stdOutputMap.put("module01_level01.csv", null);
+    this.stdOutputMap.put("module01_level02.csv", null);
+    this.stdOutputMap.put("module01_level03.csv", "Hello, Java!");
+    this.stdOutputMap.put("module01_level04.csv", "true");
+    this.stdOutputMap.put("module02_level01.csv", null);
+    this.stdOutputMap.put("module02_level02.csv", null);
+    this.stdOutputMap.put("module02_level03.csv", null);
+    this.stdOutputMap.put("module02_level04.csv", null);
+    this.stdOutputMap.put("module03_level01.csv", null);
+    this.stdOutputMap.put("module03_level02.csv", null);
+    this.stdOutputMap.put("module03_level03.csv", null);
+    this.stdOutputMap.put("module03_level04.csv", null);
+    this.stdOutputMap.put("module04_level01.csv", null);
+    this.stdOutputMap.put("module04_level02.csv", null);
+    this.stdOutputMap.put("module04_level03.csv", null);
+    this.stdOutputMap.put("module04_level04.csv", null);
   }
 }
