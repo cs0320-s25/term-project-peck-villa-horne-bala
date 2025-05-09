@@ -10,12 +10,15 @@ import Question from "../components/Question";
 import { SurveyStatus } from "./SurveyManager";
 import { SurveyManagerProps } from "../types";
 import { FormatQ } from "../types";
+import { useUser } from "@clerk/clerk-react";
+import {updateFirestoreUserSurveyStatus} from "./SurveyApi";
 
 export function SurveyQuestionManager(props: SurveyManagerProps) {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);
   const [responses, setResponses] = useState<number[]>([]);
   const [currQ, setCurrQ] = useState<FormatQ | null>();
   const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
+  const { user } = useUser();
 
   //populates the question bank upon refresh
   useEffect(() => {
@@ -46,14 +49,18 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
     }
   };
 
+
   const handleNextQuestion = () => {
     if (currQ != undefined) {
       let currQuestionID = currQ.id;
       if (currQuestionID < questionBank.length) {
         setCurrQ(questionBank[currQuestionID]);
         setSelectedAnswer(-1);
-      } else {
+      } else { // the survey has been completed
         setCurrQ(null);
+        if (user?.id) {
+          updateFirestoreUserSurveyStatus(user.id);
+        }
         props.setSurveyMode(SurveyStatus.Complete);
       }
     }

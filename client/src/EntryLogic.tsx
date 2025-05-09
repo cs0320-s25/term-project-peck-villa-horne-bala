@@ -3,42 +3,21 @@ import Homescreen from "./home_screen/HomeScreen";
 import { Survey } from "./survey/SurveyManager";
 import { useUser } from "@clerk/clerk-react";
 import { Status } from "./types";
+import {checkUserSurveyStatus} from "./survey/SurveyApi"
+
 
 export function Intro() {
   const { user } = useUser();
   const [mode, setMode] = useState<Status>(Status.InBetween);
+
   // here we will call the api to check the firebase to see if the user has taken the survey, or not and set the mode accordingly
   useEffect(() => {
-    const checkUserSurveyStatus = async () => {
-      try {
-        console.log(user);
-
-        const response = await fetch(
-          `http://localhost:3232/Survey?uid=${user}`
-        );
-        const result = await response.json();
-        console.log("Result: "+ result);
-  
-        const userHasTakenSurvey: boolean = result.takenSurvey;
-        console.log("boolean: "+userHasTakenSurvey);
-
-        if (userHasTakenSurvey) {
-          setMode(Status.Homescreen);
-        } else {
-          setMode(Status.Survey);
-        }
-      } catch (error) {
-        console.error("Failed to check survey status:", error);
-      }
-    };
-
-    checkUserSurveyStatus();
+    if(user?.id){
+      checkUserSurveyStatus(user.id, setMode);
+    }
   }, []);
 
-  useEffect(() => {
-    console.log("stat changed: " + mode);
-  }, [mode]);
-
+ 
   return (
     <div className="main">
       {mode == Status.Homescreen && <Homescreen></Homescreen>}

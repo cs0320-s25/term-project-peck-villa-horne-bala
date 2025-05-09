@@ -1,5 +1,6 @@
-package Server;
+package Server.Survey;
 
+import Server.Utils;
 import Storage.StorageInterface;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,6 @@ public class SurveyHandler implements Route {
 
   public SurveyHandler(StorageInterface storageInterface) {
     this.storage = storageInterface;
-    System.out.println("Survey handler created");
   }
 
   /**
@@ -27,12 +27,20 @@ public class SurveyHandler implements Route {
     Map<String, Object> responseMap = new HashMap<>();
     try {
       String uid = request.queryParams("uid");
+      String takenSurvey = request.queryParams("surveyCompleted");
 
-      Boolean isUserSurvey = this.storage.isUserCollection(uid);
+      if (takenSurvey != null) {
+        Map<String, Object> output = new HashMap<>();
+        output.put("surveyCompleted", true);
+        this.storage.addDocument(uid, "survey", "status", output);
 
-      System.out.println("boolean result survey: " + isUserSurvey);
-      responseMap.put("response_type", "success");
-      responseMap.put("takenSurvey", isUserSurvey);
+        responseMap.put("surveyStatus", output);
+      } else {
+        Boolean isUserSurvey = this.storage.isUserCollection(uid);
+
+        responseMap.put("response_type", "success");
+        responseMap.put("takenSurvey", isUserSurvey);
+      }
     } catch (Exception e) {
       responseMap.put("response_type", "failure");
       responseMap.put("error", e.getMessage());

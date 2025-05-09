@@ -32,7 +32,6 @@ public class FirebaseUtilities implements StorageInterface {
         Paths.get(workingDirectory, "src", "main", "resources", "firebase_config.json");
     // ^-- if your /resources/firebase_config.json.json exists but is not found,
     // try printing workingDirectory and messing around with this path.
-    System.out.println(firebaseConfigPath);
     FileInputStream serviceAccount = new FileInputStream(firebaseConfigPath.toString());
 
     FirebaseOptions options =
@@ -120,10 +119,8 @@ public class FirebaseUtilities implements StorageInterface {
       List<Map<String, Object>> surveyDocs = getCollection(uid, "survey");
 
       if (surveyDocs.isEmpty()) {
-        System.out.println("No survey document found for uid: " + uid);
         return false;
       } else {
-        System.out.println("Survey document found for uid: " + uid);
         return true;
       }
     } catch (Exception e) {

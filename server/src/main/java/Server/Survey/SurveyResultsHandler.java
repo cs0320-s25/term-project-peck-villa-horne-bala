@@ -1,4 +1,4 @@
-package Server;
+package Server.Survey;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -31,10 +31,6 @@ export function Survey(props: SurveyProps) {
     props.setMode(Status.Homescreen)
   }
 
-  useEffect(()=>{
-    console.log("survey stat changed: "+ surveyStatus)
-  }, [surveyStatus])
-
   return (
     <div className="survey">
       {surveyStatus == SurveyStatus.Intro && (
