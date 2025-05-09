@@ -2,20 +2,20 @@ import { Dispatch, FormEventHandler, SetStateAction } from "react";
 import { SurveyStatus } from "./survey/SurveyManager";
 
 export enum CompletionStatus {
-    Complete = "Complete",
-    Incomplete = "Incomplete"
+  Complete = "Complete",
+  Incomplete = "Incomplete",
 }
 
-export interface LevelProps  { 
+export interface LevelProps {
   CompletionStatus: CompletionStatus;
   setCompletionStatus: (status: CompletionStatus) => void;
 }
 
 export type UserQuestionHashMap = {
-        [questionId: string]: {
-            status: CompletionStatus;
-        };
-    };
+  [questionId: string]: {
+    status: CompletionStatus;
+  };
+};
 
 export enum Status {
   Survey = "SURVEY",
@@ -61,3 +61,20 @@ export interface QuestionProps {
 export interface SurveyManagerProps {
   setSurveyMode: Dispatch<SetStateAction<SurveyStatus>>;
 }
+
+const moduleNameArray: string[] = [
+  "module01_level01",
+  "module01_level02",
+  "module01_level03",
+  "module01_level04",
+  "module02_level01",
+  "module02_level02",
+  "module02_level03",
+  "module02_level04",
+  "module03_level01",
+  "module03_level02",
+  "module03_level03",
+  "module04_level01",
+  "module04_level02",
+  "module04_level03",
+];
