@@ -3,7 +3,7 @@ import CodeEditor from "../../components/CodeEditor";
 export function MThreeLvlFour() {
   return (
     <div>
-      <h2>Module 2: Operators - Level 1: Addition/Subtraction</h2>
+      <h2>Module 3: Operators - Level 4: Addition/Subtraction</h2>
       <CodeEditor initialCode="" questionId="module03_level04" />
       <p>
         We can use operators to add and subtract numbers. This is how we can

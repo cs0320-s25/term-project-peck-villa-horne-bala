@@ -1,10 +1,10 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../components/CodeEditor";
 
-export function MFourLvlFour() {
+export function MFourLvlTwo() {
   return (
     <div>
-      <h2>Module 2: Operators - Level 1: Addition/Subtraction</h2>
+      <h2>Module 4: Operators - Level 2: Addition/Subtraction</h2>
       <CodeEditor initialCode="" questionId="module04_level02" />
       <p>
         We can use operators to add and subtract numbers. This is how we can
@@ -25,4 +25,4 @@ export function MFourLvlFour() {
   );
 }
 
-export default MFourLvlFour;
+export default MFourLvlTwo;
