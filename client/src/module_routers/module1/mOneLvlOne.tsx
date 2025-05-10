@@ -42,7 +42,7 @@ export function MOneLvlOne() {
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
       {levelCompletionStatus === CompletionStatus.Complete && (
-        <button onClick={() => navigate("/MOneLTwo")}>Next Level</button>
+        <button onClick={() => navigate("/MOneLvlTwo")}>Next Level</button>
       )}
     </div>
   );
