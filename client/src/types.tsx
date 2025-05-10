@@ -1,6 +1,13 @@
 import { Dispatch, FormEventHandler, SetStateAction } from "react";
 import { SurveyStatus } from "./survey/SurveyManager";
 
+export interface CodeEditorProps {
+  initialCode: string;
+  questionId: string;
+  level: LevelInfo;
+  setLevelCompletionStatus: (status: CompletionStatus) => void;
+}
+
 export enum CompletionStatus {
   Complete = "Complete",
   Incomplete = "Incomplete",
@@ -28,6 +35,7 @@ export interface LevelInfo {
   locked: boolean;
   routerPath: string;
   descriptor: string;
+  completionStatus: CompletionStatus;
 }
 
 export interface ModuleInfo {
@@ -37,6 +45,7 @@ export interface ModuleInfo {
 
 export interface ModuleProps {
   module: ModuleInfo;
+  modules: ModuleInfo[];
 }
 
 export interface LevelProp {

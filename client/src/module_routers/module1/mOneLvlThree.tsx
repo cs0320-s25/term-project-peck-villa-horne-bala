@@ -1,13 +1,22 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus } from "../../types";
-import { LevelProps } from "../../types";
+import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import { LevelInfo } from "../../types";
 import { useNavigate } from "react-router-dom";
 
 export function MOneLvlThree() {
-  const [completionStatus, setCompletionStatus] = useState<CompletionStatus>(
-    CompletionStatus.Incomplete
-  );
+  const levelinfo: LevelInfo = modulesList[0].levels[2];
+  if (modulesList[0].levels[1].completionStatus === CompletionStatus.Complete) {
+    levelinfo.locked = false;
+  } else {
+    levelinfo.locked = true;
+  }
+  console.log(levelinfo.locked);
+  console.log("Previous level complete?" + modulesList[0].levels[1].completionStatus);
+  const [levelCompletionStatus, setLevelCompletionStatus] =
+    useState<CompletionStatus>(levelinfo.completionStatus);
+
   const navigate = useNavigate();
   return (
     <div>
@@ -29,9 +38,10 @@ export function MOneLvlThree() {
       <CodeEditor
         initialCode=""
         questionId="module01_level03"
-        setCompletionStatus={setCompletionStatus}
+        level={levelinfo}
+        setLevelCompletionStatus={setLevelCompletionStatus}
       />
-      {completionStatus === CompletionStatus.Complete && (
+      {levelCompletionStatus === CompletionStatus.Complete && (
         <button onClick={() => navigate("/MOneLvlFour")}>Next Level</button>
       )}
       <br></br>
