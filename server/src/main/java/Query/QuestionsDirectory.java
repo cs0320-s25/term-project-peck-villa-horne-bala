@@ -17,7 +17,7 @@ public class QuestionsDirectory {
   }
 
   public boolean checkAnswer(String filepath, String output, String code) throws IOException {
-    CSVFile file = new CSVFile("src/main/java/level_answers/" + filepath + ".csv");
+    CSVFile file = new CSVFile("server/src/main/java/level_answers" + filepath + ".csv");
 
     if (file == null) {
       System.err.println("Could not find resource: level_answers/" + filepath + ".csv");

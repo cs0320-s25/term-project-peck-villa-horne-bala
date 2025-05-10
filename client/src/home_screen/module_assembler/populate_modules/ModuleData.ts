@@ -10,14 +10,14 @@ export const module1: ModuleInfo = {
       levelName: "What is a variable?",
       locked: false,
       routerPath: "/MOneLvlOne",
-      completionStatus: CompletionStatus.Complete,
+      completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlOne",
     },
     {
       levelName: "Int VS Doubles",
       locked: false,
       routerPath: "/MOneLvlTwo",
-      completionStatus: CompletionStatus.Complete,
+      completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlTwo",
     },
     {
