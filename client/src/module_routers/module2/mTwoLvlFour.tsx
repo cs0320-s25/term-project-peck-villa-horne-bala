@@ -41,7 +41,7 @@ export function MTwoLvlFour() {
           Task: Create a variable result and set it equal to 5 + 2 * 3. Print
           result to see what happens! Then create another variable fixedResult
           that uses parentheses to change the order like this: (5 + 2) * 3.
-          Print fixedResult and compare the two results!
+          Print result and fixedResult with a comma inbetween!
         </strong>
       </p>
       <CodeEditor

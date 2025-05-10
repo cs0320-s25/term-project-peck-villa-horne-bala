@@ -1,1 +1,1 @@
-int,amount,123,double,price,=,19.99,19.99
+int|age|=|20|boolean|hasTicket|=|true|if|&&|You can enter the concert.|"Sorry, you can’t enter."|You can enter the concert.

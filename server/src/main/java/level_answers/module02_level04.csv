@@ -1,1 +1,1 @@
-int,amount,123,double,price,=,19.99,19.99
+int|=|result|fixedResult|5|2|3|(|)|11,21

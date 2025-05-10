@@ -1,1 +1,1 @@
-int,amount,123,double,price,=,19.99,19.99
+printAge(21)|printAge(42)|printAge(78)|public|static|void|printAge(int age)|System|out|println|"You are "|age|+|" years old."|You are 21 years old.You are 42 years old.You are 78 years old.

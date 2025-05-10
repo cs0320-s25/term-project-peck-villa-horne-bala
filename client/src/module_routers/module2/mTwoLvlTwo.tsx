@@ -28,19 +28,19 @@ export function MTwoLvlTwo() {
       <p>
         Multiplying (*) and dividing (/) numbers lets us solve more kinds of
         problems like calculating the area of a rectangle or splitting a bill.
-        Note: If you save the result of division in an int it will only save the
-        non-decimal value. For example if you do int div = 5/2 then it will only
-        save 2 instead of 2.5. If you do double div = 5/2 then it will save as
+        Note: To get the decimal value of and save it you must use decmal values and save it in a double.
+         For example if you do int div = 5/2 then it will only
+        save 2 instead of 2.5. If you do double div = 5.0/2 then it will save as
         2.5. This is because int is a whole number and double is a decimal
         number. So if you want to save the decimal value you need to use double
         instead of int. For example, double div = 5.0/2.0 will save the value as
         2.5.
         <br></br>
         <strong>
-          Task: Create three variables that equal, 10, 7, and 2. Print the
-          multiplication of 10 and 7 as an int, and the division of 7 and 2 as
-          an int and double. Print it in the similar format as the last level,
-          all on one line separated by spaces!
+          Task: Create three variables that equal a,b and c where a is the
+          multiplication of 10 and 7 as an int, b is the division of 7 and 2 as
+          an int and c is the save division as a double. Print it in the similar format as the last level,
+          all on one line separated by the word "and" and spaces!
         </strong>
       </p>
       <CodeEditor

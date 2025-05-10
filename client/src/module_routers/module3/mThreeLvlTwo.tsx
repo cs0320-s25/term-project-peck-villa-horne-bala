@@ -37,9 +37,9 @@ export function MThreeLvlTwo() {
         <strong>
           First create a variable “score” with the value 82. Then create a
           conditional chain where each conditional checks if your grade is a A
-          (90 or above): print “Grade: A”, B (80 or above): print “Grade B”, C
-          (70 or above): print “Grade C, lastly if all of those are false print
-          “Grade: Incomplete”. You can use the else if statement to check for the other
+          (90 or above): print “Grade:A”, B (80 or above): print “Grade:B”, C
+          (70 or above): print “Grade:C, lastly if all of those are false print
+          “Grade:Incomplete”. You can use the else if statement to check for the other
           conditions. Try it out!
         </strong>
       </p>

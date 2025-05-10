@@ -66,14 +66,16 @@ public class Parser {
    */
   public List<List<String>> parse() throws IOException {
     String line;
-    Pattern regexSplitCSVRow = Pattern.compile(",(?=([^\\\"]*\\\"[^\\\"]*\\\")*(?![^\\\"]*\\\"))");
-    while ((line = this.bufferedReader.readLine()) != null) {
-      String[] result = regexSplitCSVRow.split(line);
-      List<String> lineToArr = Arrays.stream(result).toList();
-      parsedContent.add((lineToArr));
-    }
-    this.bufferedReader.close();
+    // Regex splits on '|' unless inside quotes
+    Pattern regexSplitCustomDelimiter = Pattern.compile("\\|(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
+    while ((line = this.bufferedReader.readLine()) != null) {
+      String[] result = regexSplitCustomDelimiter.split(line);
+      List<String> lineToArr = Arrays.stream(result).toList();
+      parsedContent.add(lineToArr);
+    }
+
+    this.bufferedReader.close();
     return parsedContent;
   }
 }

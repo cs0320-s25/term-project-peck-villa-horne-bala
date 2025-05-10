@@ -23,7 +23,7 @@ export function MFourLvlTwo() {
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
       <button onClick={() => navigate("/MFourLvlOne")}>Previous Level</button>
-      <h2>Module 4: Methods - Level 1: Method Syntax</h2>
+      <h2>Module 4: Methods - Level 2: Method Syntax</h2>
       <p>
         Sometimes you want your method to do something based on input: that’s
         where parameters come in! A parameter is like a variable you pass into
@@ -41,8 +41,7 @@ export function MFourLvlTwo() {
         <br></br>
         <strong>
           Task: Write a method printAge(int age) that prints: "You are X years old."
-          Replace X with the age value passed in. Try calling it with different
-          ages!
+          Replace X with the age value passed in. Try calling it with ages 21, 42, and 78!
         </strong>
       </p>
       <CodeEditor

@@ -40,13 +40,7 @@ export function MFourLvlOne() {
         Java” and call it in main
         <br></br>
         <strong>
-          Task: Create two int variables, a = 100 and b = 5. Save the result of
-          their sum in a variable called “sum” and save the result of their
-          difference in a variable called “diff”. Print both variables! When
-          printing you can use strings to separate variables like
-          “System.out.println(variable1 + “ ” + variable2). This makes it
-          possible to print both variables on one line with a space in the
-          middle. Try it out!
+        Task: Create a method called greet that prints “Welcome to Java” and call it in main
         </strong>
       </p>
       <CodeEditor

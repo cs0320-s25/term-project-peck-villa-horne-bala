@@ -36,7 +36,7 @@ export function MFourLvlThree() {
         <br></br>
         <strong>
           Write a method called square(int number) that returns the square of a
-          number. Print the result by calling the method in a print statement.
+          number. Print the result by calling the method with 4 as the paramater in a print statement.
         </strong>
       </p>
       <CodeEditor
