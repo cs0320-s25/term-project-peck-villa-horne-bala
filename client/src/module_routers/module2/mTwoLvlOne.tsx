@@ -1,11 +1,28 @@
-import { useState, useEffect, FormEventHandler } from "react";
+import { useState } from "react";
 import CodeEditor from "../../components/CodeEditor";
+import { LevelInfo } from "../../types";
+import { CompletionStatus } from "../../types";
+import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import { useNavigate } from "react-router-dom";
 
 export function MTwoLvlOne() {
+  const levelinfo: LevelInfo = modulesList[1].levels[0];
+  if (modulesList[0].levels[4].completionStatus === CompletionStatus.Complete) {
+    levelinfo.locked = false;
+  } else {
+    levelinfo.locked = true;
+  }
+  console.log(levelinfo.locked);
+  console.log(
+    "Previous level complete?" + modulesList[0].levels[4].completionStatus
+  );
+  const [levelCompletionStatus, setLevelCompletionStatus] =
+    useState<CompletionStatus>(levelinfo.completionStatus);
+  const navigate = useNavigate();
   return (
     <div>
+      <button onClick={() => navigate("/Home")}>Back</button>
       <h2>Module 2: Operators - Level 1: Addition/Subtraction</h2>
-      <CodeEditor initialCode="" questionId="module02_level01" />
       <p>
         We can use operators to add and subtract numbers. This is how we can
         calculate scores, totals, and more! In Java, “+” means addition and “-”
@@ -21,6 +38,16 @@ export function MTwoLvlOne() {
           middle. Try it out!
         </strong>
       </p>
+      <CodeEditor
+        initialCode=""
+        questionId="module02_level01"
+        level={levelinfo}
+        setLevelCompletionStatus={setLevelCompletionStatus}
+      />
+      {levelCompletionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/MTwoLvlTwo")}>Next Level</button>
+      )}
+      <br></br>
     </div>
   );
 }

@@ -1,11 +1,30 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../components/CodeEditor";
+import { CompletionStatus } from "../../types";
+import { LevelInfo } from "../../types";
+import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import { useNavigate } from "react-router-dom";
 
 export function MTwoLvlThree() {
+   const levelinfo: LevelInfo = modulesList[1].levels[2];
+   if (
+     modulesList[0].levels[4].completionStatus === CompletionStatus.Complete
+   ) {
+     levelinfo.locked = false;
+   } else {
+     levelinfo.locked = true;
+   }
+   console.log(levelinfo.locked);
+   console.log(
+     "Previous level complete?" + modulesList[0].levels[2].completionStatus
+   );
+   const [levelCompletionStatus, setLevelCompletionStatus] =
+     useState<CompletionStatus>(levelinfo.completionStatus);
+   const navigate = useNavigate();
   return (
     <div>
       <h2>Module 2: Operators - Level 3: Modulus</h2>
-      <CodeEditor initialCode="" questionId="module02_level03" />
+
       <p>
         The modulus operator (%) is used to find the remainder of a division
         operation. It is useful for determining if a number is even or odd, or
@@ -20,6 +39,16 @@ export function MTwoLvlThree() {
           return the first numbers value.
         </strong>
       </p>
+      <CodeEditor
+        initialCode=""
+        questionId="module02_level01"
+        level={levelinfo}
+        setLevelCompletionStatus={setLevelCompletionStatus}
+      />
+       {levelCompletionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/MTwoLvlTwo")}>Next Level</button>
+      )}
+      <br></br>
     </div>
   );
 }

@@ -2,20 +2,16 @@ import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { CompletionStatus, UserQuestionHashMap } from "../types";
 import { useUser } from "@clerk/clerk-react";
+import { CodeEditorProps } from "../types";
 
-interface CodeEditorProps {
-  initialCode: string;
-  questionId: string;
-  setCompletionStatus?: (status: CompletionStatus) => void;
-}
+
 
 const CodeEditor = (props: CodeEditorProps) => {
   const [code, setCode] = useState(
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
-  const { user } = useUser();
-  const progressMap: UserQuestionHashMap = {};
+  console.log("Level Completion Status: ", props.level.completionStatus);
 
   const handleRun = async () => {
     try {
@@ -31,12 +27,13 @@ const CodeEditor = (props: CodeEditorProps) => {
       const data = await response.json();
       setOutput(`✅ Passed: ${data.passed}\n🖨️ Output:\n${data.output}`);
       if (data.passed) {
-        props.setCompletionStatus?.(CompletionStatus.Complete);
-      //   if (user) {
-      //   localStorage.setItem(user?.id, progressMap[props.questionId].status);
-      //   }
+        props.setLevelCompletionStatus?.(CompletionStatus.Complete);
+        props.level.completionStatus = CompletionStatus.Complete;
+        props.level.locked = false;
       } else {
-        props.setCompletionStatus?.(CompletionStatus.Incomplete);
+        props.setLevelCompletionStatus?.(CompletionStatus.Incomplete);
+        props.level.completionStatus = CompletionStatus.Incomplete;
+        props.level.locked = true;
       }
     } catch (err) {
       setOutput(`❌ Error: ${err}`);

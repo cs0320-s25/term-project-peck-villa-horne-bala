@@ -13,17 +13,6 @@ import "../../../styles/Card.css"
 
 
 export function Level(props: LevelProp){
-    const { user } = useUser();
-    if (user) {
-    const userProgressMap = localStorage.getItem(`${user.id}`);
-    if(userProgressMap){
-        const progress = JSON.parse(userProgressMap);
-        console.log(progress);
-        if (progress[props.level.routerPath] === "Complete") {
-            props.level.locked = false;
-        }
-    }
-  }
 
     const navigate= useNavigate();
 

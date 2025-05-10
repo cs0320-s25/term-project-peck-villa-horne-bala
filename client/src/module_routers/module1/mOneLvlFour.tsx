@@ -1,16 +1,27 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus } from "../../types";
-import { LevelProps } from "../../types";
+import { LevelInfo } from "../../types";
+import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 
 export function MOneLvlFour() {
-  const [completionStatus, setCompletionStatus] = useState<CompletionStatus>(
-    CompletionStatus.Incomplete
-  );
+   const levelinfo: LevelInfo = modulesList[0].levels[3];
+    if (modulesList[0].levels[2].completionStatus === CompletionStatus.Complete) {
+      levelinfo.locked = false;
+    } else {
+      levelinfo.locked = true;
+    }
+     console.log(levelinfo.locked);
+     console.log(
+       "Previous level complete?" + modulesList[0].levels[2].completionStatus
+     );
+     const [levelCompletionStatus, setLevelCompletionStatus] =
+       useState<CompletionStatus>(levelinfo.completionStatus);
   const navigate = useNavigate();
   return (
     <div>
+      <button onClick={() => navigate("/Home")}>Back</button>
       <h2> Module 1: Variables & Primitives - Level 4: Boolean Types</h2>
       <p>
         In Java, a boolean is a data type that can hold one of two values: true
@@ -34,9 +45,10 @@ export function MOneLvlFour() {
       <CodeEditor
         initialCode=""
         questionId="module01_level04"
-        setCompletionStatus={setCompletionStatus}
+        level={levelinfo}
+        setLevelCompletionStatus={setLevelCompletionStatus}
       />
-      {completionStatus === CompletionStatus.Complete && (
+      {levelCompletionStatus === CompletionStatus.Complete && (
         <button onClick={() => navigate("/Home")}>Continue</button>
       )}
     </div>
