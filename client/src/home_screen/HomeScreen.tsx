@@ -17,6 +17,7 @@ export function Homescreen() {
         >
           Reset
         </button>
+        <br></br>
         <UserButton></UserButton>
 
         <ModulePopulator></ModulePopulator>
