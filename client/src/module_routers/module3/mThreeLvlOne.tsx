@@ -1,11 +1,30 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../components/CodeEditor";
+import { CompletionStatus } from "../../types";
+import { LevelInfo } from "../../types";
+import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import { useNavigate } from "react-router-dom";
 
 export function MThreeLvlOne() {
+   const levelinfo: LevelInfo = modulesList[2].levels[0];
+   if (
+     modulesList[1].levels[4].completionStatus === CompletionStatus.Complete
+   ) {
+     levelinfo.locked = false;
+   } else {
+     levelinfo.locked = true;
+   }
+   console.log(levelinfo.locked);
+   console.log(
+     "Previous level complete?" + modulesList[1].levels[4].completionStatus
+   );
+   const [levelCompletionStatus, setLevelCompletionStatus] =
+     useState<CompletionStatus>(levelinfo.completionStatus);
+   const navigate = useNavigate();
   return (
     <div>
+      <button onClick={() => navigate("/Home")}>Back</button>
       <h2>Module 3: Decision Making - Level 1: If Statement</h2>
-      <CodeEditor initialCode="" questionId="module03_level01" />
       <p>
         In Java, an if statement is used to execute a block of code only if a
         specified condition is true. It allows you to make decisions in your
@@ -28,6 +47,15 @@ export function MThreeLvlOne() {
           middle. Try it out!
         </strong>
       </p>
+      <CodeEditor
+        initialCode=""
+        questionId="module03_level01"
+        level={levelinfo}
+        setLevelCompletionStatus={setLevelCompletionStatus}
+      />
+      {levelCompletionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/MThreeLvlTwo")}>Next Level</button>
+      )}
     </div>
   );
 }

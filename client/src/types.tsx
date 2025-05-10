@@ -4,9 +4,8 @@ import { SurveyStatus } from "./survey/SurveyManager";
 export interface CodeEditorProps {
   initialCode: string;
   questionId: string;
-  level: LevelInfo
-  levelCompletionStatus?: CompletionStatus;
-  setLevelCompletionStatus?: (status: CompletionStatus) => void;
+  level: LevelInfo;
+  setLevelCompletionStatus: (status: CompletionStatus) => void;
 }
 
 export enum CompletionStatus {
@@ -51,8 +50,6 @@ export interface ModuleProps {
 
 export interface LevelProp {
   level: LevelInfo;
-  setCompletionStatus?: (status: CompletionStatus) => void;
-  completionStatus?: CompletionStatus;
 }
 
 export interface FormatQ {
