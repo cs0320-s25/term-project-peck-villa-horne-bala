@@ -10,8 +10,6 @@ import { useUser } from "@clerk/clerk-react";
 
 import "../../../styles/Card.css"
 
-
-
 export function Level(props: LevelProp){
 
     const navigate= useNavigate();

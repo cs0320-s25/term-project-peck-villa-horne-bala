@@ -23,7 +23,6 @@ import java.util.concurrent.ExecutionException;
 public class FirebaseUtilities implements StorageInterface {
 
   public FirebaseUtilities() throws IOException {
-    // TODO: FIRESTORE PART 0:
     // Create /resources/ folder with firebase_config.json.json and
     // add your admin SDK from Firebase. see:
     // https://docs.google.com/document/d/10HuDtBWjkUoCaVj_A53IFm5torB_ws06fW3KYFZqKjc/edit?usp=sharing
@@ -77,7 +76,6 @@ public class FirebaseUtilities implements StorageInterface {
     // adds a new document 'doc_name' to colleciton 'collection_id' for user 'uid'
     // with data payload 'data'.
 
-    // TODO: FIRESTORE PART 1:
     // use the guide below to implement this handler
     // - https://firebase.google.com/docs/firestore/quickstart#add_data
 
@@ -89,6 +87,31 @@ public class FirebaseUtilities implements StorageInterface {
     ApiFuture<WriteResult> writeResult = docRef.set(data);
 
     System.out.println(writeResult.get().getUpdateTime());
+  }
+
+  /**
+   * @param uid
+   * @param collection_id
+   * @param data
+   */
+  @Override
+  public void addCollection(
+      String uid, String collection_id, String doc_id, Map<String, Object> data) {
+    if (uid == null) {
+      throw new IllegalArgumentException("removeUser: uid cannot be null");
+    }
+    try {
+      Firestore db = FirestoreClient.getFirestore();
+      CollectionReference collectionRef =
+          db.collection("users").document(uid).collection(collection_id);
+
+      DocumentReference docRef = collectionRef.document(doc_id);
+      docRef.set(data);
+      //      userRef.collection(collection_id).document(doc_id).set(data);
+
+    } catch (Exception e) {
+      System.out.println("Error while adding collection: " + e.getMessage());
+    }
   }
 
   // clears the collections inside of a specific user.

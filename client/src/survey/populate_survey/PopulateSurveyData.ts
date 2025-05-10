@@ -1,4 +1,4 @@
-import { FormatQ } from "../SurveyQuesManager";
+import { FormatQ } from "../../types";
 import {
   Q1,
   Q2,

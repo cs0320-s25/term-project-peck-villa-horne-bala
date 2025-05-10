@@ -28,6 +28,9 @@ public class SurveyHandler implements Route {
     try {
       String uid = request.queryParams("uid");
       String takenSurvey = request.queryParams("surveyCompleted");
+      if (uid == null) {
+        throw new Exception("Invalid user id");
+      }
 
       if (takenSurvey != null) {
         Map<String, Object> output = new HashMap<>();

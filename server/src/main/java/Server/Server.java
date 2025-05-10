@@ -2,6 +2,8 @@ package Server;
 
 import static spark.Spark.*;
 
+import Server.Modules.AddModules;
+import Server.Modules.FetchModules;
 import Server.Survey.SurveyHandler;
 import Server.Survey.SurveyResultsHandler;
 import Storage.FirebaseUtilities;
@@ -48,6 +50,8 @@ public class Server {
       // Set up handlers
       Spark.get("SurveyResults", new SurveyResultsHandler());
       Spark.get("Survey", new SurveyHandler(firebaseUtils));
+      Spark.get("FetchModules", new FetchModules(firebaseUtils));
+      Spark.get("LoadModules", new AddModules(firebaseUtils));
       Spark.post("run", new RunCodeHandler());
       Spark.init();
       Spark.awaitInitialization();

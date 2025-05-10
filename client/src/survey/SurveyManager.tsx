@@ -7,6 +7,8 @@ import {
 } from "react";
 import SurveyQuestionManager from "./SurveyQuesManager"
 import { Status } from "../types";
+import {loadModules} from "../home_screen/ModuleApi";
+import { useUser } from "@clerk/clerk-react";
 
 export enum SurveyStatus {
   Intro,
@@ -19,6 +21,8 @@ interface SurveyProps {
 }
 
 export function Survey(props: SurveyProps) {
+  const {user}= useUser();
+  
   const [surveyStatus, setSurveyStatus] = useState<SurveyStatus>(
     SurveyStatus.Intro
   );
@@ -28,6 +32,10 @@ export function Survey(props: SurveyProps) {
   }
 
   const completeSurvey =()=>{
+    // this is where the api call to the decision tree logic will be inquired to interpret the upload the modules
+    if(user?.id){
+      loadModules(user.id);
+    }
     props.setMode(Status.Homescreen)
   }
 
