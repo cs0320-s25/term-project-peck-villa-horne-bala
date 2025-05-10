@@ -32,6 +32,7 @@ export function Survey(props: SurveyProps) {
   }
 
   const completeSurvey =()=>{
+    // this is where the api call to the decision tree logic will be inquired to interpret the upload the modules
     if(user?.id){
       loadModules(user.id);
     }

@@ -11,6 +11,7 @@ export interface CodeEditorProps {
 export enum CompletionStatus {
   Complete = "Complete",
   Incomplete = "Incomplete",
+  Loading="Loading"
 }
 
 export interface LevelProps {
@@ -32,10 +33,10 @@ export enum Status {
 
 export interface LevelInfo {
   levelName: string;
-  locked: boolean;
   routerPath: string;
-  descriptor: string;
+  locked: boolean | null;
   completionStatus: CompletionStatus;
+  jsonKey: string;
 }
 
 export interface ModuleInfo {
@@ -45,7 +46,6 @@ export interface ModuleInfo {
 
 export interface ModuleProps {
   module: ModuleInfo;
-  modules: ModuleInfo[];
 }
 
 export interface LevelProp {

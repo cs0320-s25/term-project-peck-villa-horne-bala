@@ -14,6 +14,7 @@ public class FetchModules implements Route {
 
   public FetchModules(StorageInterface storageInterface) {
     this.storage = storageInterface;
+    System.out.println("FetchModules started");
   }
 
   @Override
@@ -24,6 +25,7 @@ public class FetchModules implements Route {
       if (uid == null) {
         throw new IllegalArgumentException("Invalid user id");
       }
+      System.out.println("Fetching modules for " + uid);
       List<Map<String, Object>> modules = this.storage.getCollection(uid, "modulesProgress");
       responseMap.put("userProgress", modules);
 

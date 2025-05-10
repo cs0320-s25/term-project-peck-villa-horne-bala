@@ -89,6 +89,31 @@ public class FirebaseUtilities implements StorageInterface {
     System.out.println(writeResult.get().getUpdateTime());
   }
 
+  /**
+   * @param uid
+   * @param collection_id
+   * @param data
+   */
+  @Override
+  public void addCollection(
+      String uid, String collection_id, String doc_id, Map<String, Object> data) {
+    if (uid == null) {
+      throw new IllegalArgumentException("removeUser: uid cannot be null");
+    }
+    try {
+      Firestore db = FirestoreClient.getFirestore();
+      CollectionReference collectionRef =
+          db.collection("users").document(uid).collection(collection_id);
+
+      DocumentReference docRef = collectionRef.document(doc_id);
+      docRef.set(data);
+      //      userRef.collection(collection_id).document(doc_id).set(data);
+
+    } catch (Exception e) {
+      System.out.println("Error while adding collection: " + e.getMessage());
+    }
+  }
+
   // clears the collections inside of a specific user.
   @Override
   public void clearUser(String uid) throws IllegalArgumentException {
