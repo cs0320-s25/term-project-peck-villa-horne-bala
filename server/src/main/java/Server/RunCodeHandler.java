@@ -42,8 +42,7 @@ public class RunCodeHandler implements Route {
       // Execute code using Piston
       String output = runWithPiston(payload.toString());
       boolean outputCorrect = questionsDirectory.checkAnswer(questionId, output, userCode);
-      System.out.println(outputCorrect);
-
+      System.out.println("Level:" + questionId + " | result:" + outputCorrect);
       JsonObject result = new JsonObject();
       if (outputCorrect && hasPrint) {
         result.addProperty("passed", hasPrint);
