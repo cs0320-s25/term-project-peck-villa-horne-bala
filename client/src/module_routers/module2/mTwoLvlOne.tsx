@@ -7,15 +7,17 @@ import { useNavigate } from "react-router-dom";
 
 export function MTwoLvlOne() {
   const levelinfo: LevelInfo = modulesList[1].levels[0];
-  if (modulesList[0].levels[4].completionStatus === CompletionStatus.Complete) {
+  if (modulesList[0].levels[3].completionStatus === CompletionStatus.Complete
+    && modulesList[0].levels[3].locked === false
+  ) {
     levelinfo.locked = false;
   } else {
     levelinfo.locked = true;
   }
   console.log(levelinfo.locked);
-  console.log(
-    "Previous level complete?" + modulesList[0].levels[4].completionStatus
-  );
+  // console.log(
+  //   "Previous level complete?" + modulesList[0].levels[4].completionStatus
+  // );
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(levelinfo.completionStatus);
   const navigate = useNavigate();

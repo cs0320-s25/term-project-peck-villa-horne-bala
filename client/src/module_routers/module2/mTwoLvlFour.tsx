@@ -22,19 +22,26 @@ export function MTwoLvlFour() {
   return (
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
-      <h2>Module 2: Operators - Level 3: Modulus</h2>
+      <button onClick={() => navigate("/MTwoLvlThree")}>Previous Level</button>
+      <br></br>
+      <h2>Module 2: Operators - Level 4: Order of Operations</h2>
       <p>
-        The modulus operator (%) is used to find the remainder of a division
-        operation. It is useful for determining if a number is even or odd, or
-        for performing calculations that involve remainders. For example, 10 % 3
-        would give you 1, because when you divide 10 by 3, the remainder is 1.
+        Order of operations is the order in which calculations are performed
+        when evaluating an expression. In Java, the order of operations is as
+        follows: Parentheses, Exponents, Multiplication and Division (from left
+        to right), and Addition and Subtraction (from left to right). This means
+        that if you have an expression like 2 + 3 * 4, the multiplication will
+        be performed first, resulting in 2 + 12 = 14. If you want to change the
+        order of operations, you can use parentheses to group expressions. For
+        example, (2 + 3) * 4 will be evaluated as 5 * 4 = 20. This is important
+        because it allows you to control how calculations are performed and
+        ensure that you get the correct result.
         <br></br>
         <strong>
-          Task: Use a % b to find the remainder of 7 divided by 3, 5 divided by
-          1 and 4 divided by 18. Also come up with your own way of getting the
-          remainder 9. Print the answer and think about what it means! Note: if
-          the first number is less than the second then the modulus will always
-          return the first numbers value.
+          Task: Create a variable result and set it equal to 5 + 2 * 3. Print
+          result to see what happens! Then create another variable fixedResult
+          that uses parentheses to change the order like this: (5 + 2) * 3.
+          Print fixedResult and compare the two results!
         </strong>
       </p>
       <CodeEditor
@@ -43,6 +50,10 @@ export function MTwoLvlFour() {
         level={levelinfo}
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
+      {levelCompletionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/MThreeLvlOne")}>Continue</button>
+      )}
+      <br></br>
     </div>
   );
 }

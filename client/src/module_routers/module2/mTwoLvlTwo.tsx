@@ -50,7 +50,7 @@ export function MTwoLvlTwo() {
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
       {levelCompletionStatus === CompletionStatus.Complete && (
-        <button onClick={() => navigate("/MTwoLvlTwo")}>Next Level</button>
+        <button onClick={() => navigate("/MTwoLvlThree")}>Next Level</button>
       )}
       <br></br>
     </div>

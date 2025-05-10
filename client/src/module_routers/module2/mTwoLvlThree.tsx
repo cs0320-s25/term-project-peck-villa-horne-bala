@@ -14,10 +14,6 @@ export function MTwoLvlThree() {
    } else {
      levelinfo.locked = true;
    }
-   console.log(levelinfo.locked);
-   console.log(
-     "Previous level complete?" + modulesList[1].levels[1].completionStatus
-   );
    const [levelCompletionStatus, setLevelCompletionStatus] =
      useState<CompletionStatus>(levelinfo.completionStatus);
    const navigate = useNavigate();

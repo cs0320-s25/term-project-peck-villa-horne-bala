@@ -49,7 +49,7 @@ export function MOneLvlFour() {
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
       {levelCompletionStatus === CompletionStatus.Complete && (
-        <button onClick={() => navigate("/Home")}>Continue</button>
+        <button onClick={() => navigate("/MTwoLvlOne")}>Continue</button>
       )}
     </div>
   );

@@ -8,16 +8,13 @@ import { useNavigate } from "react-router-dom";
 export function MThreeLvlOne() {
    const levelinfo: LevelInfo = modulesList[2].levels[0];
    if (
-     modulesList[1].levels[4].completionStatus === CompletionStatus.Complete
+     modulesList[1].levels[3].completionStatus === CompletionStatus.Complete
    ) {
      levelinfo.locked = false;
    } else {
      levelinfo.locked = true;
    }
    console.log(levelinfo.locked);
-   console.log(
-     "Previous level complete?" + modulesList[1].levels[4].completionStatus
-   );
    const [levelCompletionStatus, setLevelCompletionStatus] =
      useState<CompletionStatus>(levelinfo.completionStatus);
    const navigate = useNavigate();
@@ -38,13 +35,9 @@ export function MThreeLvlOne() {
         {"System.out.println(The number is positive!)"}".
         <br></br>
         <strong>
-          Task: Create two int variables, a = 100 and b = 5. Save the result of
-          their sum in a variable called “sum” and save the result of their
-          difference in a variable called “diff”. Print both variables! When
-          printing you can use strings to separate variables like
-          “System.out.println(variable1 + “ ” + variable2). This makes it
-          possible to print both variables on one line with a space in the
-          middle. Try it out!
+          Task: Create a variable “age” that is 18 and write a conditional
+          statement that checks if the variable is 18 or greater. If they are
+          then print “You are eligible to vote”.
         </strong>
       </p>
       <CodeEditor

@@ -23,20 +23,26 @@ export function MFourLvlTwo() {
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
       <button onClick={() => navigate("/MFourLvlOne")}>Previous Level</button>
-      <h2>Module 4: Operators - Level 2: Addition/Subtraction</h2>
+      <h2>Module 4: Methods - Level 1: Method Syntax</h2>
       <p>
-        We can use operators to add and subtract numbers. This is how we can
-        calculate scores, totals, and more! In Java, “+” means addition and “-”
-        means subtraction.
+        Sometimes you want your method to do something based on input: that’s
+        where parameters come in! A parameter is like a variable you pass into
+        the method. When you create a method you can define what type of
+        variable must be passed in.
+        <code>
+          public static void greetUser(){" "}
+          {` System.out.println("Hello, " + name + "!");
+`}
+        </code>
+        Here the “String name” portion in the parenthesis is telling Java that
+        to call this method you must put in a string and that string will be
+        used in the method to print out a name. When you call
+        greetUser("Alex");, it prints: Hello, Alex!
         <br></br>
         <strong>
-          Task: Create two int variables, a = 100 and b = 5. Save the result of
-          their sum in a variable called “sum” and save the result of their
-          difference in a variable called “diff”. Print both variables! When
-          printing you can use strings to separate variables like
-          “System.out.println(variable1 + “ ” + variable2). This makes it
-          possible to print both variables on one line with a space in the
-          middle. Try it out!
+          Task: Write a method printAge(int age) that prints: "You are X years old."
+          Replace X with the age value passed in. Try calling it with different
+          ages!
         </strong>
       </p>
       <CodeEditor

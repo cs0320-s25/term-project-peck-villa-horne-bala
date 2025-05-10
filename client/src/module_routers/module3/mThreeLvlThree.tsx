@@ -22,20 +22,25 @@ export function MThreeLvlThree() {
   return (
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
-      <h2>Module 3: Operators - Level 3: Addition/Subtraction</h2>
+      <button onClick={() => navigate("/MThreeLvlTwo")}>Previous Level</button>
+      <h2>Module 3: Operators - Multiple Conditions</h2>
       <p>
-        We can use operators to add and subtract numbers. This is how we can
-        calculate scores, totals, and more! In Java, “+” means addition and “-”
-        means subtraction.
+        Sometimes we need to check more than one condition at the same time.
+        Java gives us logical operators to combine conditions:
+        <ul>
+          <li>&& means AND: – both conditions must be true </li>
+          <li>|| means OR – at least one condition must be true. </li>
+          <li>
+            ! means NOT – reverses the condition (true becomes false and vice
+            versa).
+          </li>
+        </ul>
         <br></br>
         <strong>
-          Task: Create two int variables, a = 100 and b = 5. Save the result of
-          their sum in a variable called “sum” and save the result of their
-          difference in a variable called “diff”. Print both variables! When
-          printing you can use strings to separate variables like
-          “System.out.println(variable1 + “ ” + variable2). This makes it
-          possible to print both variables on one line with a space in the
-          middle. Try it out!
+          Task: create a variable “age” that is 20 and create a conditional
+          statement that checks if age is greater than or equal to 18 and if
+          they have a ticket. If so print “You can enter the concert”, if not
+          print “You cannot enter the concert”. Try it out!
         </strong>
       </p>
       <CodeEditor
@@ -44,6 +49,9 @@ export function MThreeLvlThree() {
         level={levelinfo}
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
+         {levelCompletionStatus === CompletionStatus.Complete && (
+              <button onClick={() => navigate("/MFourLvlOne")}>Continue</button>
+            )}
     </div>
   );
 }

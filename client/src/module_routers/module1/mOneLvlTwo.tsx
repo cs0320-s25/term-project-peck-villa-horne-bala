@@ -9,7 +9,6 @@ export function MOneLvlTwo() {
   const levelinfo: LevelInfo = modulesList[0].levels[1];
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(levelinfo.completionStatus);
-    console.log(levelinfo.locked);
   const navigate = useNavigate();
   return (
     <div>

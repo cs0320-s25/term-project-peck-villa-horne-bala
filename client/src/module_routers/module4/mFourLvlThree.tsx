@@ -23,20 +23,20 @@ export function MFourLvlThree() {
   return (
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
-      <h2>Module 4: Operators - Level 3: Addition/Subtraction</h2>
+      <button onClick={() => navigate("/MFourLvlTwo")}>Previous Level</button>
+      <h2>Module 4: Methods - Level 3: Return Types</h2>
       <p>
-        We can use operators to add and subtract numbers. This is how we can
-        calculate scores, totals, and more! In Java, “+” means addition and “-”
-        means subtraction.
+        Not all methods just print things but some return values. This means the
+        method calculates something and gives you a result back.To do this, you
+        change the return type from void to the type you're returning (like int,
+        double, or String), and you use the return keyword.
+        <code>public static int add(int a, int b) {`return a + b;`}</code>
+        This method takes two integers, adds them, and returns the result. You
+        can call it like this: int result = add(5, 3); and result will be 8.
         <br></br>
         <strong>
-          Task: Create two int variables, a = 100 and b = 5. Save the result of
-          their sum in a variable called “sum” and save the result of their
-          difference in a variable called “diff”. Print both variables! When
-          printing you can use strings to separate variables like
-          “System.out.println(variable1 + “ ” + variable2). This makes it
-          possible to print both variables on one line with a space in the
-          middle. Try it out!
+          Write a method called square(int number) that returns the square of a
+          number. Print the result by calling the method in a print statement.
         </strong>
       </p>
       <CodeEditor
@@ -45,6 +45,9 @@ export function MFourLvlThree() {
         level={levelinfo}
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
+      {levelCompletionStatus === CompletionStatus.Complete && (
+        <button onClick={() => navigate("/Home")}>Congratulations! Return to Home</button>
+      )}
     </div>
   );
 }

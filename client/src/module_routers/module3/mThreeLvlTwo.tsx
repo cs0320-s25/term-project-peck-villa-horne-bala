@@ -23,20 +23,24 @@ export function MThreeLvlTwo() {
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
       <button onClick={() => navigate("/MThreeLvlOne")}>Previous Level</button>
-      <h2>Module 3: Operators - Level 2: Addition/Subtraction</h2>
+      <h2>Module 3: Operators - Level 2: Else Statements</h2>
       <p>
-        We can use operators to add and subtract numbers. This is how we can
-        calculate scores, totals, and more! In Java, “+” means addition and “-”
-        means subtraction.
+        Else statements are used to execute a block of code if the condition in
+        the if statement is false. This allows you to create more complex
+        decision-making in your code. Additionally, there is another type of
+        else statement called else-if that does take a condition and runs the
+        code if the previous conditions were false. Always starting with an if
+        statement, you can chain else-if statements to check different
+        conditions. But remember that a regular else statement but always be
+        placed last because it runs if all the previous conditions were false.
         <br></br>
         <strong>
-          Task: Create two int variables, a = 100 and b = 5. Save the result of
-          their sum in a variable called “sum” and save the result of their
-          difference in a variable called “diff”. Print both variables! When
-          printing you can use strings to separate variables like
-          “System.out.println(variable1 + “ ” + variable2). This makes it
-          possible to print both variables on one line with a space in the
-          middle. Try it out!
+          First create a variable “score” with the value 82. Then create a
+          conditional chain where each conditional checks if your grade is a A
+          (90 or above): print “Grade: A”, B (80 or above): print “Grade B”, C
+          (70 or above): print “Grade C, lastly if all of those are false print
+          “Grade: Incomplete”. You can use the else if statement to check for the other
+          conditions. Try it out!
         </strong>
       </p>
       <CodeEditor

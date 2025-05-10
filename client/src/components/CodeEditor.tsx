@@ -11,7 +11,7 @@ const CodeEditor = (props: CodeEditorProps) => {
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
-  console.log("Level Completion Status: ", props.level.completionStatus);
+  console.log(`Level Completion Status: ${props.level.levelName}`, props.level.completionStatus);
 
   const handleRun = async () => {
     try {
