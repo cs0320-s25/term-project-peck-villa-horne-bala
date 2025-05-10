@@ -131,5 +131,16 @@ const module4: ModuleInfo = {
   return modules;
 };
 
+export const resetModuleCompletionStatus = () => {
+  modulesList.forEach((module) => {
+    module.levels.forEach((level) => {
+      level.completionStatus = CompletionStatus.Incomplete;
+      level.locked = true;
+    });
+  });
+  modulesList[0].levels[0].locked = false;
+  modulesList[0].levels[1].locked = false;
+};
+
 export const modulesList = populateModuleList();
 

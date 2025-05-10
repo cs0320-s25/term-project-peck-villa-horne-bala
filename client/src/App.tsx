@@ -32,6 +32,7 @@ import MThreeLvlThree from "./module_routers/module3/mThreeLvlThree";
 import MFourLvlOne from "./module_routers/module4/mFourLvlOne";
 import MFourLvlTwo from "./module_routers/module4/mFourLvlTwo";
 import MFourLvlThree from "./module_routers/module4/mFourLvlThree";
+import { resetModuleCompletionStatus } from "./home_screen/module_assembler/populate_modules/ModuleData";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
