@@ -1,4 +1,4 @@
-import { ModuleInfo } from "../../../types";
+import { Locked, ModuleInfo } from "../../../types";
 import { CompletionStatus } from "../../../types";
 import { fetchModules } from "../../ModuleApi";
 import { useState} from "react";
@@ -10,28 +10,28 @@ export const module1: ModuleInfo = {
   levels: [
     {
       levelName: "What is a variable?",
-      locked: false,
+      locked: Locked.Unlocked,
       routerPath: "/MOneLvlOne",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlOne",
     },
     {
       levelName: "Int VS Doubles",
-      locked: false,
+      locked: Locked.Unlocked,
       routerPath: "/MOneLvlTwo",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlTwo",
     },
     {
       levelName: "String Types",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MOneLvlThree",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlThree",
     },
     {
       levelName: "Boolean Types",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MOneLvlFour",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlFour",
@@ -44,28 +44,28 @@ export const module2: ModuleInfo = {
   levels: [
     {
       levelName: "Addition/Subtraction",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MTwoLvlOne",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MTwoLvlOne",
     },
     {
       levelName: "Multiplication/Division",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MTwoLvlTwo",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MTwoLvlTwo",
     },
     {
       levelName: "Modulus",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MTwoLvlThree",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MTwoLvlThree",
     },
     {
       levelName: "Order of Operations",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MTwoLvlFour",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MTwoLvlFour",
@@ -78,21 +78,21 @@ export const module3: ModuleInfo = {
   levels: [
     {
       levelName: "If Statement",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MThreeLvlOne",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MThreeLvlOne",
     },
     {
       levelName: "Else Statement",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MThreeLvlTwo",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MThreeLvlTwo",
     },
     {
       levelName: "Multiple Conditions",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MThreeLvlThree",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MThreeLvlThree",
@@ -105,21 +105,21 @@ const module4: ModuleInfo = {
   levels: [
     {
       levelName: "Method Syntax",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MFourLvlOne",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MFourLvlOne",
     },
     {
       levelName: "Parameters",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MFourLvlTwo",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MFourLvlTwo",
     },
     {
       levelName: "Return Types",
-      locked: true,
+      locked: Locked.Locked,
       routerPath: "/MFourvlThree",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MFourvlThree",
@@ -165,11 +165,11 @@ export const resetModuleCompletionStatus = () => {
   modulesList.forEach((module) => {
     module.levels.forEach((level) => {
       level.completionStatus = CompletionStatus.Incomplete;
-      level.locked = true;
+      level.locked = Locked.Locked;
     });
   });
-  modulesList[0].levels[0].locked = false;
-  modulesList[0].levels[1].locked = false;
+  modulesList[0].levels[0].locked = Locked.Unlocked;
+  modulesList[0].levels[1].locked = Locked.Unlocked;
 };
 
 export const modulesList = populateModuleList();

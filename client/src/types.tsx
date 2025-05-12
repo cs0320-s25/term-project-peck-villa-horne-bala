@@ -8,6 +8,11 @@ export interface CodeEditorProps {
   setLevelCompletionStatus: (status: CompletionStatus) => void;
 }
 
+export enum Locked {
+  Locked = "Locked",
+  Unlocked = "Unlocked",
+}
+
 export enum CompletionStatus {
   Complete = "Complete",
   Incomplete = "Incomplete",
@@ -34,7 +39,7 @@ export enum Status {
 export interface LevelInfo {
   levelName: string;
   routerPath: string;
-  locked: boolean | null;
+  locked: Locked | null;
   completionStatus: CompletionStatus;
   jsonKey: string;
 }
