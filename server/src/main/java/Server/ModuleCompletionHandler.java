@@ -7,7 +7,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import spark.Request;
 import spark.Response;
@@ -29,7 +28,7 @@ public class ModuleCompletionHandler implements Route {
 
       JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
       JsonArray modulesList = reqBody.get("modulesList").getAsJsonArray();
-      HashMap<String,HashMap<String,ArrayList<String>>> modulesToLevels = new HashMap<>();
+      HashMap<String, HashMap<String, ArrayList<String>>> modulesToLevels = new HashMap<>();
       for (int i = 0; i < modulesList.size(); i++) {
         JsonObject module = modulesList.get(i).getAsJsonObject();
         String moduleName = module.get("name").getAsString();
@@ -42,7 +41,6 @@ public class ModuleCompletionHandler implements Route {
           String levelName = level.getAsJsonObject().get("levelName").getAsString();
           String lockedStatus = level.getAsJsonObject().get("locked").getAsString();
           String completionStatus = level.getAsJsonObject().get("completionStatus").getAsString();
-
 
           if (!levelNameToProperties.containsKey(levelName)) {
             ArrayList<String> moduleProperties = new ArrayList<>();
@@ -57,12 +55,11 @@ public class ModuleCompletionHandler implements Route {
         }
       }
 
-
       Map<String, Object> data = new HashMap<>();
       data.put("modules", modulesToLevels);
 
-
-      this.firebaseStorage.addDocument("user_2wk6x5tz1UQSZhlllyVMR5Sf2Fa", "modules", "progress", data);
+      this.firebaseStorage.addDocument(
+          "user_2wk6x5tz1UQSZhlllyVMR5Sf2Fa", "modules", "progress", data);
 
       responseMap.put("status", "success");
     } catch (Exception e) {

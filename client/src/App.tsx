@@ -33,6 +33,8 @@ import MFourLvlOne from "./module_routers/module4/mFourLvlOne";
 import MFourLvlTwo from "./module_routers/module4/mFourLvlTwo";
 import MFourLvlThree from "./module_routers/module4/mFourLvlThree";
 
+import FinalLvl from "./module_routers/finalLvl";
+
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
@@ -68,6 +70,9 @@ function App() {
             <Route path="/MFourLvlOne" element={<MFourLvlOne />} />
             <Route path="/MFourLvlTwo" element={<MFourLvlTwo />} />
             <Route path="/MFourLvlThree" element={<MFourLvlThree />} />
+
+            <Route path="/finalLvl" element={<FinalLvl />} />
+
           </Routes>
         </Router>
       </SignedIn>

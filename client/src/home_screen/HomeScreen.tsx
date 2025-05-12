@@ -6,6 +6,7 @@ import { resetModuleCompletionStatus } from "./module_assembler/populate_modules
 import {ModuleInfo} from "../types"
 import { useUser } from "@clerk/clerk-react";
 import { populateModuleList } from "./module_assembler/populate_modules/ModuleData";
+import { initModules, getModules } from "../home_screen/module_assembler/module_store";
 
 export function Homescreen() {
   const[moduleList, setModuleList]= useState< ModuleInfo[]>([]);
@@ -14,10 +15,12 @@ export function Homescreen() {
 
   useEffect(() => {
     if (user?.id) {
-      const modules = populateModuleList();
-      setModuleList(modules);
+      // const modules = populateModuleList();
+      // setModuleList(modules);
+      initModules(user.id);
+      setModuleList(getModules);
     }
-  }, []);
+  }, [user]);
   return (
     <div className="home-screen">
       <div className="home-screen-head-bar">
