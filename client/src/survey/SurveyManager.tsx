@@ -9,6 +9,8 @@ import SurveyQuestionManager from "./SurveyQuesManager"
 import { Status } from "../types";
 import {loadModules} from "../home_screen/ModuleApi";
 import { useUser } from "@clerk/clerk-react";
+import { populateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 
 export enum SurveyStatus {
   Intro,
@@ -38,6 +40,13 @@ export function Survey(props: SurveyProps) {
     }
     props.setMode(Status.Homescreen)
   }
+
+useEffect(() => {
+    if (user?.id) {
+      populateModuleList();
+      storeModuleList(user.id);
+    }
+  }, []);
 
   return (
     <div className="survey">

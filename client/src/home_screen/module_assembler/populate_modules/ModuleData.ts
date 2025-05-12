@@ -155,11 +155,19 @@ export const storeModuleList = async (user: string) => {
   }
 }
 
-
-const updateModuleList =(user:string)=>{
-  const userProgress = fetchModules(user);
-}
-
+export const updateModuleList = async (user: string) => {
+  try {
+    const response = await fetch(`http://localhost:3232/restoreProgress?uid=${user}`);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Modules restored successfully:", data.modules);
+      const parsedModules = JSON.parse(data.modules);
+      console.log("Parsed modules:", parsedModules);
+    }
+  } catch (error) {
+    console.error("Error restoring modules:", error);
+  }
+}; 
 
 export const resetModuleCompletionStatus = () => {
   modulesList.forEach((module) => {

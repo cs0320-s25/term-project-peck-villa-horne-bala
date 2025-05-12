@@ -1,6 +1,7 @@
 package Server;
 
 import Storage.StorageInterface;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -55,7 +56,9 @@ public class ModuleCompletionHandler implements Route {
       }
 
       Map<String, Object> data = new HashMap<>();
-      data.put("modules", modulesToLevels);
+      Gson gson = new Gson();
+      String modulesJson = gson.toJson(modulesToLevels);
+      data.put("modules", modulesJson);
 
       this.firebaseStorage.addDocument(uid, "modules", "progress", data);
 
