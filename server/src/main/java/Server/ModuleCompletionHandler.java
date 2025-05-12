@@ -64,17 +64,13 @@ public class ModuleCompletionHandler implements Route {
 
       this.firebaseStorage.addDocument("user_2wk6x5tz1UQSZhlllyVMR5Sf2Fa", "modules", "progress", data);
 
-      // Prepare the response
-//      responseMap.put("modules", modules);
       responseMap.put("status", "success");
     } catch (Exception e) {
-      // Handle errors and log the exception
       e.printStackTrace();
       responseMap.put("status", "error");
       responseMap.put("message", e.getMessage());
     }
 
-    // Convert the response map to JSON and return it
     return Utils.toMoshiJson(responseMap);
   }
 }
