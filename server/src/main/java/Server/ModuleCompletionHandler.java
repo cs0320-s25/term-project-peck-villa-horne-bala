@@ -27,14 +27,8 @@ public class ModuleCompletionHandler implements Route {
     try {
       String uid = request.queryParams("uid");
 
-      HashMap<String,String> moduleNameToLevels = new HashMap<>();
-
-      // Parse the request body as JSON
       JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
       JsonArray modulesList = reqBody.get("modulesList").getAsJsonArray();
-//      System.out.println("Modules List: " + modulesList.toString());
-
-      // Extract module names or other relevant data
       HashMap<String,HashMap<String,ArrayList<String>>> modulesToLevels = new HashMap<>();
       for (int i = 0; i < modulesList.size(); i++) {
         JsonObject module = modulesList.get(i).getAsJsonObject();
@@ -49,7 +43,7 @@ public class ModuleCompletionHandler implements Route {
           String lockedStatus = level.getAsJsonObject().get("locked").getAsString();
           String completionStatus = level.getAsJsonObject().get("completionStatus").getAsString();
 
-          // Prevent duplicate levels by checking before adding
+
           if (!levelNameToProperties.containsKey(levelName)) {
             ArrayList<String> moduleProperties = new ArrayList<>();
             moduleProperties.add(lockedStatus);
@@ -58,20 +52,16 @@ public class ModuleCompletionHandler implements Route {
           }
         }
 
-        // Safely add module only if it's not already present
         if (!modulesToLevels.containsKey(moduleName)) {
           modulesToLevels.put(moduleName, levelNameToProperties);
         }
       }
 
 
-      // Prepare data to store in Firebase
       Map<String, Object> data = new HashMap<>();
       data.put("modules", modulesToLevels);
 
-      // Store the data in Firebase under the user's progress
-//      System.out.println("user" + uid);
-//      System.out.println(data);
+
       this.firebaseStorage.addDocument("user_2wk6x5tz1UQSZhlllyVMR5Sf2Fa", "modules", "progress", data);
 
       // Prepare the response
