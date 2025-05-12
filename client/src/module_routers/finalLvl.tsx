@@ -12,20 +12,10 @@ export function finalLvl() {
   const moduleIndex = 1;
   const levelIndex = 1;
 
-  const isLevelUnlocked = (moduleIndex: number, levelIndex: number): boolean => {
-    return true;
-    return (
-      modulesList[moduleIndex].levels[levelIndex - 1].completionStatus ===
-      CompletionStatus.Complete
-    );
-  };
-
-  // const levelinfo: LevelInfo = modulesList[moduleIndex].levels[levelIndex];
-  // levelinfo.locked = !isLevelUnlocked(moduleIndex, levelIndex);
-
-  // const [levelCompletionStatus, setLevelCompletionStatus] =
-  //   useState<CompletionStatus>(levelinfo.completionStatus);
-  // const navigate = useNavigate();
+  const levelinfo: LevelInfo = modulesList[1].levels[3];
+  const [levelCompletionStatus, setLevelCompletionStatus] =
+    useState<CompletionStatus>(levelinfo.completionStatus);
+  const navigate = useNavigate();
 
     type Cell = 0 | 1 | 'S' | 'E';
   
