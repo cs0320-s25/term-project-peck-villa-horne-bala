@@ -4,13 +4,14 @@ import { CompletionStatus } from "../../types";
 import { LevelInfo } from "../../types";
 import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
+import { Locked } from "../../types";
 
 export function MFourLvlOne() {
   const levelinfo: LevelInfo = modulesList[3].levels[0];
   if (modulesList[2].levels[2].completionStatus === CompletionStatus.Complete) {
-    levelinfo.locked = false;
-  } else {
-    levelinfo.locked = true;
+     levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
   }
   console.log(levelinfo.locked);
   console.log(

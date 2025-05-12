@@ -4,13 +4,14 @@ import { modulesList } from "../../home_screen/module_assembler/populate_modules
 import { LevelInfo } from "../../types";
 import { CompletionStatus } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { Locked } from "../../types";
 
 export function MTwoLvlFour() {
   const levelinfo: LevelInfo = modulesList[1].levels[3];
   if (modulesList[1].levels[2].completionStatus === CompletionStatus.Complete) {
-    levelinfo.locked = false;
-  } else {
-    levelinfo.locked = true;
+     levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
   }
   console.log(levelinfo.locked);
   console.log(
