@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CodeEditor from "../../components/CodeEditor";
-import { LevelInfo } from "../../types";
+import { LevelInfo, Locked } from "../../types";
 import { CompletionStatus } from "../../types";
 import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 export function MTwoLvlOne() {
   const levelinfo: LevelInfo = modulesList[1].levels[0];
   if (modulesList[0].levels[3].completionStatus === CompletionStatus.Complete
-    && modulesList[0].levels[3].locked === false
+    && modulesList[0].levels[3].locked === Locked.Unlocked
   ) {
-    levelinfo.locked = false;
-  } else {
-    levelinfo.locked = true;
+    levelinfo.locked = Locked.Unlocked;
+     } else {
+       levelinfo.locked = Locked.Locked;
   }
   console.log(levelinfo.locked);
   // console.log(

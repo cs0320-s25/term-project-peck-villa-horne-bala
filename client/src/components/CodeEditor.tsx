@@ -4,6 +4,7 @@ import { CompletionStatus, UserQuestionHashMap } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import { CodeEditorProps } from "../types";
 import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import { Locked } from "../types";
 
 
 
@@ -31,11 +32,11 @@ const CodeEditor = (props: CodeEditorProps) => {
       if (data.passed) {
         props.setLevelCompletionStatus?.(CompletionStatus.Complete);
         props.level.completionStatus = CompletionStatus.Complete;
-        props.level.locked = false;
+        props.level.locked = Locked.Unlocked;
       } else {
         props.setLevelCompletionStatus?.(CompletionStatus.Incomplete);
         props.level.completionStatus = CompletionStatus.Incomplete;
-        props.level.locked = true;
+        props.level.locked = Locked.Locked;
       }
 
     } catch (err) {

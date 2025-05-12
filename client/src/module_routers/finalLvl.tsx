@@ -20,12 +20,12 @@ export function finalLvl() {
     );
   };
 
-  const levelinfo: LevelInfo = modulesList[moduleIndex].levels[levelIndex];
-  levelinfo.locked = !isLevelUnlocked(moduleIndex, levelIndex);
+  // const levelinfo: LevelInfo = modulesList[moduleIndex].levels[levelIndex];
+  // levelinfo.locked = !isLevelUnlocked(moduleIndex, levelIndex);
 
-  const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelinfo.completionStatus);
-  const navigate = useNavigate();
+  // const [levelCompletionStatus, setLevelCompletionStatus] =
+  //   useState<CompletionStatus>(levelinfo.completionStatus);
+  // const navigate = useNavigate();
 
     type Cell = 0 | 1 | 'S' | 'E';
   

@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../../components/CodeEditor";
-import { CompletionStatus } from "../../types";
+import { CompletionStatus, Locked } from "../../types";
 import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { LevelInfo } from "../../types";
 import { useNavigate } from "react-router-dom";
@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 export function MOneLvlThree() {
   const levelinfo: LevelInfo = modulesList[0].levels[2];
   if (modulesList[0].levels[1].completionStatus === CompletionStatus.Complete) {
-    levelinfo.locked = false;
+    levelinfo.locked = Locked.Unlocked;
   } else {
-    levelinfo.locked = true;
+    levelinfo.locked = Locked.Locked;
   }
   console.log(levelinfo.locked);
   console.log("Previous level complete?" + modulesList[0].levels[1].completionStatus);

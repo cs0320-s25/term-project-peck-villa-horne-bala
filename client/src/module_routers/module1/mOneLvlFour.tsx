@@ -5,24 +5,21 @@ import { LevelInfo } from "../../types";
 import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 
+import { Locked } from "../../types";
 
 export function MOneLvlFour() {
-  const moduleIndex = 0;
-  const levelIndex = 3;
-
-  const isLevelUnlocked = (moduleIndex: number, levelIndex: number): boolean => {
-    if (levelIndex === 0) return true;
-    return (
-      modulesList[moduleIndex].levels[levelIndex - 1].completionStatus ===
-      CompletionStatus.Complete
-    );
-  };
-
-  const levelinfo: LevelInfo = modulesList[moduleIndex].levels[levelIndex];
-  levelinfo.locked = !isLevelUnlocked(moduleIndex, levelIndex);
-
-  const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelinfo.completionStatus);
+   const levelinfo: LevelInfo = modulesList[0].levels[3];
+    if (modulesList[0].levels[2].completionStatus === CompletionStatus.Complete) {
+      levelinfo.locked = Locked.Unlocked;
+       } else {
+         levelinfo.locked = Locked.Locked;
+    }
+     console.log(levelinfo.locked);
+     console.log(
+       "Previous level complete?" + modulesList[0].levels[2].completionStatus
+     );
+     const [levelCompletionStatus, setLevelCompletionStatus] =
+       useState<CompletionStatus>(levelinfo.completionStatus);
   const navigate = useNavigate();
 
   return (
