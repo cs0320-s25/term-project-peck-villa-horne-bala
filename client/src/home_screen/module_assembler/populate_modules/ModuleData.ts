@@ -137,12 +137,12 @@ export const populateModuleList = (): ModuleInfo[] => {
   return modules;
 };
 
-export const storeModuleList = async (user: any) => {
+export const storeModuleList = async (user: string) => {
   const modulesString = JSON.stringify({modulesList});
   try {
     if (user){
-      console.log("Storing modules for user:", user.id);
-      const response = await fetch(`http://localhost:3232/storeModules?userId=${user.id}`, {
+      console.log("Storing modules for user:", user);
+      const response = await fetch(`http://localhost:3232/storeModules?uid=${user}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: modulesString,

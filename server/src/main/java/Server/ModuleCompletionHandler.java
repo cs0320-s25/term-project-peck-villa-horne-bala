@@ -25,7 +25,6 @@ public class ModuleCompletionHandler implements Route {
     Map<String, Object> responseMap = new HashMap<>();
     try {
       String uid = request.queryParams("uid");
-
       JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
       JsonArray modulesList = reqBody.get("modulesList").getAsJsonArray();
       HashMap<String, HashMap<String, ArrayList<String>>> modulesToLevels = new HashMap<>();
@@ -58,8 +57,7 @@ public class ModuleCompletionHandler implements Route {
       Map<String, Object> data = new HashMap<>();
       data.put("modules", modulesToLevels);
 
-      this.firebaseStorage.addDocument(
-          "user_2wk6x5tz1UQSZhlllyVMR5Sf2Fa", "modules", "progress", data);
+      this.firebaseStorage.addDocument(uid, "modules", "progress", data);
 
       responseMap.put("status", "success");
     } catch (Exception e) {

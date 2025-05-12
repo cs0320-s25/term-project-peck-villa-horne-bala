@@ -50,8 +50,8 @@ const CodeEditor = (props: CodeEditorProps) => {
       console.log("User not found");
       return;
     }
-    console.log("Storing modules for user:", user);
-    storeModuleList(user);
+    console.log("Storing modules for user:", user.id);
+    storeModuleList(user.id);
   };
 
   return (
