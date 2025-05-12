@@ -4,7 +4,6 @@ import { CompletionStatus } from "../../types";
 import { LevelInfo } from "../../types";
 import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
-
 import { Locked } from "../../types";
 
 export function MOneLvlFour() {
@@ -27,7 +26,10 @@ export function MOneLvlFour() {
       <button onClick={() => navigate("/Home")}>Back</button>
       <h2> Module 1: Variables & Primitives - Level 4: Boolean Types</h2>
       <p>
-        {/* ...instructions... */}
+      A boolean is the simplest type of data that it can only be true or false.
+      We use booleans when our program needs to make yes/no or on/off decisions.
+      Task: Create a boolean called isJavaFun and set it to true. Print it to show your excitement for coding!
+
       </p>
       <CodeEditor
         initialCode=""
