@@ -2,6 +2,8 @@ import { ModuleInfo } from "../../../types";
 import { CompletionStatus } from "../../../types";
 import { fetchModules } from "../../ModuleApi";
 import { useState} from "react";
+import { useUser } from "@clerk/clerk-react";
+
 
 export const module1: ModuleInfo = {
   name: "Variables & Primitives",
@@ -134,6 +136,25 @@ export const populateModuleList = (): ModuleInfo[] => {
   //updateModuleList(user);
   return modules;
 };
+
+export const storeModuleList = async (user: any) => {
+  const modulesString = JSON.stringify({modulesList});
+  try {
+    if (user){
+      console.log("Storing modules for user:", user.id);
+      const response = await fetch(`http://localhost:3232/storeModules?userId=${user.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: modulesString,
+      });
+      console.log("Modules stored successfully:" + response.status);
+    }
+
+  } catch (error) {
+    console.error("Error storing modules:", error);
+  }
+}
+
 
 const updateModuleList =(user:string)=>{
   const userProgress = fetchModules(user);
