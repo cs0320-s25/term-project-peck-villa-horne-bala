@@ -24,8 +24,4 @@ export function ModulePopulator(props:ModulePopulatorProps) {
     </div>
   );
 }
-
-{
-  /* <Module module={modulePractice}></Module>; */
-}
 export default ModulePopulator;

@@ -1,0 +1,43 @@
+.curr-question {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-card {
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  width: 150vh;
+  padding: 1%;
+  justify-content: space-around;
+  background-color: rgba(42, 39, 39, 0.7);
+}
+
+.question-card-title {
+  font-size: 1.75rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding-left: 12px;
+  max-width: 90%;
+  text-align: left;
+}
+
+.form-check-input {
+  margin-top: 3px;
+  margin-right: 10px;
+}
+
+.form-check-label {
+  line-height: 1.5;
+  text-align: left;
+}
+
+.question-btn{
+    background-color: rgba(42, 39, 39, 0.1);
+}

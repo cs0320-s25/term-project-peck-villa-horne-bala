@@ -1,0 +1,37 @@
+.survey-flow-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.survey-flow-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 0rem;
+  height: 40vh;
+  background-color: rgba(42, 39, 39, 0.1);
+  border: none;
+}
+
+.survey-flow-card-title {
+  margin-top: 0;
+  margin: 5%;
+  color: #ebe5e5;
+  align-content: flex-start;
+  font-size: 4vh;
+}
+
+.survey-flow-btn {
+    display: flex;
+  background-color: rgba(42, 39, 39, 0.1);
+  justify-content: center; 
+  align-items: center;  
+  border-radius: 0rem;
+  margin-bottom: 1rem;
+  width: 10vh;
+  cursor: pointer;   
+}

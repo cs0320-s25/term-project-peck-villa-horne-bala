@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/App.css";
 import {
   ClerkProvider,
@@ -34,6 +34,7 @@ import MFourLvlTwo from "./module_routers/module4/mFourLvlTwo";
 import MFourLvlThree from "./module_routers/module4/mFourLvlThree";
 
 import FinalLvl from "./module_routers/finalLvl";
+import { useUser } from "@clerk/clerk-react";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -42,6 +43,7 @@ if (!PUBLISHABLE_KEY) {
 }
 
 function App() {
+  const { user } = useUser();
   return (
     <div className="App">
       <SignedOut>

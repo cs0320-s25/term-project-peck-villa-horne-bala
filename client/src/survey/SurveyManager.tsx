@@ -9,6 +9,10 @@ import SurveyQuestionManager from "./SurveyQuesManager"
 import { Status } from "../types";
 import {loadModules} from "../home_screen/ModuleApi";
 import { useUser } from "@clerk/clerk-react";
+import { populateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import SurveyFlowPage from "./SurveyFlow";
+import AnimatedBackground from "../components/AnimatedBackground";
 
 export enum SurveyStatus {
   Intro,
@@ -39,17 +43,22 @@ export function Survey(props: SurveyProps) {
     props.setMode(Status.Homescreen)
   }
 
+useEffect(() => {
+    if (user?.id) {
+      populateModuleList();
+      storeModuleList(user.id);
+    }
+  }, []);
+
   return (
     <div className="survey">
+      <AnimatedBackground />
       {surveyStatus == SurveyStatus.Intro && (
-        <div className="survey-intro">
-          <h3>
-            {" "}
-            To prepare an appropriate set of lessons tailored to your level,
-            please take the following survey!{" "}
-          </h3>
-          <button onClick={beginSurvey}>Begin!</button>
-        </div>
+        <SurveyFlowPage
+          text="To prepare the most effective set of lessons tailored to you, please take the following survey"
+          eventHandler={beginSurvey}
+          surveyText="Begin!"
+        ></SurveyFlowPage>
       )}
 
       {surveyStatus == SurveyStatus.TakingSurvey && (
@@ -59,11 +68,11 @@ export function Survey(props: SurveyProps) {
       )}
 
       {surveyStatus == SurveyStatus.Complete && (
-        <div className="survey-results">
-          {" "}
-          <h3> Here are your results!</h3>
-          <button onClick={completeSurvey}> Go Home!</button>
-        </div>
+        <SurveyFlowPage
+          text="Here are your results!"
+          eventHandler={completeSurvey}
+          surveyText="Go Home!"
+        ></SurveyFlowPage>
       )}
     </div>
   );

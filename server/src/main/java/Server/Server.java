@@ -54,6 +54,7 @@ public class Server {
       Spark.get("LoadModules", new AddModules(firebaseUtils));
       Spark.post("run", new RunCodeHandler());
       Spark.post("storeModules", new ModuleCompletionHandler(firebaseUtils));
+      Spark.get("restoreProgress", new RestoreProgressHandler(firebaseUtils));
       Spark.init();
       Spark.awaitInitialization();
 

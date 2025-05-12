@@ -127,12 +127,26 @@ const module4: ModuleInfo = {
   ],
 };
 
+const finalModule: ModuleInfo = {
+  name: "Final Module!",
+  levels: [
+    {
+      levelName: "Method Syntax",
+      locked: Locked.Locked,
+      routerPath: "/finalLvl",
+      completionStatus: CompletionStatus.Incomplete,
+      jsonKey: "finalLvl",
+    },
+  ],
+};
+
 export const populateModuleList = (): ModuleInfo[] => {
   const modules: ModuleInfo[] = [];
   modules.push(module1);
   modules.push(module2);
   modules.push(module3);
   modules.push(module4);
+  modules.push(finalModule);
   //updateModuleList(user);
   return modules;
 };
@@ -155,11 +169,19 @@ export const storeModuleList = async (user: string) => {
   }
 }
 
-
-const updateModuleList =(user:string)=>{
-  const userProgress = fetchModules(user);
-}
-
+export const updateModuleList = async (user: string) => {
+  try {
+    const response = await fetch(`http://localhost:3232/restoreProgress?uid=${user}`);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Modules restored successfully:", data.modules);
+      const parsedModules = JSON.parse(data.modules);
+      console.log("Parsed modules:", parsedModules);
+    }
+  } catch (error) {
+    console.error("Error restoring modules:", error);
+  }
+}; 
 
 export const resetModuleCompletionStatus = () => {
   modulesList.forEach((module) => {
