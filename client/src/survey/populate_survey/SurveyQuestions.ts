@@ -1,4 +1,4 @@
-import { FormatQ } from "../SurveyQuesManager";
+import { FormatQ } from "../../types";
 export const Q1: FormatQ = {
   id: 1,
   question:

@@ -13,23 +13,23 @@ public class Dataset {
     this.data = data;
   }
 
-//  public Dataset(List<String> attributes, List<List<String>> rawData) {
-//    this.attributes = attributes;
-//    this.data = new ArrayList<>();
-//    for (int i = 0; i < rawData.size(); i++) {
-//      this.data.add(new DataPoint(this.attributes, rawData.get(i)));
-//    }
-//  }
+  //  public Dataset(List<String> attributes, List<List<String>> rawData) {
+  //    this.attributes = attributes;
+  //    this.data = new ArrayList<>();
+  //    for (int i = 0; i < rawData.size(); i++) {
+  //      this.data.add(new DataPoint(this.attributes, rawData.get(i)));
+  //    }
+  //  }
 
   public Dataset splitData(String value, String attribute) {
     List<DataPoint> subSet = new ArrayList<>();
     for (int i = 0; i < this.data.size(); i++) {
-      if (this.data.get(i).getAttributeValue(attribute).equals(value)){
+      if (this.data.get(i).getAttributeValue(attribute).equals(value)) {
         subSet.add(this.data.get(i));
       }
     }
     List<String> subsetAttributes = new ArrayList<>();
-    for (String attributeFromList: this.attributes) {
+    for (String attributeFromList : this.attributes) {
       if (!attributeFromList.equals(attribute)) {
         subsetAttributes.add(attributeFromList);
       }
@@ -40,7 +40,7 @@ public class Dataset {
 
   public List<String> getValuesForAttribute(String attribute) {
     List<String> attributevalues = new ArrayList<>();
-    for (DataPoint dataPoint: this.data) {
+    for (DataPoint dataPoint : this.data) {
       if (!attributevalues.contains(dataPoint.getAttributeValue(attribute))) {
         attributevalues.add(dataPoint.getAttributeValue(attribute));
       }
@@ -53,8 +53,8 @@ public class Dataset {
       return false;
     }
     String value = this.data.get(0).getAttributeValue(attribute);
-    for (DataPoint object: this.data){
-      if (!value.equals(object.getAttributeValue(attribute))){
+    for (DataPoint object : this.data) {
+      if (!value.equals(object.getAttributeValue(attribute))) {
         return false;
       }
     }

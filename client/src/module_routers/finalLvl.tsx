@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEventHandler } from "react";
 import CodeEditor from "../components/CodeEditor";
-import Maze from "../components/maze";
+import Maze from "../components/Maze";
 import { CompletionStatus } from "../types";
 import { LevelInfo } from "../types";
 import { modulesList } from "../home_screen/module_assembler/populate_modules/ModuleData";

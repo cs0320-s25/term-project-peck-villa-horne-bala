@@ -1,0 +1,24 @@
+.animated-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* behind your content */
+    background: linear-gradient(-45deg, #5124da, #0f18c4, #02388a, #f50eb3);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+  }
+  
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  

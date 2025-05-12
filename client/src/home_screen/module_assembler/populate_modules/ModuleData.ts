@@ -127,12 +127,26 @@ const module4: ModuleInfo = {
   ],
 };
 
+const finalModule: ModuleInfo = {
+  name: "Final Module!",
+  levels: [
+    {
+      levelName: "Method Syntax",
+      locked: Locked.Locked,
+      routerPath: "/finalLvl",
+      completionStatus: CompletionStatus.Incomplete,
+      jsonKey: "finalLvl",
+    },
+  ],
+};
+
 export const populateModuleList = (): ModuleInfo[] => {
   const modules: ModuleInfo[] = [];
   modules.push(module1);
   modules.push(module2);
   modules.push(module3);
   modules.push(module4);
+  modules.push(finalModule);
   //updateModuleList(user);
   return modules;
 };
