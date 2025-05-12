@@ -44,5 +44,12 @@
     flex-shrink: 0; 
   }
 
+  .player {
+    width: 75%;
+    height: 75%;
+    background-color: red;
+    border-radius: 50%;
+    margin: auto;
+  }
 
   

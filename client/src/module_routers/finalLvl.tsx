@@ -1,6 +1,5 @@
 import { useState, useEffect, FormEventHandler } from "react";
-import CodeEditor from "../components/CodeEditor";
-import Maze from "../components/maze";
+import MazeCodeEditor from "../components/MazeCodeEditor";
 import { CompletionStatus } from "../types";
 import { LevelInfo } from "../types";
 import { modulesList } from "../home_screen/module_assembler/populate_modules/ModuleData";
@@ -16,25 +15,6 @@ export function finalLvl() {
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(levelinfo.completionStatus);
   const navigate = useNavigate();
-
-    type Cell = 0 | 1 | 'S' | 'E';
-  
-
-  const maze: Cell[][] = [
-    [1,'E',1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,1,1,1,0,1,1,1],
-    [1,0,1,1,0,0,0,0,0,0,0,1],
-    [1,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,1,1,1,0,1,0,1,0,1],
-    [1,1,0,1,1,0,0,0,0,1,0,1],
-    [1,1,0,1,1,0,1,1,1,1,0,1],
-    [1,1,0,0,1,0,1,1,1,1,1,1],
-    [1,1,1,0,1,0,1,1,1,0,1,1],
-    [1,1,1,0,1,0,0,0,1,0,1,1],
-    [1,1,1,0,1,1,1,0,1,0,1,1],
-    [1,1,1,0,0,0,0,0,0,0,1,1],
-    [1,1,1,1,1,1,1,'S',1,1,1,1]
-  ];
   return (
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
@@ -51,14 +31,13 @@ export function finalLvl() {
       </p>
       <div className="container">
         <div className="fixed-box">
-        <CodeEditor
+        <MazeCodeEditor
         initialCode=""
         questionId="finalLvl"
         level={levelinfo}
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
         </div>
-        <Maze grid={maze} />
       </div>
       {/* {levelCompletionStatus === CompletionStatus.Complete && (
         <button onClick={() => navigate("/MTwoLvlOne")}>Continue</button>
