@@ -28,7 +28,7 @@ public class DecisionTree {
       dataPoints.add(new DataPoint(this.rawdata.get(i), this.attributes));
     }
     this.dataset = new Dataset(this.attributes, dataPoints);
-    this.root = this.generateTree(this.dataset, this.attributes.getLast());
+    // this.root = this.generateTree(this.dataset, this.attributes.getLast());
   }
 
   private TreeNode generateTree(Dataset data, String targetAttribute) {
