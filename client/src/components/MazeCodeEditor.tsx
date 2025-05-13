@@ -14,21 +14,21 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
-    console.log(`Level Completion Status: ${props.level.levelName}`, props.level.completionStatus);
+    // console.log(`Level Completion Status: ${props.level.levelName}`, props.level.completionStatus);
   const [playerPosition, setPlayerPosition] = useState({ row: 12, col: 7 }); // Start at 'S'
 
-  type Cell = 0 | 1 | 'S' | 'E';
+  type Cell = 0 | 1 | 2  | 'S' | 'E';
   
   const maze: Cell[][] = [
     [1,'E',1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,1,1,1,0,1,1,1],
-    [1,0,1,1,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,1,1,0,1,1,1],
+    [1,2,2,2,2,2,2,2,0,0,0,1],
     [1,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,1,1,1,0,1,0,1,0,1],
-    [1,1,0,1,1,0,0,0,0,1,0,1],
-    [1,1,0,1,1,0,1,1,1,1,0,1],
-    [1,1,0,0,1,0,1,1,1,1,1,1],
-    [1,1,1,0,1,0,1,1,1,0,1,1],
+    [1,0,2,1,1,1,0,1,0,1,0,1],
+    [1,1,2,1,1,2,0,0,0,1,0,1],
+    [1,1,2,1,1,2,1,1,1,1,0,1],
+    [1,1,0,0,1,2,1,1,1,1,1,1],
+    [1,1,1,0,1,2,1,1,1,0,1,1],
     [1,1,1,0,1,0,0,0,1,0,1,1],
     [1,1,1,0,1,1,1,0,1,0,1,1],
     [1,1,1,0,0,0,0,0,0,0,1,1],
@@ -113,9 +113,16 @@ async function movePlayer(commands: string[]) {
   let col = 7;
 
   for (const command of commands) {
-    const match = command.trim().match(/^(UP|DOWN|LEFT|RIGHT)\s+(\d+)$/);
-    if (!match) continue;
-    const [, dir, stepsStr] = match;
+    console.log("******COMMAND: " + command);
+    
+    // Match e.g., SWIM UP 2 or WALK LEFT 3
+    const match = command.trim().match(/^(SWIM|WALK)\s+(UP|DOWN|LEFT|RIGHT)\s+(\d+)$/);
+    if (!match) {
+      setOutput(`❌ Error: Invalid command format: "${command}"`);
+      return;
+    }
+
+    const [, action, dir, stepsStr] = match;
     const steps = parseInt(stepsStr, 10);
 
     for (let i = 0; i < steps; i++) {
@@ -129,19 +136,34 @@ async function movePlayer(commands: string[]) {
         case "RIGHT": nextCol++; break;
       }
 
+      // Check bounds
       if (
-        nextRow >= 0 && nextRow < maze.length &&
-        nextCol >= 0 && nextCol < maze[0].length &&
-        maze[nextRow][nextCol] !== 1
+        nextRow < 0 || nextRow >= maze.length ||
+        nextCol < 0 || nextCol >= maze[0].length
       ) {
-        row = nextRow;
-        col = nextCol;
-        setPlayerPosition({ row, col });
-        await new Promise(res => setTimeout(res, 300)); // delay between steps
-        // console.log(`Player is at row: ${row}, col: ${col}`);
-      } else {
-        break;
+        setOutput("❌ Error: Out of bounds");
+        return;
       }
+
+      const cellType = maze[nextRow][nextCol];
+
+      // Check movement rules
+      if (cellType === 1) {
+        setOutput("❌ Error: Hit a wall");
+        return;
+      } else if (cellType === 2 && action !== "SWIM") {
+        setOutput("❌ Error: You must SWIM over water");
+        return;
+      } else if ((cellType === 0 || cellType === 'S' || cellType === 'E') && action !== "WALK") {
+        setOutput("❌ Error: You must WALK on land");
+        return;
+      }
+
+      // Valid move
+      row = nextRow;
+      col = nextCol;
+      setPlayerPosition({ row, col });
+      await new Promise(res => setTimeout(res, 300));
     }
   }
 }

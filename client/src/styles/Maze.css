@@ -41,6 +41,9 @@
   .cell-1 {
     background-color: black;
   }
+  .cell-2 {
+    background-color: blue;
+  }
   
   .cell-S {
     background-color: lightgreen;
@@ -49,6 +52,7 @@
   .cell-E {
     background-color: gold;
   }
+
   
   .player {
     width: 25px;

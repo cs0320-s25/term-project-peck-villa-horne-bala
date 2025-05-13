@@ -1,6 +1,6 @@
 import "../styles/Maze.css"
 
-type Cell = 0 | 1 | 'S' | 'E';
+type Cell = 0 | 1 | 2| 3 | 'S' | 'E';
 type MazeGrid = Cell[][];
 
   interface MazeProps {
