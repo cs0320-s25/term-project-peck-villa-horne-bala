@@ -108,18 +108,13 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
   function parseCommand(input: string): string[] {
     return input.split(",").map(item => item.trim());
 }
-function movePlayer(commands: string[]) {
+async function movePlayer(commands: string[]) {
   let row = 12;
   let col = 7;
 
-  commands.forEach((command) => {
+  for (const command of commands) {
     const match = command.trim().match(/^(UP|DOWN|LEFT|RIGHT)\s+(\d+)$/);
-    if (!match) {
-      console.log("******** Command: " + command)
-      console.log("Incorrect command format!");
-      return;
-    }
-
+    if (!match) continue;
     const [, dir, stepsStr] = match;
     const steps = parseInt(stepsStr, 10);
 
@@ -141,13 +136,14 @@ function movePlayer(commands: string[]) {
       ) {
         row = nextRow;
         col = nextCol;
+        setPlayerPosition({ row, col });
+        await new Promise(res => setTimeout(res, 300)); // delay between steps
+        // console.log(`Player is at row: ${row}, col: ${col}`);
       } else {
         break;
       }
     }
-  });
-
-  setPlayerPosition({ row, col }); // only update once at the end
+  }
 }
 };
 
