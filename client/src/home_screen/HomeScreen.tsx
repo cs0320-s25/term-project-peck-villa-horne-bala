@@ -3,12 +3,14 @@ import { UserButton } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import ModulePopulator from "./module_assembler/populate_modules/ModulePopulator";
 import { resetModuleCompletionStatus } from "./module_assembler/populate_modules/ModuleData";
-import {ModuleInfo} from "../types"
+import { ModuleInfo } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import { populateModuleList } from "./module_assembler/populate_modules/ModuleData";
 import { updateModuleList } from "./module_assembler/populate_modules/ModuleData";
 import { storeModuleList } from "./module_assembler/populate_modules/ModuleData";
 import { modulesList } from "./module_assembler/populate_modules/ModuleData";
+
+import "../styles/Homescreen.css";
 
 export function Homescreen() {
   const [moduleList, setModuleList] = useState<ModuleInfo[]>([]);
@@ -36,8 +38,9 @@ export function Homescreen() {
   return (
     <div className="home-screen">
       <div className="home-screen-head-bar">
-        <h1> Home </h1>
+        <h1 className="home-screen-title"> Home </h1>
         <button
+          className="reset-button"
           onClick={() => {
             resetModuleCompletionStatus();
             window.location.reload();
@@ -45,15 +48,11 @@ export function Homescreen() {
         >
           Reset
         </button>
-        <br></br>
         <UserButton></UserButton>
-
-        <ModulePopulator modules={moduleList}></ModulePopulator>
       </div>
-      <div className="home-screen-module-container"></div>
+      <ModulePopulator modules={moduleList}></ModulePopulator>
     </div>
   );
 }
-
 
 export default Homescreen;

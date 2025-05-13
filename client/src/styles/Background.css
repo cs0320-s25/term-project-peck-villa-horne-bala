@@ -5,7 +5,7 @@
     width: 100%;
     height: 100%;
     z-index: -1; /* behind your content */
-    background: linear-gradient(-45deg, #5124da, #0f18c4, #02388a, #f50eb3);
+    background: linear-gradient(-45deg, #5c13b5,  #20024d,#4b0da1,  #20024d);
     background-size: 400% 400%;
     animation: gradientMove 15s ease infinite;
   }

@@ -8,8 +8,8 @@ import { FaLock, FaUnlock} from "react-icons/fa";
 import { LevelProp } from "../../../types";
 import { Locked } from "../../../types";
 import { useUser } from "@clerk/clerk-react";
+import "../../../styles/Level.css"
 
-import "../../../styles/Card.css"
 
 export function Level(props: LevelProp){
 
@@ -23,19 +23,18 @@ export function Level(props: LevelProp){
     console.log("Level locked: " + props.level.levelName, props.level.locked);
 
     return (
-     
-      <Card className="module-inner-card">
-          <span>{props.level.levelName}</span>
-          {props.level.locked === Locked.Locked ? (
-            <FaLock size={30}  />
-          ) : (
-            <FaUnlock size={30} />
-          )}
-          {props.level.locked === Locked.Unlocked && (
-            <Button className="module-inner-card-button" onClick={goToLesson}>
-              Go to Lesson
-            </Button>
-          )}
+      <Card className="level-card">
+        <span className="level-name">{props.level.levelName}</span>
+        {props.level.locked === Locked.Locked ? (
+          <FaLock className="lock-icon" size={30} />
+        ) : (
+          <FaUnlock className="lock-icon" size={30} />
+        )}
+        {props.level.locked === Locked.Unlocked && (
+          <Button className="level-card-button" onClick={goToLesson}>
+            Go to Lesson
+          </Button>
+        )}
       </Card>
     );
 
