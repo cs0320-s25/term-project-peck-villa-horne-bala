@@ -20,6 +20,8 @@ export function Level(props: LevelProp){
         navigate(path);
     }
 
+    console.log("Level locked: " + props.level.levelName, props.level.locked);
+
     return (
      
       <Card className="module-inner-card">

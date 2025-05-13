@@ -168,6 +168,7 @@ export const storeModuleList = async (user: string) => {
     console.error("Error storing modules:", error);
   }
 }
+export var modulesList = populateModuleList();
 
 export const updateModuleList = async (user: string) => {
   try {
@@ -175,13 +176,31 @@ export const updateModuleList = async (user: string) => {
     if (response.ok) {
       const data = await response.json();
       console.log("Modules restored successfully:", data.modules);
-      const parsedModules = JSON.parse(data.modules);
-      console.log("Parsed modules:", parsedModules);
-    }
+
+      modulesList.forEach((module) => {
+        const backendModule = data.modules[module.name];
+        if (backendModule) {
+          module.levels = module.levels.map((level) => {
+            const backendLevel = backendModule[level.levelName];
+            if (backendLevel) {
+              return {
+                ...level,
+                locked: backendLevel[0], 
+                completionStatus: backendLevel[1], 
+              };
+            }
+            return level;
+          });
+        }
+      });
+      localStorage.setItem(user, JSON.stringify(modulesList));
+  }
   } catch (error) {
     console.error("Error restoring modules:", error);
   }
 }; 
+
+
 
 export const resetModuleCompletionStatus = () => {
   modulesList.forEach((module) => {
@@ -194,5 +213,5 @@ export const resetModuleCompletionStatus = () => {
   modulesList[0].levels[1].locked = Locked.Unlocked;
 };
 
-export const modulesList = populateModuleList();
+
 
