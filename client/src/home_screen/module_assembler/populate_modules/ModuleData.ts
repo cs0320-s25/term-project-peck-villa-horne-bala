@@ -155,13 +155,12 @@ export const storeModuleList = async (user: string) => {
   const modulesString = JSON.stringify({modulesList});
   try {
     if (user){
-      console.log("Storing modules for user:", user);
       const response = await fetch(`http://localhost:3232/storeModules?uid=${user}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: modulesString,
       });
-      console.log("Modules stored successfully:" + response.status);
+      console.log("Modulesc stored successfully:" + response.status);
     }
 
   } catch (error) {
@@ -170,12 +169,11 @@ export const storeModuleList = async (user: string) => {
 }
 export var modulesList = populateModuleList();
 
-export const updateModuleList = async (user: string) => {
+export const updateModuleList = async (user: any) => {
   try {
     const response = await fetch(`http://localhost:3232/restoreProgress?uid=${user}`);
     if (response.ok) {
       const data = await response.json();
-      console.log("Modules restored successfully:", data.modules);
 
       modulesList.forEach((module) => {
         const backendModule = data.modules[module.name];
@@ -193,7 +191,8 @@ export const updateModuleList = async (user: string) => {
           });
         }
       });
-      localStorage.setItem(user, JSON.stringify(modulesList));
+      localStorage.setItem(user.id, JSON.stringify(modulesList));
+      console.log("Modules list updated:", modulesList);
   }
   } catch (error) {
     console.error("Error restoring modules:", error);

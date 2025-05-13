@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import { CompletionStatus, UserQuestionHashMap } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import { CodeEditorProps } from "../types";
-import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import { storeModuleList, updateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { Locked } from "../types";
 
 
@@ -50,8 +50,7 @@ const CodeEditor = (props: CodeEditorProps) => {
       console.log("User not found");
       return;
     }
-    console.log("Storing modules for user:", user.id);
-    storeModuleList(user.id);
+    updateModuleList(user.id);
   };
 
   return (

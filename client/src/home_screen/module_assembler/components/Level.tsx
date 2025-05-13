@@ -19,9 +19,6 @@ export function Level(props: LevelProp){
         const path: string= props.level.routerPath;
         navigate(path);
     }
-
-    console.log("Level locked: " + props.level.levelName, props.level.locked);
-
     return (
       <Card className="level-card">
         <span className="level-name">{props.level.levelName}</span>

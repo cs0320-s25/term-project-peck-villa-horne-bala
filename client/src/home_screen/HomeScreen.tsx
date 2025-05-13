@@ -18,20 +18,12 @@ export function Homescreen() {
 
   useEffect(() => {
     if (user?.id ) {
-      const savedModules = localStorage.getItem(user.id);
-      console.log("Saved modules: ", savedModules);
         setModuleList(modulesList);
-        console.log("Default modules: ", modulesList);
+        updateModuleList(user.id);
+        console.log("Default modules: saved by code editor", modulesList);
       
     }
   }, [user]);
-
-  // Save moduleList to localStorage whenever it changes
-  useEffect(() => {
-    if (user?.id) {
-      localStorage.setItem(user.id, JSON.stringify(moduleList));
-    }
-  }, [moduleList, user]);
 
 
 

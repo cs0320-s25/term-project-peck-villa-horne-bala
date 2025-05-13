@@ -13,7 +13,6 @@ export function MOneLvlThree() {
     levelinfo.locked = Locked.Locked;
   }
   console.log(levelinfo.locked);
-  console.log("Previous level complete?" + modulesList[0].levels[1].completionStatus);
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(levelinfo.completionStatus);
 
