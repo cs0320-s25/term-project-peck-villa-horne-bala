@@ -32,10 +32,9 @@ public class QuestionsDirectory {
       }
     }
     String cleaned = parsed.get(parsed.size() - 1).replaceAll("\\r?\\n", "").trim();
-    System.out.println(filepath + " output:" + cleaned);
+    //    System.out.println(filepath + " output:" + cleaned);
     String outputTrimmed = output.replaceAll("\\r?\\n", "").trim();
-    //    System.out.println(outputTrimmed);
-    //    System.out.println(cleaned);
+    //    System.out.println("Output: " + outputTrimmed);
     return cleaned.equals(outputTrimmed);
   }
 

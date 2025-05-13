@@ -30,7 +30,7 @@ export function finalLvl() {
       For example, "WALK LEFT 4" means the player should move left by 4 tiles on regular ground, while "SWIM UP 2" would move the player upward through 2 tiles of water.
       Only valid, properly formatted moves will be executed. 
       If a command is not in the correct format or attempts to move the player out of bounds or into a wall, it will be ignored. Good luck!
-      Note: For your answer to be considered valid you should create your own method that features multiple parameters and conditionals.
+      Note: For your answer to be considered valid you should create your own method called move that features multiple parameters and conditionals.
 
       </p>
       <div className="container">

@@ -111,11 +111,10 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
 async function movePlayer(commands: string[]) {
   let row = 12;
   let col = 7;
-
-  for (const command of commands) {
+  const filtered = commands.filter(item => item.trim() !== "");
+  for (const command of filtered) {
     console.log("******COMMAND: " + command);
     
-    // Match e.g., SWIM UP 2 or WALK LEFT 3
     const match = command.trim().match(/^(SWIM|WALK)\s+(UP|DOWN|LEFT|RIGHT)\s+(\d+)$/);
     if (!match) {
       setOutput(`❌ Error: Invalid command format: "${command}"`);
