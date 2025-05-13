@@ -1,0 +1,182 @@
+/* Module.css - Enhanced styling for the learning platform - Dark Mode */
+
+/* Overall page layout */
+.module-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    color: #e2e2e2;
+    background-color: #121212;
+    min-height: 100vh;
+  }
+  
+  /* Header section styling */
+  .module-header {
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #6366f1;
+  }
+  
+  .module-title {
+    font-size: 1.8rem;
+    color: #f0f0f0;
+    margin: 16px 0;
+  }
+  
+  /* Back button */
+  .back-button {
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .back-button:hover {
+    background-color: #4f46e5;
+  }
+  
+  /* Main content container */
+  .content-container {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .content-container {
+      flex-direction: column;
+    }
+  }
+  
+  /* Instruction box */
+  .instruction-box {
+    flex: 1;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+  }
+  
+  /* Code editor box */
+  .editor-box {
+    flex: 1;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Task highlight */
+  .task-highlight {
+    background-color: #2d2d2d;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-weight: 500;
+  }
+  
+  /* Navigation buttons */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+  
+  .next-button {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.2s;
+  }
+  
+  .next-button:hover {
+    background-color: #059669;
+  }
+  
+  /* Code editor enhancements */
+  .code-editor-container {
+    height: 400px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #333;
+    background-color: #252525;
+  }
+  
+  /* Action buttons for code editor */
+  .editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .editor-actions button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+  }
+  
+  .clear-button {
+    background-color: #4b5563;
+    color: white;
+  }
+  
+  .clear-button:hover {
+    background-color: #374151;
+  }
+  
+  .run-button {
+    background-color: #6366f1;
+    color: white;
+  }
+  
+  .run-button:hover {
+    background-color: #4f46e5;
+  }
+  
+  /* Text styling */
+  .text-highlight {
+    color: #a5b4fc;
+    font-weight: 500;
+  }
+  
+  .code-inline {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background-color: #252525;
+    color: #c3dafe;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  
+  /* Code syntax highlighting for dark mode */
+  pre code {
+    color: #f0f0f0;
+    background-color: #252525;
+  }
+  
+  /* List styling */
+  ul {
+    color: #d1d5db;
+    margin-left: 20px;
+  }
+  
+  ul li {
+    margin-bottom: 8px;
+  }
