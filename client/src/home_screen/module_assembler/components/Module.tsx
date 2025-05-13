@@ -4,7 +4,7 @@ import Level from "./Level";
 import { ModuleProps } from "../../../types";
 
 import Card from "react-bootstrap/Card";
-import "../../../styles/Card.css";
+import "../../../styles/HomescreenModule.css"
 
 
 

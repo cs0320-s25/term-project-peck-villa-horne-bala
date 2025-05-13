@@ -1,11 +1,10 @@
 /* For controlling appearance of the mock app (such as headers) */
 .App {
   text-align: center;
-  font-family:monospace;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
 }
-
 .App-header {
-  background: linear-gradient(135deg, #111111 0%, rgba(201, 14, 14, 0.798) 100%);
+  /* background: linear-gradient(135deg, #111111 0%, rgba(201, 14, 14, 0.798) 100%); */
   min-height: 20vh;
   display: flex;
   flex-direction: column;
@@ -14,6 +13,6 @@
   color: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 4px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
