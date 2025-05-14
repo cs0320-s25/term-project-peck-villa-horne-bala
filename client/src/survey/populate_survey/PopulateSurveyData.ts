@@ -30,7 +30,16 @@ export const populateSurvey = (): FormatQ[] => {
   surveyList.push(Q19);
   surveyList.push(Q20);
   surveyList.push(Q21);
-  // surveyList.push(Q6);
 
   return surveyList;
 };
+
+export const populateSurveyAnswerChoices= (): number[]=>{
+  const surveyAnswers: number[] = [];
+  surveyAnswers.push(Q17.correctAnswerIndex)
+  surveyAnswers.push(Q18.correctAnswerIndex);
+  surveyAnswers.push(Q19.correctAnswerIndex);
+  surveyAnswers.push(Q20.correctAnswerIndex);
+  surveyAnswers.push(Q21.correctAnswerIndex);
+  return surveyAnswers;
+}
