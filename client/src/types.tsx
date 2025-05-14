@@ -5,6 +5,7 @@ export interface CodeEditorProps {
   initialCode: string;
   questionId: string;
   level: LevelInfo;
+  modules: ModuleInfo[];
   setLevelCompletionStatus: (status: CompletionStatus) => void;
 }
 

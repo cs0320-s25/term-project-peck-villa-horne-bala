@@ -43,12 +43,12 @@ export function Survey(props: SurveyProps) {
     props.setMode(Status.Homescreen)
   }
 
-useEffect(() => {
-    if (user?.id) {
-      populateModuleList();
-      storeModuleList(user.id);
-    }
-  }, []);
+// useEffect(() => {
+//     if (user?.id) {
+//       populateModuleList();
+//       storeModuleList(user.id);
+//     }
+//   }, []);
 
   return (
     <div className="survey">

@@ -1,25 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus, Locked } from "../../types";
 import { LevelInfo } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
 
 export function MThreeLvlOne() {
-  const levelInfo: LevelInfo = modulesList[2].levels[0];
-
-  // Unlock the level if the previous level is complete
-  if (modulesList[1].levels[3].completionStatus === CompletionStatus.Complete) {
-    levelInfo.locked = Locked.Unlocked;
-  } else {
-    levelInfo.locked = Locked.Locked;
-  }
+  const { user } = useUser();
+  const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+  const [levelInfo, setLevelInfo] = useState<LevelInfo>(
+    populateModuleList()[2].levels[0]
+  );
 
   const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
-  const navigate = useNavigate();
+    useState<CompletionStatus>(CompletionStatus.Incomplete);
 
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in module 3 lvl 1: ", modules);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (modulesList.length > 0) {
+      const levelinfo: LevelInfo = modulesList[2].levels[0];
+      if (
+        modulesList[1].levels[3].completionStatus === CompletionStatus.Complete
+      ) {
+        levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
+      }
+      setLevelInfo(levelinfo);
+      setLevelCompletionStatus(levelinfo.completionStatus);
+    }
+  }, [modulesList]);
+   
+   
+   const navigate = useNavigate();
   return (
     <div className="module-page">
       <header className="module-header">
@@ -64,12 +90,19 @@ export function MThreeLvlOne() {
         </div>
 
         <div className="editor-box">
+          <div className="code-editor-container">
             <CodeEditor
               initialCode=""
               questionId="module03_level01"
               level={levelInfo}
+              modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
+          </div>
+          <div className="editor-actions">
+            <button className="clear-button">Clear Code</button>
+            <button className="run-button">Run Code</button>
+          </div>
         </div>
       </div>
 

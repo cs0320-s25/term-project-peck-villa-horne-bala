@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LevelInfo } from "../../../types";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,7 @@ export function Level(props: LevelProp){
         const path: string= props.level.routerPath;
         navigate(path);
     }
+    
     return (
       <Card className="level-card">
         <span className="level-name">{props.level.levelName}</span>

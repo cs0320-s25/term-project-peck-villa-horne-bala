@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import MazeCodeEditor from "../components/MazeCodeEditor";
 import { CompletionStatus } from "../types";
 import { LevelInfo } from "../types";
-import { modulesList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 import "../styles/Maze.css";
-import "../styles/Module.css";
+import "../styles/Module.css";import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../types";
 
-export function FinalLevel() {
+
+export function finalLvl() {
+  const moduleIndex = 1;
+  const levelIndex = 1;
+  const {user}= useUser();
+  const[modulesList, setModulesList]= useState<ModuleInfo[]>(populateModuleList());
+  
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModulesList(modules);
+    }
+  }, [user]);
+
   const levelInfo: LevelInfo = modulesList[1].levels[3];
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(levelInfo.completionStatus);
@@ -86,4 +103,4 @@ export function FinalLevel() {
   );
 }
 
-export default FinalLevel;
+export default finalLvl;

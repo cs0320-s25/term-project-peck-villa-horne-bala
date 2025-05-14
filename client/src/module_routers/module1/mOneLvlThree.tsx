@@ -1,65 +1,81 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus, Locked } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { LevelInfo } from "../../types";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
 
 export function MOneLvlThree() {
-  const levelInfo: LevelInfo = modulesList[0].levels[2];
-
-  // Unlock the level if the previous level is complete
-  if (modulesList[0].levels[1].completionStatus === CompletionStatus.Complete) {
-    levelInfo.locked = Locked.Unlocked;
-  } else {
-    levelInfo.locked = Locked.Locked;
-  }
+  const { user } = useUser();
+  const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+  const [levelInfo, setLevelInfo] = useState<LevelInfo>(
+    populateModuleList()[0].levels[2]
+  );
 
   const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
+    useState<CompletionStatus>(CompletionStatus.Incomplete);
+
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in module 1 lvl 3: ", modules);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (modulesList.length > 0) {
+      const levelinfo: LevelInfo = modulesList[0].levels[2];
+      if (
+        modulesList[0].levels[0].completionStatus === CompletionStatus.Complete
+      ) {
+        levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
+      }
+      setLevelInfo(levelinfo);
+      setLevelCompletionStatus(levelinfo.completionStatus);
+    }
+  }, [modulesList]);
+  useEffect(() => {
+    console.log(
+      "completion status for m one lvl 3 changed to: " + levelCompletionStatus
+    );
+  }, [levelCompletionStatus]);
+  
+ 
   const navigate = useNavigate();
 
   return (
-    <div className="module-page">
-      <header className="module-header">
-        <button className="back-button" onClick={() => navigate("/Home")}>
-          Back
-        </button>
-        <h1 className="module-title">
-          Module 1: Variables & Primitives - Level 3: String Types
-        </h1>
-      </header>
-
-      <div className="content-container">
-        <div className="instruction-box">
-          <p>
-            In Java, a string is a sequence of characters. Strings are used to
-            represent text and can be created using double quotes. For example,
-            <span className="code-inline">"Hello, World!"</span> is a string.
-            Strings are immutable, meaning that once they are created, their
-            values cannot be changed. However, you can create new strings based
-            on existing ones.
-          </p>
-          <div className="task-highlight">
-            <strong>Task:</strong> Create a{" "}
-            <span className="code-inline">String</span> variable called
-            <span className="code-inline">greeting</span> and set it to
-            <span className="code-inline">"Hello, Java!"</span>. Print it in the
-            sandbox!
-          </div>
-        </div>
-
-        <div className="editor-box">
-            <CodeEditor
-              initialCode=""
-              questionId="module01_level03"
-              level={levelInfo}
-              setLevelCompletionStatus={setLevelCompletionStatus}
-            />
-        </div>
-      </div>
-
+    <div>
+      <button onClick={() => navigate("/Home")}>Back</button>
+      <button onClick={() => navigate("/MOneLvlOne")}>Previous Level</button>;
+      <h2> Module 1: Variables & Primitives - Level 3: String Types</h2>
+      <p>
+        In Java, a string is a sequence of characters. Strings are used to
+        represent text and can be created using double quotes. For example,
+        "Hello, World!" is a string. Strings are immutable, meaning that once
+        they are created, their values cannot be changed. However, you can
+        create new strings based on existing ones.
+        <br></br>
+        <strong>
+          Task: Task: Create a “String” variable called greeting and set it to
+          "Hello, Java!". Print it in the sandbox!
+        </strong>
+      </p>
+      <CodeEditor
+        initialCode=""
+        questionId="module01_level03"
+        level={levelInfo}
+        modules={modulesList}
+        setLevelCompletionStatus={setLevelCompletionStatus}
+      />
       {levelCompletionStatus === CompletionStatus.Complete && (
         <div className="nav-buttons">
           <button

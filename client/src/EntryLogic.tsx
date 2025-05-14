@@ -4,11 +4,13 @@ import { Survey } from "./survey/SurveyManager";
 import { useUser } from "@clerk/clerk-react";
 import { Status } from "./types";
 import {checkUserSurveyStatus} from "./survey/SurveyApi"
+import { ModuleInfo } from "./types";
 
 
 export function Intro() {
   const { user } = useUser();
   const [mode, setMode] = useState<Status>(Status.InBetween);
+  const [moduleList, setModuleList] = useState<ModuleInfo[]>([]);
 
   // here we will call the api to check the firebase to see if the user has taken the survey, or not and set the mode accordingly
   useEffect(() => {

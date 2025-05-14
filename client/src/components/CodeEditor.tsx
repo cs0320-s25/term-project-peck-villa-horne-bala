@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import { CompletionStatus, UserQuestionHashMap } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import { CodeEditorProps } from "../types";
-import { storeModuleList, updateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import { updateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { Locked } from "../types";
 import "../styles/Module.css"
 
@@ -15,7 +15,6 @@ const CodeEditor = (props: CodeEditorProps) => {
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
-  console.log(`Level Completion Status: ${props.level.levelName}`, props.level.completionStatus);
 
   const handleRun = async () => {
     try {
@@ -51,7 +50,7 @@ const CodeEditor = (props: CodeEditorProps) => {
       console.log("User not found");
       return;
     }
-    updateModuleList(user.id);
+    updateModuleList(user.id, props.modules);
   };
 
   return (

@@ -5,15 +5,29 @@ import { useUser } from "@clerk/clerk-react";
 import { CodeEditorProps } from "../types";
 import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { Locked } from "../types";
-import Maze from "../components/maze";
+import Maze from "../components/Maze";
+import { ModuleInfo } from "../types";
+import { populateModuleList, getModuleListLocalStorage } from "../home_screen/module_assembler/populate_modules/ModuleData";
+
 
 const MazeCodeEditor = (props: CodeEditorProps) => {
+  const [modulesList, setModuleList] =
+    useState<ModuleInfo[]>(populateModuleList());
+  
   const { isLoaded, user } = useUser();
   const [code, setCode] = useState(
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
   const [playerPosition, setPlayerPosition] = useState({ row: 12, col: 7 }); // Start at 'S'
+
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in final project: ", modulesList);
+    }
+  }, [user]);
 
   type Cell = 0 | 1 | 2 | 3 | 'S' | 'E';
   
@@ -73,9 +87,36 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
       return;
     }
     console.log("Storing modules for user:", user.id);
-    storeModuleList(user.id);
+    storeModuleList(user.id, modulesList);
+    
   };
 
+  return (
+    <div>
+    <div className="container">
+      <Editor
+        height="400px"
+        language="java"
+        theme="vs-dark"
+        value={code}
+        onChange={(value) => setCode(value ?? "")}
+      />
+      <Maze playerPosition={playerPosition} grid={maze} />
+    </div>
+    <button
+        onClick={() =>
+          setCode(
+            `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
+          )
+        }
+      >
+        Clear Code
+      </button>
+      <button onClick={handleRun}>Run Code</button>
+      <pre>{output}</pre>
+    </div>
+    
+  );
   function parseCommand(input: string): string[] {
     return input.split(",").map(item => item.trim());
   }
