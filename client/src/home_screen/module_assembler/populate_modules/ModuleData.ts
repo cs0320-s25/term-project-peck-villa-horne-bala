@@ -17,7 +17,7 @@ export const module1: ModuleInfo = {
     },
     {
       levelName: "Int VS Doubles",
-      locked: Locked.Unlocked,
+      locked: Locked.Locked,
       routerPath: "/MOneLvlTwo",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MOneLvlTwo",

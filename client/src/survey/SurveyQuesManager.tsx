@@ -1,4 +1,7 @@
-import { populateSurvey } from "./populate_survey/PopulateSurveyData";
+import {
+  populateSurvey,
+  populateSurveyAnswerChoices,
+} from "./populate_survey/PopulateSurveyData";
 import {
   useState,
   useEffect,
@@ -66,6 +69,8 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
       } else { // the survey has been completed
         setCurrQ(null);
         if (user?.id) {
+          const surveyAnswerKey = populateSurveyAnswerChoices();
+          console.log("survey answer key: "+ surveyAnswerKey);
           updateFirestoreUserSurveyStatus(user.id);
         }
         props.setSurveyMode(SurveyStatus.Complete);
