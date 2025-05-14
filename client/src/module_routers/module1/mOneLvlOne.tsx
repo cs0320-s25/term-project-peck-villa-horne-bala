@@ -49,9 +49,39 @@ export function MOneLvlOne() {
       <div className="content-container">
         <div className="instruction-box">
           <p>
-            In Java, variables are containers that store data in memory...
+            In Java, variables are containers that store data in memory.
+            Understanding variables plays a very important role as it defines
+            how data is stored, accessed, and manipulated.
           </p>
-          {/* (rest of instructional content omitted for brevity) */}
+          <p>
+            The next module we will learn about types but for this demonstration
+            we will start with the
+            <span className="code-inline">int</span> type which tells Java that
+            you are trying to store a non-decimal number.
+          </p>
+          <p>
+            Example: <span className="code-inline">int age = 19;</span>, where:
+          </p>
+          <ul>
+            <li>
+              <span className="text-highlight">int</span> is the type
+            </li>
+            <li>
+              <span className="text-highlight">age</span> is the name of the
+              variable
+            </li>
+            <li>
+              <span className="text-highlight">19</span> is the value that the
+              variable stores
+            </li>
+          </ul>
+          <p>
+            Remember that we use the equal sign to assign a value to a variable
+            and almost every statement should end with a semicolon.
+            Additionally, you can print any variable using the command{" "}
+            <span className="code-inline">System.out.println(variable)</span>.
+          </p>
+
           <div className="task-highlight">
             <strong>Task:</strong> Try on your own creating an int type variable
             called num that stores the value 1000 and print it!
@@ -59,13 +89,13 @@ export function MOneLvlOne() {
         </div>
 
         <div className="editor-box">
-          <CodeEditor
-            initialCode=""
-            questionId="module01_level01"
-            level={levelInfo}
-            modules={modulesList}
-            setLevelCompletionStatus={setLevelCompletionStatus}
-          />
+            <CodeEditor
+              initialCode=""
+              questionId="module01_level01"
+              level={levelInfo}
+              modules={modulesList}
+              setLevelCompletionStatus={setLevelCompletionStatus}
+            />
         </div>
       </div>
 
