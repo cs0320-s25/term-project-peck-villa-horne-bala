@@ -111,8 +111,8 @@ export function MFourLvlThree() {
           >
             Previous Level
           </button>
-          <button className="next-button" onClick={() => navigate("/Home")}>
-            Congratulations! Return to Home
+          <button className="next-button" onClick={() => navigate("/finalLvl")}>
+           Time for the Final Level!!
           </button>
         </div>
       )}
