@@ -16,55 +16,35 @@ import { populateSurvey } from "../survey/populate_survey/PopulateSurveyData";
 
 export function Homescreen() {
   const [moduleList, setModuleList] = useState<ModuleInfo[]>([]);
-  const [cacheList, setCacheList] = useState<ModuleInfo[]>([]);
   const { user } = useUser();
 
-  // useEffect(() => {
-  //   if (user?.id ) {
-  //     const storedData:string | null= localStorage.getItem(user.id);
-  //     if (storedData==null) {
-  //       // first time they sign in
-  //       setModuleList(modulesList);
-  //       updateModuleList(user.id);
-  //     } else if (storedData != null) {
-  //       const listFromLocalStorage: ModuleInfo[] = parseModuleList(storedData);
-  //       setModuleList(listFromLocalStorage);
-  //     }
-  //     getModuleList(user.id);
-  //     //console.log("Default modules: saved by code editor", modulesList);
-  //   }
-  // }, [user]);
-
+  // this updates the moduleList using local storage or firestore based on whether there is something in the local storage
   useEffect(() => {
     if (user?.id) {
       const cachedModules = localStorage.getItem(user.id);
-      if (cachedModules) {
+      if (cachedModules) { // local storage
         const parsedModules = parseModuleList(cachedModules);
-        console.log("parsedModules from local storage");
         setModuleList(parsedModules);
         const updateModules = async () => {
           await storeModuleList(user.id, moduleList);
         };
         updateModules();
-      } else {
+      } else { // firestore
         const loadModules = async () => {
-          const updatedList = await updateModuleList(user.id, moduleList);
-          console.log(
-            "fetching the module list from firestore!!: " + updatedList
-          );
+          const updatedList = await updateModuleList(user.id, moduleList); // calling api to get the module list and store that into the updated list
+  
           if (updatedList) {
             setModuleList(updatedList);
-            console.log("updared module list from firestore: " + moduleList);
           }
         };
         loadModules();
       }
     } else {
-      console.log("user cleared when refreshing");
       localStorage.clear();
     }
   }, [user]);
 
+  // this updates the firestore everytime that the list is updates
   useEffect(() => {
     if (user?.id) {
       const updateModules = async () => {
@@ -74,20 +54,13 @@ export function Homescreen() {
     }
   }, [moduleList]);
 
-  // useEffect(() => {
-  //   if (user?.id) {
-  //     const cachedModules = localStorage.getItem(user.id);
-  //     if (cachedModules) {
-  //       const parsedModules = parseModuleList(cachedModules);
-  //       console.log("parsedModules from local storage");
-  //       setModuleList(parsedModules);
-  //       const updateModules = async () => {
-  //         await storeModuleList(user.id, moduleList);
-  //       };
-  //       updateModules();
-  //     }
-  //   }
-  // }, [cacheList]);
+  // this function is used to reset the modules so that only the first level is open
+  const resetModules =()=>{
+    if(user && user.id){
+      resetModuleCompletionStatus(setModuleList, user.id);
+    }
+    window.location.reload();
+  }
 
   return (
     <div className="home-screen">
@@ -95,16 +68,7 @@ export function Homescreen() {
         <h1 className="home-screen-title"> Home </h1>
         <button
           className="reset-button"
-          onClick={() => {
-            const resetModules = resetModuleCompletionStatus(moduleList);
-            if (resetModules != null && user && user.id) {
-              setModuleList(resetModules);
-              localStorage.setItem(user.id, JSON.stringify(resetModules));
-              storeModuleList(user.id, resetModules);
-            }
-
-            window.location.reload();
-          }}
+          onClick={resetModules}
         >
           Reset
         </button>

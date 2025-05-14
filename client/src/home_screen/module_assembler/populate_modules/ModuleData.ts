@@ -1,7 +1,7 @@
 import { Locked, ModuleInfo } from "../../../types";
 import { CompletionStatus } from "../../../types";
 import { fetchModules } from "../../ModuleApi";
-import { useState} from "react";
+import { Dispatch, SetStateAction, useState} from "react";
 import { useUser } from "@clerk/clerk-react";
 
 
@@ -218,15 +218,13 @@ export const updateModuleList = async (user: string, modulesList: ModuleInfo[]):
 }; 
 
 
-export const resetModuleCompletionStatus = (modules: ModuleInfo[]) => {
-  modules.forEach((module) => {
-    module.levels.forEach((level) => {
-      level.completionStatus = CompletionStatus.Incomplete;
-      level.locked = Locked.Locked;
-    });
-  });
-  modules[0].levels[0].locked = Locked.Unlocked;
-  modules[0].levels[1].locked = Locked.Unlocked;
+export const resetModuleCompletionStatus = (
+  setModules: Dispatch<SetStateAction<ModuleInfo[]>>, user: string
+) => {
+  const mockedModules= populateModuleList();
+  setModules(mockedModules);
+  localStorage.setItem(user, JSON.stringify(mockedModules));
+  storeModuleList(user, mockedModules);
 };
 
 export function parseModuleList(rawJson: string): ModuleInfo[] {
