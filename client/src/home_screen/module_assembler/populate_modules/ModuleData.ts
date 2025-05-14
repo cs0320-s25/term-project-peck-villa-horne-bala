@@ -127,12 +127,26 @@ const module4: ModuleInfo = {
   ],
 };
 
+const finalModule: ModuleInfo = {
+  name: "Final Module!",
+  levels: [
+    {
+      levelName: "Method Syntax",
+      locked: Locked.Locked,
+      routerPath: "/finalLvl",
+      completionStatus: CompletionStatus.Incomplete,
+      jsonKey: "finalLvl",
+    },
+  ],
+};
+
 export const populateModuleList = (): ModuleInfo[] => {
   const modules: ModuleInfo[] = [];
   modules.push(module1);
   modules.push(module2);
   modules.push(module3);
   modules.push(module4);
+  modules.push(finalModule);
   //updateModuleList(user);
   return modules;
 };
@@ -141,33 +155,51 @@ export const storeModuleList = async (user: string) => {
   const modulesString = JSON.stringify({modulesList});
   try {
     if (user){
-      console.log("Storing modules for user:", user);
       const response = await fetch(`http://localhost:3232/storeModules?uid=${user}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: modulesString,
       });
-      console.log("Modules stored successfully:" + response.status);
+      console.log("Modulesc stored successfully:" + response.status);
     }
 
   } catch (error) {
     console.error("Error storing modules:", error);
   }
 }
+export var modulesList = populateModuleList();
 
-export const updateModuleList = async (user: string) => {
+export const updateModuleList = async (user: any) => {
   try {
     const response = await fetch(`http://localhost:3232/restoreProgress?uid=${user}`);
     if (response.ok) {
       const data = await response.json();
-      console.log("Modules restored successfully:", data.modules);
-      const parsedModules = JSON.parse(data.modules);
-      console.log("Parsed modules:", parsedModules);
-    }
+
+      modulesList.forEach((module) => {
+        const backendModule = data.modules[module.name];
+        if (backendModule) {
+          module.levels = module.levels.map((level) => {
+            const backendLevel = backendModule[level.levelName];
+            if (backendLevel) {
+              return {
+                ...level,
+                locked: backendLevel[0], 
+                completionStatus: backendLevel[1], 
+              };
+            }
+            return level;
+          });
+        }
+      });
+      localStorage.setItem(user.id, JSON.stringify(modulesList));
+      console.log("Modules list updated:", modulesList);
+  }
   } catch (error) {
     console.error("Error restoring modules:", error);
   }
 }; 
+
+
 
 export const resetModuleCompletionStatus = () => {
   modulesList.forEach((module) => {
@@ -180,5 +212,5 @@ export const resetModuleCompletionStatus = () => {
   modulesList[0].levels[1].locked = Locked.Unlocked;
 };
 
-export const modulesList = populateModuleList();
+
 

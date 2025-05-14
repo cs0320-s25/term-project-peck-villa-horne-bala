@@ -1,7 +1,6 @@
 package DecisionTree;
 
 import DataRepresentation.DataPoint;
-import java.util.List;
 
 public class DecisionLeaf implements TreeNode {
   private String value;

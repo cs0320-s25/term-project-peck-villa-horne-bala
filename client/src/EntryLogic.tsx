@@ -13,6 +13,7 @@ export function Intro() {
   // here we will call the api to check the firebase to see if the user has taken the survey, or not and set the mode accordingly
   useEffect(() => {
     if(user?.id){
+      console.log(user.id)
       checkUserSurveyStatus(user.id, setMode);
     }
   }, []);

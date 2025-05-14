@@ -1,61 +1,103 @@
-import { useState, useEffect, FormEventHandler } from "react";
+import { useState } from "react";
 import CodeEditor from "../../components/CodeEditor";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import { CompletionStatus, Locked } from "../../types";
 import { LevelInfo } from "../../types";
-import { CompletionStatus } from "../../types";
+import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
-import { Locked } from "../../types";
+import "../../styles/Module.css";
 
-export function MTwoLvlTwo() {
-  const levelinfo: LevelInfo = modulesList[1].levels[1];
-  if (modulesList[1].levels[0].completionStatus === CompletionStatus.Complete) {
-    levelinfo.locked = Locked.Unlocked;
-     } else {
-       levelinfo.locked = Locked.Locked;
+export function MTwoLvlThree() {
+  const levelInfo: LevelInfo = modulesList[1].levels[2];
+
+  // Unlock the level if the previous level is complete
+  if (modulesList[1].levels[1].completionStatus === CompletionStatus.Complete) {
+    levelInfo.locked = Locked.Unlocked;
+  } else {
+    levelInfo.locked = Locked.Locked;
   }
-  console.log(levelinfo.locked);
-  console.log(
-    "Previous level complete?" + modulesList[1].levels[0].completionStatus
-  );
+
   const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelinfo.completionStatus);
+    useState<CompletionStatus>(levelInfo.completionStatus);
   const navigate = useNavigate();
 
   return (
-    <div>
-      <button onClick={() => navigate("/Home")}>Back</button>
-      <button onClick={() => navigate("/MTwoLvlOne")}>Previous Level</button>
-      <h2>Module 2: Operators - Level 2: Multiplication/Divison</h2>
-      <p>
-        Multiplying (*) and dividing (/) numbers lets us solve more kinds of
-        problems like calculating the area of a rectangle or splitting a bill.
-        Note: To get the decimal value of and save it you must use decmal values and save it in a double.
-         For example if you do int div = 5/2 then it will only
-        save 2 instead of 2.5. If you do double div = 5.0/2 then it will save as
-        2.5. This is because int is a whole number and double is a decimal
-        number. So if you want to save the decimal value you need to use double
-        instead of int. For example, double div = 5.0/2.0 will save the value as
-        2.5.
-        <br></br>
-        <strong>
-          Task: Create three variables that equal a,b and c where a is the
-          multiplication of 10 and 7 as an int, b is the division of 7 and 2 as
-          an int and c is the save division as a double. Print it in the similar format as the last level,
-          all on one line separated by the word "and" and spaces!
-        </strong>
-      </p>
-      <CodeEditor
-        initialCode=""
-        questionId="module02_level02"
-        level={levelinfo}
-        setLevelCompletionStatus={setLevelCompletionStatus}
-      />
+    <div className="module-page">
+      <header className="module-header">
+        <button className="back-button" onClick={() => navigate("/Home")}>
+          Back
+        </button>
+        <h1 className="module-title">Module 2: Operators - Level 3: Modulus</h1>
+      </header>
+
+      <div className="content-container">
+        <div className="instruction-box">
+          <p>
+            The modulus operator (<span className="code-inline">%</span>) is
+            used to find the remainder of a division operation. It is useful for
+            determining if a number is even or odd, or for performing
+            calculations that involve remainders. For example,{" "}
+            <span className="code-inline">10 % 3</span> would give you{" "}
+            <span className="code-inline">1</span>, because when you divide 10
+            by 3, the remainder is 1.
+          </p>
+          <div className="task-highlight">
+            <strong>Task:</strong> In the format{" "}
+            <span className="code-inline">x % y</span>, find the remainder of:
+            <ul>
+              <li>
+                <span className="code-inline">7 % 3</span>
+              </li>
+              <li>
+                <span className="code-inline">5 % 1</span>
+              </li>
+              <li>
+                <span className="code-inline">4 % 18</span>
+              </li>
+            </ul>
+            Also, come up with your own way of getting the remainder{" "}
+            <span className="code-inline">9</span>. Print the result of each
+            modulus operation with commas in between and think about what it
+            means!
+            <br />
+            <em>Note:</em> If the first number is less than the second, the
+            modulus will always return the first number's value.
+          </div>
+        </div>
+
+        <div className="editor-box">
+          <div className="code-editor-container">
+            <CodeEditor
+              initialCode=""
+              questionId="module02_level03"
+              level={levelInfo}
+              setLevelCompletionStatus={setLevelCompletionStatus}
+            />
+          </div>
+          <div className="editor-actions">
+            <button className="clear-button">Clear Code</button>
+            <button className="run-button">Run Code</button>
+          </div>
+        </div>
+      </div>
+
       {levelCompletionStatus === CompletionStatus.Complete && (
-        <button onClick={() => navigate("/MTwoLvlThree")}>Next Level</button>
+        <div className="nav-buttons">
+          <button
+            className="previous-button"
+            onClick={() => navigate("/MTwoLvlTwo")}
+          >
+            Previous Level
+          </button>
+          <button
+            className="next-button"
+            onClick={() => navigate("/MTwoLvlFour")}
+          >
+            Next Level
+          </button>
+        </div>
       )}
-      <br></br>
     </div>
   );
 }
 
-export default MTwoLvlTwo;
+export default MTwoLvlThree;

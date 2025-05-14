@@ -11,7 +11,7 @@ import spark.Route;
 public class RestoreProgressHandler implements Route {
   private StorageInterface storage;
 
-  public  RestoreProgressHandler(StorageInterface storage){
+  public RestoreProgressHandler(StorageInterface storage) {
     this.storage = storage;
   }
 
@@ -29,13 +29,11 @@ public class RestoreProgressHandler implements Route {
 
       responseMap.put("response_type", "success");
       responseMap.put("modules", modules);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       responseMap.put("response_type", "error");
       responseMap.put("message", e.getMessage());
     }
     return Utils.toMoshiJson(responseMap);
-
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component, Dispatch, SetStateAction, useState } from "react";
+import "../styles/QuestionCards.css"
 
 interface AnsChoiceProps {
   answerChoices: string[];

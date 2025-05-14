@@ -1,48 +1,66 @@
-.maze-grid {
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .fixed-box {
+    width: 900px;
+    height: 200px;
+    flex-shrink: 0;
+  }
+  
+  .maze-wrapper {
+    position: relative;
+    width: 300px; /* Adjust to fit the grid size */
+    height: 300px; /* Adjust to fit the grid size */
+  }
+  
+  .maze-grid {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    margin-top: 20px;
   }
   
   .maze-row {
     display: flex;
-    gap: 2px;
   }
   
   .cell {
     width: 25px;
     height: 25px;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    line-height: 25px;
     border: 1px solid #ccc;
   }
   
-  /* Cell types */
   .cell-0 {
-    background-color: white; /* path */
+    background-color: white;
   }
   
   .cell-1 {
-    background-color: black; /* wall */
+    background-color: black;
+  }
+  .cell-2 {
+    background-color: blue;
   }
   
   .cell-S {
-    background-color: green; /* start */
+    background-color: lightgreen;
   }
   
   .cell-E {
-    background-color: red; /* end */
+    background-color: gold;
   }
 
-  .container {
-    display: flex;
-    justify-content: center;
+  
+  .player {
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    transition: top 0.3s ease, left 0.3s ease;
   }
-
-  .fixed-box{
-    width: 900px;
-    height: 200px;
-    flex-shrink: 0; 
-  }
-
-
   

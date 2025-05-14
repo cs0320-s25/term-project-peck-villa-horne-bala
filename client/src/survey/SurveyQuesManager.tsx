@@ -12,6 +12,7 @@ import { SurveyManagerProps } from "../types";
 import { FormatQ } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import {updateFirestoreUserSurveyStatus} from "./SurveyApi";
+import "../styles/QuestionCards.css"
 
 export function SurveyQuestionManager(props: SurveyManagerProps) {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);

@@ -1,6 +1,5 @@
 import { useState, useEffect, FormEventHandler } from "react";
-import CodeEditor from "../components/CodeEditor";
-import Maze from "../components/maze";
+import MazeCodeEditor from "../components/MazeCodeEditor";
 import { CompletionStatus } from "../types";
 import { LevelInfo } from "../types";
 import { modulesList } from "../home_screen/module_assembler/populate_modules/ModuleData";
@@ -16,49 +15,33 @@ export function finalLvl() {
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(levelinfo.completionStatus);
   const navigate = useNavigate();
-
-    type Cell = 0 | 1 | 'S' | 'E';
-  
-
-  const maze: Cell[][] = [
-    [1,'E',1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,1,1,1,0,1,1,1],
-    [1,0,1,1,0,0,0,0,0,0,0,1],
-    [1,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,1,1,1,0,1,0,1,0,1],
-    [1,1,0,1,1,0,0,0,0,1,0,1],
-    [1,1,0,1,1,0,1,1,1,1,0,1],
-    [1,1,0,0,1,0,1,1,1,1,1,1],
-    [1,1,1,0,1,0,1,1,1,0,1,1],
-    [1,1,1,0,1,0,0,0,1,0,1,1],
-    [1,1,1,0,1,1,1,0,1,0,1,1],
-    [1,1,1,0,0,0,0,0,0,0,1,1],
-    [1,1,1,1,1,1,1,'S',1,1,1,1]
-  ];
   return (
     <div>
       <button onClick={() => navigate("/Home")}>Back</button>
       <h2> Final Level</h2>
       <p>
-        Welcome to the Final Level! This level should challenge everything you have learned thus far. 
-        To the right you can see a maze and the goal of this level to solve it. To solve the maze you must create a method that can print out
-        directions and the amount of tiles you want to cross.
-         Each command MUST be in the format direction in all caps with a space and then a number
-        for the amount, like "LEFT 4" will tell the computer that you want your person to move left 4 spaces. 
-        The directions are UP, DOWN, LEFT, RIGHT. Only valid moves with be registered so if it a command is not in the correct format or moves 
-        in an out of bound region then it is consdered incorrect. 
+      Welcome to the Final Level!  
+      On the right, you'll see a maze with the start being the green square, the end being the yellow square, and the circle being the player. 
+      Your objective is to guide the player from the start to the end by writing a method that prints out a sequence of movement commands. 
+      Each command must appear on its own line and follow a specific format: an action, a direction, and a number of steps followed by another comma.
+      The action should be either WALK or SWIM, depending on the type of terrain. Regular path tiles can be crossed using the WALK command. 
+      However, if the tile contains water, you must use the SWIM command to move through it. The direction must be in all capital letters and can be one of the following: UP, DOWN, LEFT, or RIGHT. 
+      After the direction, include a space and then the number of tiles you wish to move in that direction. 
+      For example, "WALK LEFT 4" means the player should move left by 4 tiles on regular ground, while "SWIM UP 2" would move the player upward through 2 tiles of water.
+      Only valid, properly formatted moves will be executed. 
+      If a command is not in the correct format or attempts to move the player out of bounds or into a wall, it will be ignored. Good luck!
+      Note: For your answer to be considered valid you should create your own method called move that features multiple parameters and conditionals.
 
       </p>
       <div className="container">
         <div className="fixed-box">
-        <CodeEditor
+        <MazeCodeEditor
         initialCode=""
         questionId="finalLvl"
         level={levelinfo}
         setLevelCompletionStatus={setLevelCompletionStatus}
       />
         </div>
-        <Maze grid={maze} />
       </div>
       {/* {levelCompletionStatus === CompletionStatus.Complete && (
         <button onClick={() => navigate("/MTwoLvlOne")}>Continue</button>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./styles/App.css";
 import {
-  ClerkProvider,
   SignedIn,
   SignedOut,
   SignInButton,

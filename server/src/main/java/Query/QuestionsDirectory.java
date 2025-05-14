@@ -17,7 +17,7 @@ public class QuestionsDirectory {
   }
 
   public boolean checkAnswer(String filepath, String output, String code) throws IOException {
-    CSVFile file = new CSVFile("server/src/main/java/level_answers/" + filepath + ".csv");
+    CSVFile file = new CSVFile("src/main/java/level_answers/" + filepath + ".csv");
 
     if (file == null) {
       System.err.println("Could not find resource: level_answers/" + filepath + ".csv");
@@ -32,10 +32,9 @@ public class QuestionsDirectory {
       }
     }
     String cleaned = parsed.get(parsed.size() - 1).replaceAll("\\r?\\n", "").trim();
-    System.out.println(filepath + " output:" + cleaned);
+    //    System.out.println(filepath + " output:" + cleaned);
     String outputTrimmed = output.replaceAll("\\r?\\n", "").trim();
-    //    System.out.println(outputTrimmed);
-    //    System.out.println(cleaned);
+    //    System.out.println("Output: " + outputTrimmed);
     return cleaned.equals(outputTrimmed);
   }
 
