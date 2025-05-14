@@ -49,7 +49,7 @@ public class Server {
       firebaseUtils = new FirebaseUtilities();
       // Set up handlers
       Spark.get("SurveyResults", new SurveyResultsHandler());
-      Spark.get("Survey", new SurveyHandler(firebaseUtils));
+      Spark.post("Survey", new SurveyHandler(firebaseUtils));
       Spark.get("FetchModules", new FetchModules(firebaseUtils));
       Spark.get("LoadModules", new AddModules(firebaseUtils));
       Spark.post("run", new RunCodeHandler());

@@ -60,7 +60,7 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
   };
 
   // sets up curr question as the next question IF not the end of the survey. If survey completed, then we load survey status complete to firebase
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currQ != undefined) {
       let currQuestionID = currQ.id;
       if (currQuestionID < questionBank.length) {
@@ -72,6 +72,16 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
           const surveyAnswerKey = populateSurveyAnswerChoices();
           console.log("survey answer key: "+ surveyAnswerKey);
           updateFirestoreUserSurveyStatus(user.id);
+          const sendSurveyAnswers = fetch(`http://localhost:3232/survey`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: user.id,
+              surveyAnswerKey: surveyAnswerKey,
+            }),
+          });
         }
         props.setSurveyMode(SurveyStatus.Complete);
       }

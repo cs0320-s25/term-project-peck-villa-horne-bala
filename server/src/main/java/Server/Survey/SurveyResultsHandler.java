@@ -11,6 +11,14 @@ public class SurveyResultsHandler implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     Map<String, Object> responseMap = new HashMap<>();
+    try {
+      
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      responseMap.put("status", "error");
+
+    }
     responseMap.put("response_type", "success");
     return responseMap;
   }
