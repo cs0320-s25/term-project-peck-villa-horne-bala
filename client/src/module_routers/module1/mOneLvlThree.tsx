@@ -17,9 +17,9 @@ export function MOneLvlThree() {
   const [levelInfo, setLevelInfo] = useState<LevelInfo>(
     populateModuleList()[0].levels[2]
   );
-
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(CompletionStatus.Incomplete);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user?.id) {
@@ -43,39 +43,63 @@ export function MOneLvlThree() {
       setLevelCompletionStatus(levelinfo.completionStatus);
     }
   }, [modulesList]);
+
   useEffect(() => {
     console.log(
       "completion status for m one lvl 3 changed to: " + levelCompletionStatus
     );
   }, [levelCompletionStatus]);
-  
- 
-  const navigate = useNavigate();
+
+  // Guard: If data not yet loaded, show loading or nothing
+  if (modulesList.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div>
-      <button onClick={() => navigate("/Home")}>Back</button>
-      <button onClick={() => navigate("/MOneLvlOne")}>Previous Level</button>;
-      <h2> Module 1: Variables & Primitives - Level 3: String Types</h2>
-      <p>
-        In Java, a string is a sequence of characters. Strings are used to
-        represent text and can be created using double quotes. For example,
-        "Hello, World!" is a string. Strings are immutable, meaning that once
-        they are created, their values cannot be changed. However, you can
-        create new strings based on existing ones.
-        <br></br>
-        <strong>
-          Task: Task: Create a “String” variable called greeting and set it to
-          "Hello, Java!". Print it in the sandbox!
-        </strong>
-      </p>
-      <CodeEditor
-        initialCode=""
-        questionId="module01_level03"
-        level={levelInfo}
-        modules={modulesList}
-        setLevelCompletionStatus={setLevelCompletionStatus}
-      />
+    <div className="module-page">
+      <header className="module-header">
+        <button className="back-button" onClick={() => navigate("/Home")}>
+          Back
+        </button>
+        <h1 className="module-title">
+          Module 1: Variables & Primitives - Level 3: String Types
+        </h1>
+      </header>
+
+      <div className="content-container">
+        <div className="instruction-box">
+          <p>
+            In Java, a <span className="code-inline">String</span> is a sequence of characters and are used to
+            represent text. They can be created using double quotes:
+            "Hello" is a <span className="code-inline">String</span>. Strings are immutable, meaning that once
+            they are created, their values cannot be changed. However, you can
+            create new strings based on existing ones by adding them together. 
+            This process is called <span className="code-inline">concatenation</span> and is possible by adding two
+             <span className="code-inline">String</span> types together. 
+             <p>
+             If you used had variable str1 that equals "Brown" and a variable str2 that equals "University". 
+             <span className="text-highlight">Ex: str1 + " " + str2 would equal "Brown University"</span>
+             </p>
+          </p>
+          
+          <div className="task-highlight">
+            <strong>Task:</strong> Create two String variables called greeting1 and greeting2. 
+            greeting1 should equal "Hello," and greeting2 should equal "Java!"
+            Concatenate them in such a way that when you print them together the output is "Hello, Java!".  
+          </div>
+        </div>
+
+        <div className="editor-box">
+          <CodeEditor
+            initialCode=""
+            questionId="module01_level03"
+            level={levelInfo}
+            modules={modulesList}
+            setLevelCompletionStatus={setLevelCompletionStatus}
+          />
+        </div>
+      </div>
+
       {levelCompletionStatus === CompletionStatus.Complete && (
         <div className="nav-buttons">
           <button

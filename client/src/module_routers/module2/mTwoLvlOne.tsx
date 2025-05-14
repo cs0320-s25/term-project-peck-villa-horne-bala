@@ -69,12 +69,12 @@ export function MTwoLvlOne() {
           </p>
           <div className="task-highlight">
             <strong>Task:</strong> Create two variables,{" "}
-            <span className="code-inline">a = 100</span> and{" "}
-            <span className="code-inline">b = 24.362</span>. Save the result of
+            <span className="code-inline">a is equal to 100</span> and{" "}
+            <span className="code-inline">b is equal to 24.362</span>. Save the result of
             their sum in a variable called{" "}
             <span className="code-inline">sum</span> and save the result of
             their difference in a variable called{" "}
-            <span className="code-inline">diff</span>. Print both variables!
+            <span className="code-inline">diff</span>. Print the sum and the difference!
             When printing, you can use strings to separate variables like
             <span className="code-inline">
               System.out.println(variable1 + " and " + variable2)

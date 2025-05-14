@@ -73,13 +73,13 @@ export function MTwoLvlTwo() {
             <span className="code-inline">x % y</span>, find the remainder of:
             <ul>
               <li>
-                <span className="code-inline">7 % 3</span>
+                <span className="code-inline">7 mod 3</span>
               </li>
               <li>
-                <span className="code-inline">5 % 1</span>
+                <span className="code-inline">5 mod 1</span>
               </li>
               <li>
-                <span className="code-inline">4 % 18</span>
+                <span className="code-inline">4 mod 18</span>
               </li>
             </ul>
             Also, come up with your own way of getting the remainder{" "}
