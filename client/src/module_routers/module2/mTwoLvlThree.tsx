@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
-import { CompletionStatus, Locked } from "../../types";
-import { LevelInfo } from "../../types";
-import {
-  getModuleListLocalStorage,
-  populateModuleList,
-} from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import { LevelInfo, CompletionStatus, Locked } from "../../types";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
 import { useUser } from "@clerk/clerk-react";
 import { ModuleInfo } from "../../types";
-
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 
 export function MTwoLvlThree() {
   const { user } = useUser();
@@ -18,15 +16,14 @@ export function MTwoLvlThree() {
   const [levelInfo, setLevelInfo] = useState<LevelInfo>(
     populateModuleList()[1].levels[2]
   );
-
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(CompletionStatus.Incomplete);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user?.id) {
       const modules = getModuleListLocalStorage(user.id);
       setModuleList(modules);
-      console.log("module list in module 2 lvl 3: ", modules);
     }
   }, [user]);
 
@@ -44,9 +41,12 @@ export function MTwoLvlThree() {
       setLevelCompletionStatus(levelinfo.completionStatus);
     }
   }, [modulesList]);
+
+  // Guard: If data not yet loaded, show loading or nothing
+  if (modulesList.length === 0) {
+    return <div>Loading...</div>;
+  }
    
-   
-   const navigate = useNavigate();
   return (
     <div className="module-page">
       <header className="module-header">
@@ -92,14 +92,13 @@ export function MTwoLvlThree() {
         </div>
 
         <div className="editor-box">
-            <CodeEditor
-              initialCode=""
-              questionId="module02_level03"
-              level={levelInfo}
-              modules={modulesList}
-              setLevelCompletionStatus={setLevelCompletionStatus}
-            />
-          
+          <CodeEditor
+            initialCode=""
+            questionId="module02_level03"
+            level={levelInfo}
+            modules={modulesList}
+            setLevelCompletionStatus={setLevelCompletionStatus}
+          />
         </div>
       </div>
 

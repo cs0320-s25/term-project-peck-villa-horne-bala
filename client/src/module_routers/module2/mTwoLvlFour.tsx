@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
-import { LevelInfo } from "../../types";
-import { CompletionStatus } from "../../types";
+import { LevelInfo, CompletionStatus, Locked } from "../../types";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
 import { useUser } from "@clerk/clerk-react";
@@ -10,7 +9,6 @@ import {
   getModuleListLocalStorage,
   populateModuleList,
 } from "../../home_screen/module_assembler/populate_modules/ModuleData";
-import { Locked } from "../../types";
 
 export function MTwoLvlFour() {
   const { user } = useUser();
@@ -18,15 +16,14 @@ export function MTwoLvlFour() {
   const [levelInfo, setLevelInfo] = useState<LevelInfo>(
     populateModuleList()[1].levels[3]
   );
-
   const [levelCompletionStatus, setLevelCompletionStatus] =
     useState<CompletionStatus>(CompletionStatus.Incomplete);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user?.id) {
       const modules = getModuleListLocalStorage(user.id);
       setModuleList(modules);
-      console.log("module list in module 2 lvl 4: ", modules);
     }
   }, [user]);
 
@@ -45,7 +42,10 @@ export function MTwoLvlFour() {
     }
   }, [modulesList]);
 
-  const navigate = useNavigate();
+  // Guard: If data not yet loaded, show loading or nothing
+  if (modulesList.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="module-page">
@@ -92,13 +92,13 @@ export function MTwoLvlFour() {
         </div>
 
         <div className="editor-box">
-            <CodeEditor
-              initialCode=""
-              questionId="module02_level04"
-              level={levelInfo}
-              modules={modulesList}
-              setLevelCompletionStatus={setLevelCompletionStatus}
-            />
+          <CodeEditor
+            initialCode=""
+            questionId="module02_level04"
+            level={levelInfo}
+            modules={modulesList}
+            setLevelCompletionStatus={setLevelCompletionStatus}
+          />
         </div>
       </div>
 
