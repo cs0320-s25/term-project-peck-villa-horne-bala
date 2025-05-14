@@ -7,6 +7,11 @@ interface SurveyFlowPageProps{
     surveyText:string
 }
 
+/**
+ * This component is made to be reused for both survey instructions and survey completion results
+ * @param props 
+ * @returns 
+ */
 export function SurveyFlowPage(props: SurveyFlowPageProps){
     return (
       <div className="survey-flow-page">

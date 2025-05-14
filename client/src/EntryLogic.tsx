@@ -6,7 +6,10 @@ import { Status } from "./types";
 import {checkUserSurveyStatus} from "./survey/SurveyApi"
 import { ModuleInfo } from "./types";
 
-
+/**
+ * This function handles the logic behind showcasing the survey or the homescreen by using enums
+ * @returns 
+ */
 export function Intro() {
   const { user } = useUser();
   const [mode, setMode] = useState<Status>(Status.InBetween);

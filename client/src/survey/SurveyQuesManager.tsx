@@ -13,7 +13,11 @@ import { FormatQ } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import {updateFirestoreUserSurveyStatus} from "./SurveyApi";
 import "../styles/QuestionCards.css"
-
+/**
+ * This function is in charge of going through the survey questions.
+ * @param props 
+ * @returns 
+ */
 export function SurveyQuestionManager(props: SurveyManagerProps) {
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);
   const [responses, setResponses] = useState<number[]>([]);
@@ -34,12 +38,14 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
     }
   }, [questionBank]);
 
+  // this is what updates the visual component of the answer choices
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currQ != undefined) {
       setSelectedAnswer(Number(e.target.value));
     }
   };
 
+  // checks that the user has submited an answer, stores the answer, and brings up the next question
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (selectedAnswer == -1) {
@@ -50,7 +56,7 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
     }
   };
 
-
+  // sets up curr question as the next question IF not the end of the survey. If survey completed, then we load survey status complete to firebase
   const handleNextQuestion = () => {
     if (currQ != undefined) {
       let currQuestionID = currQ.id;

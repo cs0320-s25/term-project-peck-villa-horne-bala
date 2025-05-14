@@ -16,15 +16,20 @@ import {
   Q14,
   Q15,
   Q16,
+  Q17,
+  Q18,
+  Q19,
+  Q20,
+  Q21
 } from "./SurveyQuestions";
 
 export const populateSurvey = (): FormatQ[] => {
   const surveyList: FormatQ[] = [];
-  surveyList.push(Q1);
-  surveyList.push(Q2);
-  surveyList.push(Q3);
-  surveyList.push(Q4);
-  surveyList.push(Q5);
+  surveyList.push(Q17);
+  surveyList.push(Q18);
+  surveyList.push(Q19);
+  surveyList.push(Q20);
+  surveyList.push(Q21);
   // surveyList.push(Q6);
 
   return surveyList;
