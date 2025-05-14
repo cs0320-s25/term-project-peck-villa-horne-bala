@@ -120,7 +120,7 @@ const module4: ModuleInfo = {
     {
       levelName: "Return Types",
       locked: Locked.Locked,
-      routerPath: "/MFourvlThree",
+      routerPath: "/MFourLvlThree",
       completionStatus: CompletionStatus.Incomplete,
       jsonKey: "MFourvlThree",
     },
