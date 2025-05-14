@@ -79,12 +79,12 @@ export function MTwoLvlFour() {
           <div className="task-highlight">
             <strong>Task:</strong> Create a variable{" "}
             <span className="code-inline">result</span> and set it equal to{" "}
-            <span className="code-inline">5 + 2 * 3</span>. Print{" "}
+            <span className="code-inline">5 plus 2 multiplied by 3</span>. Print{" "}
             <span className="code-inline">result</span> to see what happens!
             Then create another variable{" "}
             <span className="code-inline">fixedResult</span> that uses
             parentheses to change the order like this:{" "}
-            <span className="code-inline">(5 + 2) * 3</span>. Print{" "}
+            <span className="code-inline">(5 plus 2) multiplied by 3</span>. Print{" "}
             <span className="code-inline">result</span> and{" "}
             <span className="code-inline">fixedResult</span> with a comma in
             between!
