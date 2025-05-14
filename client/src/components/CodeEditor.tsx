@@ -28,12 +28,13 @@ const CodeEditor = (props: CodeEditorProps) => {
       );
 
       const data = await response.json();
-      setOutput(`✅ Passed: ${data.passed}\n🖨️ Output:\n${data.output}`);
       if (data.passed) {
+        setOutput(`✅ Correct Answer!!!\n🖨️ Output:\n${data.output}`);
         props.setLevelCompletionStatus?.(CompletionStatus.Complete);
         props.level.completionStatus = CompletionStatus.Complete;
         props.level.locked = Locked.Unlocked;
       } else {
+        setOutput(`❌ Incorect Answer :( \n🖨️ Output:\n${data.output}`);
         props.setLevelCompletionStatus?.(CompletionStatus.Incomplete);
         props.level.completionStatus = CompletionStatus.Incomplete;
         props.level.locked = Locked.Locked;

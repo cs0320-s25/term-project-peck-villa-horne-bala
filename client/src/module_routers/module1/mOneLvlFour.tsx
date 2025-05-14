@@ -45,6 +45,10 @@ export function MOneLvlFour() {
 
   useEffect(()=>{
     console.log("completion status for m one lvl 4 changed to: "+ levelCompletionStatus)
+    if(levelCompletionStatus==CompletionStatus.Complete){
+      const nextLvl= modulesList[1].levels[0];
+      nextLvl.locked = Locked.Unlocked;
+    }
   }, [levelCompletionStatus])
 
   const navigate = useNavigate();

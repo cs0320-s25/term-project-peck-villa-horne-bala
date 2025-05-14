@@ -31,6 +31,10 @@ export function MOneLvlTwo() {
       console.log(
         "completion status for m one lvl 2 changed to: " + levelCompletionStatus
       );
+      if (levelCompletionStatus == CompletionStatus.Complete) {
+        const nextLvl = modulesList[0].levels[2];
+        nextLvl.locked = Locked.Unlocked;
+      }
     }, [levelCompletionStatus]);
     useEffect(() => {
       if (modulesList.length > 0) {
