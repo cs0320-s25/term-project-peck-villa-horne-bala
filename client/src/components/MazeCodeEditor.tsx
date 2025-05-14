@@ -5,7 +5,7 @@ import { useUser } from "@clerk/clerk-react";
 import { CodeEditorProps } from "../types";
 import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { Locked } from "../types";
-import Maze from "../components/Maze";
+import Maze from "../components/maze";
 import { ModuleInfo } from "../types";
 import { populateModuleList, getModuleListLocalStorage } from "../home_screen/module_assembler/populate_modules/ModuleData";
 

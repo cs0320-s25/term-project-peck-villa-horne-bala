@@ -84,6 +84,7 @@ export function finalLvl() {
             initialCode=""
             questionId="finalLvl"
             level={levelInfo}
+            modules={modulesList}
             setLevelCompletionStatus={setLevelCompletionStatus}
           />
           
