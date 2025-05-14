@@ -41,6 +41,11 @@ if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
 
+
+/**
+ * This is the app class, (highest level logic) where we establish all the routes for navigation
+ * @returns 
+ */
 function App() {
   const { user } = useUser();
   return (

@@ -68,7 +68,7 @@ export const Q5: FormatQ = {
   correctAnswerIndex: 0,
 };
 
-// edit these
+
 export const Q6: FormatQ = {
   id: 6,
   question: "Describe a situation where you would use an inner class.",
@@ -197,5 +197,73 @@ export const Q16: FormatQ = {
     "Hashmap",
   ],
   correctAnswerContent: "Array",
-  correctAnswerIndex: 2,
+  correctAnswerIndex: 2
 };
+
+//USING THESE QUESTIONS FOR THE SURVEY TRAINING DATA
+export const Q17: FormatQ = {
+  id: 1,
+  question: "int a = 5;\ndouble b = 2;\nSystem.out.println(a / b);",
+  answerChoices: [
+    "2",
+    "2.5",
+    "2.0",
+    "Compilation error",
+  ],
+  correctAnswerContent: "2.5",
+  correctAnswerIndex: 1
+};
+
+export const Q18: FormatQ = {
+  id: 2,
+  question: "What does the expression 10 % 3 evaluate to in Java?",
+  answerChoices: [
+    "3",
+    "1",
+    "0",
+    "10",
+  ],
+  correctAnswerContent: "1",
+  correctAnswerIndex: 1
+};
+
+export const Q19: FormatQ = {
+  id: 3,
+  question: "int x = 10;\nif (x > 5) {\n  System.out.println(\"Greater than 5\");\n}\nWhat is the output?",
+  answerChoices: [
+    "x > 5",
+    "Greater than 5",
+    "Nothing",
+    "Compilation Error",
+  ],
+  correctAnswerContent: "Greater than 5",
+  correctAnswerIndex: 1
+};
+
+export const Q20: FormatQ = {
+  id: 4,
+  question: "Which method signature correctly defines a method that takes two integers and returns nothing?",
+  answerChoices: [
+    "void sum(int a, int b)",
+    "int sum(a, b)",
+    "sum(int a, int b)",
+    "int sum(int a int b)",
+  ],
+  correctAnswerContent: "void sum(int a, int b)",
+  correctAnswerIndex: 0
+};
+
+export const Q21: FormatQ = {
+  id: 5,
+  question: "Which of the following is NOT a valid return type in Java?",
+  answerChoices: [
+    "int",
+    "void",
+    "boolean",
+    "num",
+  ],
+  correctAnswerContent: "num",
+  correctAnswerIndex: 3
+};
+
+

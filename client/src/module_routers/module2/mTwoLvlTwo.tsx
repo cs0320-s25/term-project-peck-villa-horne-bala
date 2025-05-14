@@ -1,24 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
-import { CompletionStatus, Locked } from "../../types";
+import { CompletionStatus} from "../../types";
 import { LevelInfo } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
+import { Locked } from "../../types";
 
-export function MTwoLvlThree() {
-  const levelInfo: LevelInfo = modulesList[1].levels[2];
-
-  // Unlock the level if the previous level is complete
-  if (modulesList[1].levels[1].completionStatus === CompletionStatus.Complete) {
-    levelInfo.locked = Locked.Unlocked;
-  } else {
-    levelInfo.locked = Locked.Locked;
-  }
+export function MTwoLvlTwo() {
+  const { user } = useUser();
+  const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+  const [levelInfo, setLevelInfo] = useState<LevelInfo>(
+    populateModuleList()[1].levels[1]
+  );
 
   const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
+    useState<CompletionStatus>(CompletionStatus.Incomplete);
+
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in module 2 lvl 2: ", modules);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (modulesList.length > 0) {
+      const levelinfo: LevelInfo = modulesList[1].levels[1];
+      if (
+        modulesList[1].levels[0].completionStatus === CompletionStatus.Complete
+      ) {
+        levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
+      }
+      setLevelInfo(levelinfo);
+      setLevelCompletionStatus(levelinfo.completionStatus);
+    }
+  }, [modulesList]);
+  
   const navigate = useNavigate();
+
+  // Guard: If data not yet loaded, show loading or nothing
+  if (modulesList.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="module-page">
@@ -26,57 +57,33 @@ export function MTwoLvlThree() {
         <button className="back-button" onClick={() => navigate("/Home")}>
           Back
         </button>
-        <h1 className="module-title">Module 2: Operators - Level 3: Modulus</h1>
+        <h1 className="module-title">Module 2: Operators - Level 2: Multiplication and Division</h1>
       </header>
 
       <div className="content-container">
         <div className="instruction-box">
           <p>
-            The modulus operator (<span className="code-inline">%</span>) is
-            used to find the remainder of a division operation. It is useful for
-            determining if a number is even or odd, or for performing
-            calculations that involve remainders. For example,{" "}
-            <span className="code-inline">10 % 3</span> would give you{" "}
-            <span className="code-inline">1</span>, because when you divide 10
-            by 3, the remainder is 1.
+            Multiplying (<span className="code-inline">*</span>) and dividing (<span className="code-inline">/</span>) numbers lets us solve more kinds of problems 
+            like calculating the area of a rectangle or splitting a bill.
+          </p>
+          <p>
+            <strong>Note:</strong> If you save the result of division in an int it will only save the non-decimal value. 
+            For example if you do <span className="code-inline">int div = 5/2</span> then it will only save 2 instead of 2.5. 
+            If you do <span className="code-inline">double div = 5/2</span> then it will save as 2.5
           </p>
           <div className="task-highlight">
-            <strong>Task:</strong> In the format{" "}
-            <span className="code-inline">x % y</span>, find the remainder of:
-            <ul>
-              <li>
-                <span className="code-inline">7 % 3</span>
-              </li>
-              <li>
-                <span className="code-inline">5 % 1</span>
-              </li>
-              <li>
-                <span className="code-inline">4 % 18</span>
-              </li>
-            </ul>
-            Also, come up with your own way of getting the remainder{" "}
-            <span className="code-inline">9</span>. Print the result of each
-            modulus operation with commas in between and think about what it
-            means!
-            <br />
-            <em>Note:</em> If the first number is less than the second, the
-            modulus will always return the first number's value.
+            <strong>Task:</strong> Create three variables that equal, 10, 7, and 2. Print the multiplication of 10 and 7 as an int, 
+            and the division of 7 and 2 as an int and double. Print it in the similar format as the last level, all on one line separated by commas!
           </div>
         </div>
-
         <div className="editor-box">
-          <div className="code-editor-container">
             <CodeEditor
               initialCode=""
-              questionId="module02_level03"
+              questionId="module02_level02"
               level={levelInfo}
+              modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
-          </div>
-          <div className="editor-actions">
-            <button className="clear-button">Clear Code</button>
-            <button className="run-button">Run Code</button>
-          </div>
         </div>
       </div>
 
@@ -84,13 +91,13 @@ export function MTwoLvlThree() {
         <div className="nav-buttons">
           <button
             className="previous-button"
-            onClick={() => navigate("/MTwoLvlTwo")}
+            onClick={() => navigate("/MTwoLvlOne")}
           >
             Previous Level
           </button>
           <button
             className="next-button"
-            onClick={() => navigate("/MTwoLvlFour")}
+            onClick={() => navigate("/MTwoLvlThree")}
           >
             Next Level
           </button>
@@ -100,4 +107,4 @@ export function MTwoLvlThree() {
   );
 }
 
-export default MTwoLvlThree;
+export default MTwoLvlTwo;

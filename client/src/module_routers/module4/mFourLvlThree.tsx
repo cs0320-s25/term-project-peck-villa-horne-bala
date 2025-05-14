@@ -1,23 +1,49 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus, Locked } from "../../types";
 import { LevelInfo } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
 
 export function MFourLvlThree() {
-  const levelInfo: LevelInfo = modulesList[3].levels[2];
-
-  // Unlock the level if the previous level is complete
-  if (modulesList[3].levels[1].completionStatus === CompletionStatus.Complete) {
-    levelInfo.locked = Locked.Unlocked;
-  } else {
-    levelInfo.locked = Locked.Locked;
-  }
+  const { user } = useUser();
+  const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+  const [levelInfo, setLevelInfo] = useState<LevelInfo>(
+    populateModuleList()[3].levels[2]
+  );
 
   const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
+    useState<CompletionStatus>(CompletionStatus.Incomplete);
+
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in module 4 lvl 3: ", modules);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (modulesList.length > 0) {
+      const levelinfo: LevelInfo = modulesList[3].levels[2];
+      if (
+        modulesList[3].levels[1].completionStatus === CompletionStatus.Complete
+      ) {
+        levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
+      }
+      setLevelInfo(levelinfo);
+      setLevelCompletionStatus(levelinfo.completionStatus);
+    }
+  }, [modulesList]);
+  
   const navigate = useNavigate();
 
   return (
@@ -66,18 +92,14 @@ export function MFourLvlThree() {
         </div>
 
         <div className="editor-box">
-          <div className="code-editor-container">
             <CodeEditor
               initialCode=""
               questionId="module04_level03"
               level={levelInfo}
+              modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
-          </div>
-          <div className="editor-actions">
-            <button className="clear-button">Clear Code</button>
-            <button className="run-button">Run Code</button>
-          </div>
+          
         </div>
       </div>
 
@@ -89,8 +111,8 @@ export function MFourLvlThree() {
           >
             Previous Level
           </button>
-          <button className="next-button" onClick={() => navigate("/Home")}>
-            Congratulations! Return to Home
+          <button className="next-button" onClick={() => navigate("/finalLvl")}>
+           Time for the Final Level!!
           </button>
         </div>
       )}

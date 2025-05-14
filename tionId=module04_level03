@@ -1,0 +1,539 @@
+[33mcommit e528a3256dda7d4e95b37ab9941fdeee7005eb1a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 13 17:06:29 2025 -0400
+
+    update visuals
+
+[33mcommit c759cf27e3ea681c85b1d47bff90fbd3bc640569[m[33m ([m[1;31morigin/storage-persist[m[33m, [m[1;32mstorage-persist[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 13 16:09:54 2025 -0400
+
+    persist check 1
+
+[33mcommit b64856d70ff89ab7542f49dd24553b2844fef965[m
+Merge: bb4e161 410b5a4
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 13 15:26:00 2025 -0400
+
+    merge
+
+[33mcommit 410b5a453090401e67365f9e54436244998215c2[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Tue May 13 14:34:14 2025 -0400
+
+    survey and homescreen styling
+
+[33mcommit bb4e16154f534841666ddf8a5bea6e9268e22ebe[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 13 13:25:14 2025 -0400
+
+    restoration of progress attempt - frontend locks are not unlocking despite saving progress
+
+[33mcommit e7db4bebe244476c3c9c7e54d5000ceaeace8ece[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Tue May 13 07:35:27 2025 -0400
+
+    first level styling
+
+[33mcommit 0a071991ecb92d178d916e8ece8bf3064933b3f5[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Tue May 13 07:14:54 2025 -0400
+
+    finalLvl answer done
+
+[33mcommit a93b5fe3c14a24f36d9b7bc39b509da0c494eaad[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Tue May 13 06:52:57 2025 -0400
+
+    finalLvl done
+
+[33mcommit 05008b2c617541371be8a280d87bb0c61d63e094[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 22:18:30 2025 -0400
+
+    feat: finalLvl maze animation
+
+[33mcommit 80ed450464197e705c896b3bbe7f56124c3d9311[m
+Merge: 47658a7 57506df
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 17:19:50 2025 -0400
+
+    feat: maze
+
+[33mcommit 47658a77aa8a0199710014f8029d4dde80cbc693[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 17:19:10 2025 -0400
+
+    maze
+
+[33mcommit 57506df5f7a84ffe99994d8d3632f9454ef42fa2[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Mon May 12 16:56:37 2025 -0400
+
+    survey styling
+
+[33mcommit c7e346063e0609c8e79a913eef3b8ac74ff58afe[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Mon May 12 16:51:00 2025 -0400
+
+    survey styling done
+
+[33mcommit 87151ce865ee9273817bee34aff815c425d8825d[m
+Author: Elias Horne <elias_horne@brown.edu>
+Date:   Mon May 12 16:09:58 2025 -0400
+
+    feat: decision tree structure built
+
+[33mcommit 399e68a2fc56cf9033969892cd17f320d52ccf82[m[33m ([m[1;31morigin/load-modules[m[33m, [m[1;32mload-modules[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Mon May 12 15:59:23 2025 -0400
+
+    wip restoring progress
+
+[33mcommit 1c10c830bdf8a59ad70687524c584153361c5d94[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Mon May 12 12:02:25 2025 -0400
+
+    user id not null in moduleCompletionHandler
+
+[33mcommit 709da81c0140a65a84b89b1cf35041c265bd7314[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 01:14:42 2025 -0400
+
+    fix: MOneLvl4
+
+[33mcommit 52679dd10292055821876004c2df38fa9e35d4a6[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 01:02:45 2025 -0400
+
+    feat: maze added to finalLvl
+
+[33mcommit 6c270b5b76f6b736e8f49e858d1b0e8c78527a7a[m
+Merge: 30df40e f0c14b0
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 00:55:03 2025 -0400
+
+    merge
+
+[33mcommit 30df40e0d972d51b8c83a8f1147c047c82c01018[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Mon May 12 00:53:10 2025 -0400
+
+    feat: maze
+
+[33mcommit f0c14b06cbf5f478a4f61c21de54d27883dc1e7b[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sun May 11 23:27:24 2025 -0400
+
+    finished
+
+[33mcommit 27ab01fae6a4911a9b54c0cd6d8bc6b3f8e7505d[m[33m ([m[1;31morigin/new-enum-for-locked[m[33m, [m[1;32mnew-enum-for-locked[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sun May 11 23:07:32 2025 -0400
+
+    add new enum for locked indicator
+
+[33mcommit ad4cf00157cf0aa489b34bba4b340c30bc9a40d6[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sun May 11 20:27:22 2025 -0400
+
+    storage check
+
+[33mcommit f31e8a185358d7c26cb0a43e72e384dc72a6a2f3[m[33m ([m[1;31morigin/storage-for-modules[m[33m, [m[1;32mstorage-for-modules[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sun May 11 20:17:52 2025 -0400
+
+    remove duplicate maps
+
+[33mcommit ff2e8c14411125d4250cffab68d307310028689d[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sun May 11 20:15:40 2025 -0400
+
+    add progress to database
+
+[33mcommit 8293a638d2a2880dd99d498ef29708ff998828db[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 17:57:57 2025 -0400
+
+    fix route
+
+[33mcommit b4b8881cc596b42439c57b719592278353d18b28[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 17:49:23 2025 -0400
+
+    second fix for file path
+
+[33mcommit 6ecef440fc2525e7f6b680dd912c54b3a2100f65[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 17:48:25 2025 -0400
+
+    fix csv file path for parser
+
+[33mcommit e27054ff71791aa7e8c062fa43eb8fa4a5fecd90[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 17:42:03 2025 -0400
+
+    fixing firebase config file path
+
+[33mcommit f523ebd1eaf877d8a4ff90360ded5229d8d5618f[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Sat May 10 17:28:43 2025 -0400
+
+    feat: answers done
+
+[33mcommit 2d7c99a77dfabd316b50f9e5dad7e95b90faa0af[m
+Merge: 185ec43 b7a6635
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Sat May 10 14:55:30 2025 -0400
+
+    Merge branch 'main' of https://github.com/cs0320-s25/term-project-peck-villa-horne-bala
+
+[33mcommit 185ec43433cd176fb7097508b749a5086dde48f3[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Sat May 10 14:54:45 2025 -0400
+
+    feat: added level answers
+
+[33mcommit b7a663546bc0d65fd69f4866a1bec9d0298d88e0[m[33m ([m[1;31morigin/alison[m[33m)[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Sat May 10 14:52:38 2025 -0400
+
+    handlers for firestore fetching and loading modules
+
+[33mcommit d3963a760f2361ab59484411113fb718c3ab4dd1[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Sat May 10 12:03:05 2025 -0400
+
+    firestore loading modules
+
+[33mcommit 828ec5a75a8c2b95a81a23a48b75605163c2af74[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 07:45:10 2025 -0400
+
+    center reset button
+
+[33mcommit 6bcd5f1e3ac6f121dd1f3584de545034b48f650f[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 07:42:30 2025 -0400
+
+    add reset button
+
+[33mcommit 9c7f50246de85ec780e927ff4d843e49ae45b1f2[m[33m ([m[1;31morigin/progress-fix[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat May 10 01:00:03 2025 -0400
+
+    Finish progression bug fixes and implemented lesson plan
+
+[33mcommit 2ed020aa828881282a248c233f50cc3d406d6b14[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 23:09:49 2025 -0400
+
+    creating basic tests for testing progression for lessons
+
+[33mcommit d9a22823995ab53e64a9184c8dde6639f9d770b1[m
+Merge: 206fe96 2c99653
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 22:48:02 2025 -0400
+
+    Merge branch 'dynamic-module-progress'
+
+[33mcommit 2c996536cc89438a8f43c12be6aad347676ca6e6[m[33m ([m[1;31morigin/dynamic-module-progress[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 22:46:20 2025 -0400
+
+    finished dynamic progress in lessons and modules
+
+[33mcommit 5e8e54e226099c174cef1b718d9050d65b7afe33[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 22:15:05 2025 -0400
+
+    added progression
+
+[33mcommit 206fe960b2f6cc80b335560298137ac11ab691c4[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Fri May 9 19:22:00 2025 -0400
+
+    random change
+
+[33mcommit 536cd5efce35404a8e4db2dc77b70fe2c4dbd0c1[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 19:14:27 2025 -0400
+
+    add new type
+
+[33mcommit 1855a1066484bb598e5ba7f39b01b3efc65188dd[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Fri May 9 13:26:40 2025 -0400
+
+    module 3 and 4 plugged into homescreen
+
+[33mcommit 8830688652bf814e9b31417a0ec93fedd10ee9c4[m
+Merge: ef669d6 c06f84a
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 13:07:57 2025 -0400
+
+    Merge branch 'routing-completion'
+
+[33mcommit c06f84a80d4aa401af8844f3a29efbeb7312d8b7[m[33m ([m[1;31morigin/routing-completion[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 13:07:08 2025 -0400
+
+    add modules to types list to add progress checker
+
+[33mcommit ef669d69c5e412c058eb90460bbf8e222c44818b[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Fri May 9 13:02:01 2025 -0400
+
+    feat: survey status fetched from firestore
+
+[33mcommit a41cf6bd21157a36385fd15a8762e7872153d511[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 12:55:00 2025 -0400
+
+    hashmap creation for checking matching stdoutput
+
+[33mcommit ae4e0538e9bfa91e6e77f12e64f72b2f4f2e5883[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Fri May 9 11:37:04 2025 -0400
+
+    module 3 and four routers in place
+
+[33mcommit d9c506cfa28174e59ce81ccf427e5b8cc3468bb8[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 02:57:48 2025 -0400
+
+    add hashmap for print contains
+
+[33mcommit 07f376eea1111f710b7febdfbf72e4bc6cbf6de8[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Fri May 9 01:40:02 2025 -0400
+
+    fix answer checking
+
+[33mcommit 98ce006eccffc0458d228b7c8642e59580032757[m
+Merge: 16b5b72 6e2b00b
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Thu May 8 19:28:23 2025 -0400
+
+    feat: answer checking
+
+[33mcommit 16b5b7227dd96425203cc056593f2785818dfa83[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Thu May 8 19:26:53 2025 -0400
+
+    changes
+
+[33mcommit 6e2b00b38e4e2bea0df2a958386e031c81c716b5[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Thu May 8 19:25:29 2025 -0400
+
+    feat: answer checking working
+
+[33mcommit c93d99fecdf47c996adbb2bab6af0426baa4b1cf[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Thu May 8 17:15:25 2025 -0400
+
+    local storage completion stuff
+
+[33mcommit f0feca9c0fe2b16e0cdab62ca440d975bea9a655[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Thu May 8 16:41:38 2025 -0400
+
+    cleanup types and class organization
+
+[33mcommit 4a2529f7bfcb6e5edc3402928e66a591d191330c[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Thu May 8 16:06:23 2025 -0400
+
+    route levels to next level and home page -- added types file for creating a storage system for completed progress
+
+[33mcommit 21cabfb451b7f76ce2e1bb9fcd2577e861c322f0[m
+Merge: c1a9d48 3861e72
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Thu May 8 14:46:40 2025 -0400
+
+    merge ide-answers
+
+[33mcommit 3861e72600192ffa57874f8337329694dcbdc6c0[m[33m ([m[1;31morigin/ide-answers[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Thu May 8 14:42:32 2025 -0400
+
+    verify answers
+
+[33mcommit c1a9d481fc48426c951c83303905341d908eaac2[m
+Author: joshualbala <joshua_bala@brown.edu>
+Date:   Thu May 8 13:46:45 2025 -0400
+
+    feat: added parser
+
+[33mcommit 93fd8e9070a71c4a36da1d02502035aa967fd23a[m[33m ([m[1;31morigin/module-answers[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Thu May 8 01:55:48 2025 -0400
+
+    clean up modules and server structure
+
+[33mcommit 2602efcf84148cd3ee05673a3c2e14b13505bc50[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Wed May 7 14:38:59 2025 -0400
+
+    fix firebase filepath
+
+[33mcommit 326d65a0514ae87a62fc9f401eb501c396d0b1b7[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Wed May 7 14:27:05 2025 -0400
+
+    fixing error statements
+
+[33mcommit 64706dee9e88a1f9ecf915576b3459fd693512d6[m
+Merge: c7bc1ae 47c35fa
+Author: ewhorne <144467293+ewhorne@users.noreply.github.com>
+Date:   Wed May 7 14:20:59 2025 -0400
+
+    Merge pull request #2 from cs0320-s25/code-editor-impl
+    
+    Code editor impl
+
+[33mcommit 47c35fa6c5bf0e21a7432d76038bb5b410f00f27[m[33m ([m[1;31morigin/code-editor-impl[m[33m)[m
+Merge: 1c13d58 c7bc1ae
+Author: ewhorne <144467293+ewhorne@users.noreply.github.com>
+Date:   Wed May 7 14:20:51 2025 -0400
+
+    Merge branch 'main' into code-editor-impl
+
+[33mcommit 1c13d584df04510f564fc1f3b25cb4208bfd719b[m[33m ([m[1;31morigin/populate-modules[m[33m, [m[1;32mcode-editor-impl[m[33m)[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Wed May 7 12:39:13 2025 -0400
+
+    Editing props for coeditor to make sure that the backend makes appropriate comparisons
+
+[33mcommit 22e8c7509e498aec7b0127f65b95945b315f1514[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Wed May 7 12:34:49 2025 -0400
+
+    Populating modules with code editor
+
+[33mcommit e67d330c11e3ba8e31ed27ca264364cce980e2c3[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Wed May 7 05:01:22 2025 -0400
+
+    Reverting
+
+[33mcommit 6a9c888bd805ad21ffe778d745faf10c06aff394[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Wed May 7 04:20:43 2025 -0400
+
+    props for code editor
+
+[33mcommit c7bc1ae3e9c0c6459888f271c19f22ff7eb06418[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Tue May 6 22:49:21 2025 -0400
+
+    check survey completed
+
+[33mcommit 81bdd095fa41a7546ed2862636563229ea027b58[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Tue May 6 22:01:41 2025 -0400
+
+    survey handler rough draft
+
+[33mcommit 573bf4b1ae82e84d0b577c941eebedb74f2afda8[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 6 20:52:02 2025 -0400
+
+    Code Editor Implementation Part 1 Complete
+
+[33mcommit c9688d667e9b12c9e5aec5c437ba87ea89af8283[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 6 20:15:00 2025 -0400
+
+    cleaning up firebase and other code residuals
+
+[33mcommit cf107da70b7bce43a577b80f92553ea4ac1b82b3[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 6 19:20:08 2025 -0400
+
+    check
+
+[33mcommit 5d9f0b5d0c56bad596b57c2095f80d1aff6dc1df[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Tue May 6 18:57:45 2025 -0400
+
+    adding uncommitted  changes
+
+[33mcommit 36c265a6bad34b765ac4ff6be06811734072c7c9[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Mon May 5 16:04:25 2025 -0400
+
+    finished implementation -- refactor code when adjusting each of the questions
+
+[33mcommit 39286d51b321166a3bab7513219e0ddcfdb7b27a[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Mon May 5 15:38:43 2025 -0400
+
+    fix maven dependencies, add backend piston editor
+
+[33mcommit 02ffda9161083d5dd8de1905216b81ec6fd72c1a[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Fri May 2 23:13:24 2025 -0400
+
+    changing between homescreen and survey layed out
+
+[33mcommit c3e1ec9ae2f19b56f245347b15daf07e6ab09bec[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Tue Apr 29 15:24:28 2025 -0400
+
+    home screen outline created, routers and home screen relationship established
+
+[33mcommit e14426357f39a21628ad907e198c2f67f3e70ce1[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Tue Apr 29 09:37:34 2025 -0400
+
+    flow between home screen and survey established
+
+[33mcommit 22e705f6cac89d266964748b7c951e496522333f[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Tue Apr 29 09:23:12 2025 -0400
+
+    fixed clerk component bug, survey up
+
+[33mcommit 88358e504ffce14a1af3cd9b5d4f6d47c918432d[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Mon Apr 28 18:41:44 2025 -0400
+
+    check
+
+[33mcommit 8043f86f6c87dbee62187da28be246e3b4ce7b33[m
+Author: Michael Peck <ppeck64@gmail.com>
+Date:   Sat Apr 26 10:38:47 2025 -0400
+
+    set up firebase and other configurations
+
+[33mcommit cfbf74f1fd0054ed9871c1b8b91c8fc20e18c29a[m
+Author: alisonvilla <alison_villa@brown.edu>
+Date:   Fri Apr 25 20:54:10 2025 -0400
+
+    survey folder: question and option prop declared, a question shows
+
+[33mcommit d081d5f97bea2b7a48fd8ebd44823942e9aacdf2[m
+Author: Elias Horne <elias_horne@brown.edu>
+Date:   Fri Apr 25 19:09:58 2025 -0400
+
+    chore: create folders and files for basic structure and setup of client and server
+
+[33mcommit ca1171c4f57959f2b70d67765c08163aa1cd38c0[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Thu Mar 20 19:09:19 2025 +0000
+
+    Setting up GitHub Classroom Feedback
+
+[33mcommit a949a0538f59134580fb7a5864057cf7ce1b0cc3[m[33m ([m[1;31morigin/feedback[m[33m)[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Thu Mar 20 19:09:19 2025 +0000
+
+    GitHub Classroom Feedback
+
+[33mcommit 323754e596699f7f2d1d220d24e1399a1ace42e8[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Sun Mar 2 21:19:09 2025 +0000
+
+    Initial commit

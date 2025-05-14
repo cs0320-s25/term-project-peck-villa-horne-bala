@@ -18,10 +18,9 @@ public class RestoreProgressHandler implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     Map<String, Object> responseMap = new HashMap<>();
-
+    System.out.println("Restore progress handler");
     try {
       String uid = request.queryParams("uid");
-      System.out.println("uid: " + uid);
 
       List<Map<String, Object>> vals = this.storage.getCollection(uid, "modules");
 

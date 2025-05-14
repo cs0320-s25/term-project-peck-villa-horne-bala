@@ -5,9 +5,9 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import SurveyQuestionManager from "./SurveyQuesManager"
+import SurveyQuestionManager from "./SurveyQuesManager";
 import { Status } from "../types";
-import {loadModules} from "../home_screen/ModuleApi";
+import { loadModules } from "../home_screen/ModuleApi";
 import { useUser } from "@clerk/clerk-react";
 import { populateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
@@ -23,33 +23,40 @@ export enum SurveyStatus {
 interface SurveyProps {
   setMode: Dispatch<SetStateAction<Status>>;
 }
-
+/**
+ * This function basically oversees the flow of the survey life, so from instructions, to taking the questions, to survey results
+ * @param props
+ * @returns
+ */
 export function Survey(props: SurveyProps) {
-  const {user}= useUser();
-  
+  const { user } = useUser();
+
   const [surveyStatus, setSurveyStatus] = useState<SurveyStatus>(
     SurveyStatus.Intro
   );
 
   const beginSurvey = () => {
-    setSurveyStatus(SurveyStatus.TakingSurvey)
-  }
+    setSurveyStatus(SurveyStatus.TakingSurvey);
+  };
 
-  const completeSurvey =()=>{
+  const completeSurvey = () => {
     // this is where the api call to the decision tree logic will be inquired to interpret the upload the modules
-    if(user?.id){
-      loadModules(user.id);
-    }
-    props.setMode(Status.Homescreen)
-  }
+    // if(user?.id){
+    //   loadModules(user.id);
+    // }
+    props.setMode(Status.Homescreen);
+  };
 
-useEffect(() => {
+  // populating a mocked list of modules
+  useEffect(() => {
     if (user?.id) {
-      populateModuleList();
-      storeModuleList(user.id);
+      const modules = populateModuleList();
+      localStorage.setItem(user.id, JSON.stringify(modules));
+      //storeModuleList(user.id, modules);
     }
   }, []);
 
+  // if survey status intro, show instructions; if survey status is taking survey, then we call survey question manager; if survey status complete, we show results
   return (
     <div className="survey">
       <AnimatedBackground />

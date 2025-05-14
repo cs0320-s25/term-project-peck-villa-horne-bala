@@ -6,18 +6,30 @@ import { CodeEditorProps } from "../types";
 import { storeModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 import { Locked } from "../types";
 import Maze from "../components/maze";
+import { ModuleInfo } from "../types";
+import { populateModuleList, getModuleListLocalStorage } from "../home_screen/module_assembler/populate_modules/ModuleData";
 
 
 const MazeCodeEditor = (props: CodeEditorProps) => {
+  const [modulesList, setModuleList] =
+    useState<ModuleInfo[]>(populateModuleList());
+  
   const { isLoaded, user } = useUser();
   const [code, setCode] = useState(
     `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
   );
   const [output, setOutput] = useState("");
-    // console.log(`Level Completion Status: ${props.level.levelName}`, props.level.completionStatus);
   const [playerPosition, setPlayerPosition] = useState({ row: 12, col: 7 }); // Start at 'S'
 
-  type Cell = 0 | 1 | 2  | 'S' | 'E';
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in final project: ", modulesList);
+    }
+  }, [user]);
+
+  type Cell = 0 | 1 | 2 | 3 | 'S' | 'E';
   
   const maze: Cell[][] = [
     [1,'E',1,1,1,1,1,1,1,1,1,1],
@@ -75,99 +87,108 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
       return;
     }
     console.log("Storing modules for user:", user.id);
-    storeModuleList(user.id);
+    storeModuleList(user.id, modulesList);
     
   };
 
   return (
-    <div>
-    <div className="container">
-      <Editor
-        height="400px"
-        language="java"
-        theme="vs-dark"
-        value={code}
-        onChange={(value) => setCode(value ?? "")}
-      />
-      <Maze playerPosition={playerPosition} grid={maze} />
-    </div>
-    <button
-        onClick={() =>
-          setCode(
-            `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
-          )
-        }
-      >
-        Clear Code
-      </button>
-      <button onClick={handleRun}>Run Code</button>
-      <pre>{output}</pre>
-    </div>
-    
+    <>
+      <div className="maze-container">
+        {/* Maze visualization above code editor */}
+        <Maze playerPosition={playerPosition} grid={maze} />
+        
+        {/* Code editor */}
+        <div className="editor-container">
+          <Editor
+            height="400px"
+            language="java"
+            theme="vs-dark"
+            value={code}
+            onChange={(value) => setCode(value ?? "")}
+          />
+        </div>
+      </div>
+      
+      {/* Control buttons */}
+      <div className="control-buttons">
+        <button
+          onClick={() =>
+            setCode(
+              `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
+            )
+          }
+        >
+          Clear Code
+        </button>
+        <button onClick={handleRun}>Run Code</button>
+      </div>
+      
+      {/* Output display */}
+      <pre className="output-display">{output}</pre>
+    </>
   );
   function parseCommand(input: string): string[] {
     return input.split(",").map(item => item.trim());
-}
-async function movePlayer(commands: string[]) {
-  let row = 12;
-  let col = 7;
-  const filtered = commands.filter(item => item.trim() !== "");
-  for (const command of filtered) {
-    console.log("******COMMAND: " + command);
-    
-    const match = command.trim().match(/^(SWIM|WALK)\s+(UP|DOWN|LEFT|RIGHT)\s+(\d+)$/);
-    if (!match) {
-      setOutput(`❌ Error: Invalid command format: "${command}"`);
-      return;
-    }
+  }
 
-    const [, action, dir, stepsStr] = match;
-    const steps = parseInt(stepsStr, 10);
-
-    for (let i = 0; i < steps; i++) {
-      let nextRow = row;
-      let nextCol = col;
-
-      switch (dir) {
-        case "UP": nextRow--; break;
-        case "DOWN": nextRow++; break;
-        case "LEFT": nextCol--; break;
-        case "RIGHT": nextCol++; break;
-      }
-
-      // Check bounds
-      if (
-        nextRow < 0 || nextRow >= maze.length ||
-        nextCol < 0 || nextCol >= maze[0].length
-      ) {
-        setOutput("❌ Error: Out of bounds");
+  async function movePlayer(commands: string[]) {
+    let row = 12;
+    let col = 7;
+    const filtered = commands.filter(item => item.trim() !== "");
+    for (const command of filtered) {
+      console.log("******COMMAND: " + command);
+      
+      const match = command.trim().match(/^(SWIM|WALK)\s+(UP|DOWN|LEFT|RIGHT)\s+(\d+)$/);
+      if (!match) {
+        setOutput(`❌ Error: Invalid command format: "${command}"`);
         return;
       }
 
-      const cellType = maze[nextRow][nextCol];
+      const [, action, dir, stepsStr] = match;
+      const steps = parseInt(stepsStr, 10);
 
-      // Check movement rules
-      if (cellType === 1) {
-        setOutput("❌ Error: Hit a wall");
-        return;
-      } else if (cellType === 2 && action !== "SWIM") {
-        setOutput("❌ Error: You must SWIM over water");
-        return;
-      } else if ((cellType === 0 || cellType === 'S' || cellType === 'E') && action !== "WALK") {
-        setOutput("❌ Error: You must WALK on land");
-        return;
+      for (let i = 0; i < steps; i++) {
+        let nextRow = row;
+        let nextCol = col;
+
+        switch (dir) {
+          case "UP": nextRow--; break;
+          case "DOWN": nextRow++; break;
+          case "LEFT": nextCol--; break;
+          case "RIGHT": nextCol++; break;
+        }
+
+        // Check bounds
+        if (
+          nextRow < 0 || nextRow >= maze.length ||
+          nextCol < 0 || nextCol >= maze[0].length
+        ) {
+          setOutput("❌ Error: Out of bounds");
+          return;
+        }
+
+        const cellType = maze[nextRow][nextCol];
+
+        // Check movement rules
+        if (cellType === 1) {
+          setOutput("❌ Error: Hit a wall");
+          return;
+        } else if (cellType === 2 && action !== "SWIM") {
+          setOutput("❌ Error: You must SWIM over water");
+          return;
+        } else if ((cellType === 0 || cellType === 'S' || cellType === 'E') && action !== "WALK") {
+          setOutput("❌ Error: You must WALK on land");
+          return;
+        }
+
+        // Valid move
+        row = nextRow;
+        col = nextCol;
+        setPlayerPosition({ row, col });
+        await new Promise(res => setTimeout(res, 300));
       }
-
-      // Valid move
-      row = nextRow;
-      col = nextCol;
-      setPlayerPosition({ row, col });
-      await new Promise(res => setTimeout(res, 300));
     }
   }
-}
 };
-
-
 
 export default MazeCodeEditor;

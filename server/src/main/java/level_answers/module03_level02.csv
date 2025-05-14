@@ -1,1 +1,1 @@
-int|score|=|82|if|score|>=|90|80|70|else if|else|Grade:A|Grade:B|Grade:C|Grade:Incomplete|Grade:B
+int|score|=|82|if|score|>=|90|80|70|else if|else|Grade: A|Grade: B|Grade: C|Grade: Incomplete|Grade: B

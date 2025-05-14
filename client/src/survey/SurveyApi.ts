@@ -2,6 +2,7 @@ import { useUser } from "@clerk/clerk-react";
 import { Status } from "../types";
 import { Dispatch, SetStateAction } from "react";
 
+// this function is what cheks if the survey has been taken; calls the api which checks firestore
 export const checkUserSurveyStatus = async (user: string, setMode: Dispatch<SetStateAction<Status>>) => {
   try {
     const response = await fetch(`http://localhost:3232/Survey?uid=${user}`);
@@ -18,6 +19,7 @@ export const checkUserSurveyStatus = async (user: string, setMode: Dispatch<SetS
   }
 };
 
+// this function updates if the user has taken the survey; calls api and sets firestore survey field to true
 export const updateFirestoreUserSurveyStatus = async (user: string) => {
     try {
       const response = await fetch(

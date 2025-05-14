@@ -1,23 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus, Locked } from "../../types";
 import { LevelInfo } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
 
-export function MThreeLvlOne() {
-  const levelInfo: LevelInfo = modulesList[2].levels[0];
-
-  // Unlock the level if the previous level is complete
-  if (modulesList[1].levels[3].completionStatus === CompletionStatus.Complete) {
-    levelInfo.locked = Locked.Unlocked;
-  } else {
-    levelInfo.locked = Locked.Locked;
-  }
+export function MThreeLvlThree() {
+  const { user } = useUser();
+  const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+  const [levelInfo, setLevelInfo] = useState<LevelInfo>(
+    populateModuleList()[2].levels[2]
+  );
 
   const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
+    useState<CompletionStatus>(CompletionStatus.Incomplete);
+
+  useEffect(() => {
+    if (user?.id) {
+      const modules = getModuleListLocalStorage(user.id);
+      setModuleList(modules);
+      console.log("module list in module 3 lvl 3: ", modules);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (modulesList.length > 0) {
+      const levelinfo: LevelInfo = modulesList[2].levels[2];
+      if (
+        modulesList[2].levels[1].completionStatus === CompletionStatus.Complete
+      ) {
+        levelinfo.locked = Locked.Unlocked;
+      } else {
+        levelinfo.locked = Locked.Locked;
+      }
+      setLevelInfo(levelinfo);
+      setLevelCompletionStatus(levelinfo.completionStatus);
+    }
+  }, [modulesList]);
+
   const navigate = useNavigate();
 
   return (
@@ -27,55 +53,58 @@ export function MThreeLvlOne() {
           Back
         </button>
         <h1 className="module-title">
-          Module 3: Decision Making - Level 1: If Statement
+          Module 3: Decision Making - Level 3: Multiple Conditions
         </h1>
       </header>
 
       <div className="content-container">
         <div className="instruction-box">
           <p>
-            In Java, an <span className="code-inline">if</span> statement is
-            used to execute a block of code only if a specified condition is
-            true. It allows you to make decisions in your code. Should the
-            program display a message? Is a number high enough to pass a test?
-            These kinds of decisions are handled using control statements in
-            Java.
+            Sometimes we need to check more than one condition at the same time.
+            Java gives us logical operators to combine conditions:
           </p>
-          <p>
-            The <span className="code-inline">if</span> statement is the
-            simplest control statement. It runs a block of code only if a
-            condition is true. For example, if you want to check if a number is
-            positive, you can use an <span className="code-inline">if</span>{" "}
-            statement like this:
-          </p>
-          <p className="code-example">
-            <span className="code-inline">
-              if (number &gt; 0) {"{"} System.out.println("The number is
-              positive!"); {"}"}
-            </span>
-          </p>
+          <ul>
+            <li>
+              <span className="code-inline">&&</span> means AND: both conditions
+              must be true.
+            </li>
+            <li>
+              <span className="code-inline">||</span> means OR: at least one
+              condition must be true.
+            </li>
+            <li>
+              <span className="code-inline">!</span> means NOT: reverses the
+              condition (true becomes false and vice versa).
+            </li>
+          </ul>
           <div className="task-highlight">
             <strong>Task:</strong> Create a variable{" "}
-            <span className="code-inline">age</span> that is 18 and write a
-            conditional statement that checks if the variable is 18 or greater.
-            If it is, print{" "}
-            <span className="code-inline">"You are eligible to vote"</span>.
+            <span className="code-inline">age</span> that is 20 and a boolean
+            called <span className="code-inline">hasTicket</span> and create a
+            conditional statement that checks if:
+            <ul>
+              <li>
+                <span className="code-inline">age</span> is greater than or
+                equal to 18
+              </li>
+              <li>They have a ticket</li>
+            </ul>
+            If both conditions are true, print{" "}
+            <span className="code-inline">"You can enter the concert."</span>.
+            Otherwise, print{" "}
+            <span className="code-inline">"Sorry, you can’t enter."</span>. Try
+            it out!
           </div>
         </div>
 
         <div className="editor-box">
-          <div className="code-editor-container">
-            <CodeEditor
-              initialCode=""
-              questionId="module03_level01"
-              level={levelInfo}
-              setLevelCompletionStatus={setLevelCompletionStatus}
-            />
-          </div>
-          <div className="editor-actions">
-            <button className="clear-button">Clear Code</button>
-            <button className="run-button">Run Code</button>
-          </div>
+          <CodeEditor
+            initialCode=""
+            questionId="module03_level03"
+            level={levelInfo}
+            modules={modulesList}
+            setLevelCompletionStatus={setLevelCompletionStatus}
+          />
         </div>
       </div>
 
@@ -83,15 +112,15 @@ export function MThreeLvlOne() {
         <div className="nav-buttons">
           <button
             className="previous-button"
-            onClick={() => navigate("/MTwoLvlFour")}
+            onClick={() => navigate("/MThreeLvlTwo")}
           >
-            Previous Module
+            Previous Level
           </button>
           <button
             className="next-button"
-            onClick={() => navigate("/MThreeLvlTwo")}
+            onClick={() => navigate("/MFourLvlOne")}
           >
-            Next Level
+            Next Module
           </button>
         </div>
       )}
@@ -99,4 +128,4 @@ export function MThreeLvlOne() {
   );
 }
 
-export default MThreeLvlOne;
+export default MThreeLvlThree;

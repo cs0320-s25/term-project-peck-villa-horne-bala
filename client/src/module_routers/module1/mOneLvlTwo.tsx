@@ -1,15 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { CompletionStatus } from "../../types";
 import { LevelInfo } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
+import { Locked } from "../../types";
 
 export function MOneLvlTwo() {
-  const levelInfo: LevelInfo = modulesList[0].levels[1];
-  const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
+  const { user } = useUser();
+    const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+    const [levelCompletionStatus, setLevelCompletionStatus] =
+      useState<CompletionStatus>(CompletionStatus.Incomplete);
+
+    const [levelInfo, setLevelInfo] = useState<LevelInfo>(populateModuleList()[0].levels[1]);
+    useEffect(() => {
+      if (user?.id) {
+        const modules = getModuleListLocalStorage(user.id);
+        setModuleList(modules);
+        console.log("module list in module 1 lvl 2: ", modules);
+      }
+    }, [user]);
+
+    useEffect(() => {
+      console.log(
+        "completion status for m one lvl 2 changed to: " + levelCompletionStatus
+      );
+    }, [levelCompletionStatus]);
+    useEffect(() => {
+      if (modulesList.length > 0) {
+        const levelinfo: LevelInfo = modulesList[0].levels[1];
+        if (
+          modulesList[0].levels[0].completionStatus ===
+          CompletionStatus.Complete
+        ) {
+          levelinfo.locked = Locked.Unlocked;
+        } else {
+          levelinfo.locked = Locked.Locked;
+        }
+        setLevelInfo(levelinfo);
+        setLevelCompletionStatus(levelinfo.completionStatus);
+      }
+    }, [modulesList]);
+    
   const navigate = useNavigate();
 
   return (
@@ -51,18 +89,19 @@ export function MOneLvlTwo() {
         </div>
 
         <div className="editor-box">
-          <div className="code-editor-container">
+         
             <CodeEditor
               initialCode=""
               questionId="module01_level02"
               level={levelInfo}
+              modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
-          </div>
-          <div className="editor-actions">
+
+          {/* <div className="editor-actions">
             <button className="clear-button">Clear Code</button>
             <button className="run-button">Run Code</button>
-          </div>
+          </div> */}
         </div>
       </div>
 

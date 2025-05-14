@@ -1,26 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "../../components/CodeEditor";
 import { LevelInfo, Locked } from "../../types";
 import { CompletionStatus } from "../../types";
-import { modulesList } from "../../home_screen/module_assembler/populate_modules/ModuleData";
+import {
+  getModuleListLocalStorage,
+  populateModuleList,
+} from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Module.css";
+import { useUser } from "@clerk/clerk-react";
+import { ModuleInfo } from "../../types";
+
 
 export function MTwoLvlOne() {
-  const levelInfo: LevelInfo = modulesList[1].levels[0];
+  const { user } = useUser();
+    const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
+    const [levelInfo, setLevelInfo] = useState<LevelInfo>(
+      populateModuleList()[1].levels[0]
+    );
+  
+    const [levelCompletionStatus, setLevelCompletionStatus] =
+      useState<CompletionStatus>(CompletionStatus.Incomplete);
+  
+    useEffect(() => {
+      if (user?.id) {
+        const modules = getModuleListLocalStorage(user.id);
+        setModuleList(modules);
+        console.log("module list in module 2 lvl 1: ", modules);
+      }
+    }, [user]);
+  
+    useEffect(() => {
+      if (modulesList.length > 0) {
+        const levelinfo: LevelInfo = modulesList[1].levels[0];
+        if (
+          modulesList[0].levels[3].completionStatus === CompletionStatus.Complete
+        ) {
+          levelinfo.locked = Locked.Unlocked;
+        } else {
+          levelinfo.locked = Locked.Locked;
+        }
+        setLevelInfo(levelinfo);
+        setLevelCompletionStatus(levelinfo.completionStatus);
+      }
+    }, [modulesList]);
 
-  // Unlock the level if the previous level is complete
-  if (
-    modulesList[0].levels[3].completionStatus === CompletionStatus.Complete &&
-    modulesList[0].levels[3].locked === Locked.Unlocked
-  ) {
-    levelInfo.locked = Locked.Unlocked;
-  } else {
-    levelInfo.locked = Locked.Locked;
-  }
-
-  const [levelCompletionStatus, setLevelCompletionStatus] =
-    useState<CompletionStatus>(levelInfo.completionStatus);
+ 
   const navigate = useNavigate();
 
   return (
@@ -44,12 +69,12 @@ export function MTwoLvlOne() {
           </p>
           <div className="task-highlight">
             <strong>Task:</strong> Create two variables,{" "}
-            <span className="code-inline">a = 100</span> and{" "}
-            <span className="code-inline">b = 24.362</span>. Save the result of
+            <span className="code-inline">a is equal to 100</span> and{" "}
+            <span className="code-inline">b is equal to 24.362</span>. Save the result of
             their sum in a variable called{" "}
             <span className="code-inline">sum</span> and save the result of
             their difference in a variable called{" "}
-            <span className="code-inline">diff</span>. Print both variables!
+            <span className="code-inline">diff</span>. Print the sum and the difference!
             When printing, you can use strings to separate variables like
             <span className="code-inline">
               System.out.println(variable1 + " and " + variable2)
@@ -60,18 +85,16 @@ export function MTwoLvlOne() {
         </div>
 
         <div className="editor-box">
-          <div className="code-editor-container">
+         
+
             <CodeEditor
               initialCode=""
               questionId="module02_level01"
               level={levelInfo}
+              modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
-          </div>
-          <div className="editor-actions">
-            <button className="clear-button">Clear Code</button>
-            <button className="run-button">Run Code</button>
-          </div>
+        
         </div>
       </div>
 

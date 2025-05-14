@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LevelInfo } from "../../../types";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import { useUser } from "@clerk/clerk-react";
 import "../../../styles/Level.css"
 
 
+// returns the jsx component that is the level card, renders a lock based on the lock state of level info
 export function Level(props: LevelProp){
 
     const navigate= useNavigate();
@@ -19,6 +20,7 @@ export function Level(props: LevelProp){
         const path: string= props.level.routerPath;
         navigate(path);
     }
+    
     return (
       <Card className="level-card">
         <span className="level-name">{props.level.levelName}</span>
