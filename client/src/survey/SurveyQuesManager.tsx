@@ -64,7 +64,6 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
     if (selectedAnswer == -1) {
       alert("Please Select An Answer Before Submitting!");
     } else {
-      setResponses([...responses, selectedAnswer]);
       handleNextQuestion();
     }
   };
