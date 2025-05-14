@@ -25,22 +25,22 @@ public class DecisionTree {
     this.attributes = this.rawdata.get(0);
     List<DataPoint> dataPoints = new ArrayList<>();
     for (int i = 1; i < this.rawdata.size(); i++) {
-      dataPoints.add(new DataPoint(this.rawdata.get(i), this.attributes));
+      dataPoints.add(new DataPoint(this.attributes, this.rawdata.get(i)));
     }
     this.dataset = new Dataset(this.attributes, dataPoints);
-    this.root = this.generateTree(this.dataset, this.attributes.getLast());
+    this.root = this.generateTree(this.dataset, this.attributes.get(this.attributes.size() - 1));
   }
 
   private TreeNode generateTree(Dataset data, String targetAttribute) {
     List<Edge> edges = new ArrayList<>();
     Dataset splitData;
     Random rand = new Random();
-    int attributeIndex = rand.nextInt(this.attributes.size()-1); //can't use this.attributes
-    String attribute = this.attributes.get(attributeIndex);
+    int attributeIndex = rand.nextInt(data.getAttributes().size()-1);
+    String attribute = data.getAttributes().get(attributeIndex);
     for (String value: data.getValuesForAttribute(attribute)) {
       splitData = data.splitData(value, attribute);
       if (splitData.isAllSameValue(targetAttribute)) {
-        edges.add(new Edge(new DecisionLeaf(value), value));
+        edges.add(new Edge(new DecisionLeaf(splitData.getData().get(0).getAttributeValue(targetAttribute)), value));
       } else {
         if (splitData.isAllSameValue(attribute)) {
           edges.add(new Edge(this.generateTree(splitData, targetAttribute), value));
@@ -56,8 +56,10 @@ public class DecisionTree {
     return new AttributeNode(attribute, this.getDefault(data, targetAttribute), edges);
   }
 
-  public String getDecision(DataPoint data) {
-    return this.root.getDecision(data);
+  public String getDecision(List<String> data) {
+    ArrayList<String> attributesList = new ArrayList<>(this.attributes);
+    attributesList.remove(attributesList.size() - 1);
+    return this.root.getDecision(new DataPoint(attributesList, data));
   }
 
   public String getDefault(Dataset data, String attribute) {

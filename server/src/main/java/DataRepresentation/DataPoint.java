@@ -17,4 +17,9 @@ public class DataPoint {
   public String getAttributeValue(String attribute) {
     return this.attributeToValues.get(attribute);
   }
+
+  @Override
+  public String toString() {
+    return this.attributeToValues.toString();
+  }
 }
