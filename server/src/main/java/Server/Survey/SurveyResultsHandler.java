@@ -12,24 +12,23 @@ import spark.Route;
 
 public class SurveyResultsHandler implements Route {
 
-      @Override
-      public Object handle(Request request, Response response) throws Exception {
-        Map<String, Object> responseMap = new HashMap<>();
-        try {
-          JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
-          JsonArray modulesList = reqBody.get("surveyAnswerKey").getAsJsonArray();
-          JsonArray responses = reqBody.get("responses").getAsJsonArray();
-          System.out.println("modulesList: " + modulesList);
-          System.out.println("responses: " + responses);
+  @Override
+  public Object handle(Request request, Response response) throws Exception {
+    Map<String, Object> responseMap = new HashMap<>();
+    try {
+      JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
+      JsonArray modulesList = reqBody.get("surveyAnswerKey").getAsJsonArray();
+      JsonArray responses = reqBody.get("responses").getAsJsonArray();
+      System.out.println("modulesList: " + modulesList);
+      System.out.println("responses: " + responses);
 
-          responseMap.put("response_type", "success");
-          return responseMap;
+      responseMap.put("response_type", "success");
+      return responseMap;
 
-        } catch (Exception e) {
-          e.printStackTrace();
-          responseMap.put("response_type", "error");
-
-        }
-        return Utils.toMoshiJson(responseMap);
-      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      responseMap.put("response_type", "error");
     }
+    return Utils.toMoshiJson(responseMap);
+  }
+}
