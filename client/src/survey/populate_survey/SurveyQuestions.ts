@@ -68,7 +68,7 @@ export const Q5: FormatQ = {
   correctAnswerIndex: 0,
 };
 
-// edit these
+
 export const Q6: FormatQ = {
   id: 6,
   question: "Describe a situation where you would use an inner class.",
