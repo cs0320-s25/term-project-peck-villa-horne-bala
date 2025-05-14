@@ -14,6 +14,7 @@ public class DataPoint {
   /**
    * Constructor takes in the attributes and values of the data point and converts to a hashmap of
    * attribute to value
+   *
    * @param attributes list of attribute names
    * @param values list of values for each attribute
    */
@@ -26,6 +27,7 @@ public class DataPoint {
 
   /**
    * Getter method for retrieving the datapoint's value for a specific attribute
+   *
    * @param attribute the attribute to get the value of
    * @return the value of the attribute
    */
@@ -35,6 +37,7 @@ public class DataPoint {
 
   /**
    * toString method used for testing
+   *
    * @return the string representation of the data point
    */
   @Override

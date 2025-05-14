@@ -35,12 +35,15 @@ public class DecisionTree {
     List<Edge> edges = new ArrayList<>();
     Dataset splitData;
     Random rand = new Random();
-    int attributeIndex = rand.nextInt(data.getAttributes().size()-1);
+    int attributeIndex = rand.nextInt(data.getAttributes().size() - 1);
     String attribute = data.getAttributes().get(attributeIndex);
-    for (String value: data.getValuesForAttribute(attribute)) {
+    for (String value : data.getValuesForAttribute(attribute)) {
       splitData = data.splitData(value, attribute);
       if (splitData.isAllSameValue(targetAttribute)) {
-        edges.add(new Edge(new DecisionLeaf(splitData.getData().get(0).getAttributeValue(targetAttribute)), value));
+        edges.add(
+            new Edge(
+                new DecisionLeaf(splitData.getData().get(0).getAttributeValue(targetAttribute)),
+                value));
       } else {
         if (splitData.isAllSameValue(attribute)) {
           edges.add(new Edge(this.generateTree(splitData, targetAttribute), value));
@@ -67,8 +70,8 @@ public class DecisionTree {
     outputs = this.getUniqueValues(outputs);
     String defaultString = "";
     int biggestData = 0;
-    for(int i = 0; i< outputs.size();i++){
-      if(data.splitData(outputs.get(i), attribute).size() > biggestData) {
+    for (int i = 0; i < outputs.size(); i++) {
+      if (data.splitData(outputs.get(i), attribute).size() > biggestData) {
         biggestData = data.splitData(outputs.get(i), attribute).size();
         defaultString = outputs.get(i);
       }
@@ -87,7 +90,7 @@ public class DecisionTree {
   public List<String> getUniqueValues(List<String> outputs) {
     List<String> newOutputs = new ArrayList<>();
     for (int i = 0; i < outputs.size() - 1; i++) {
-      if(!newOutputs.contains(outputs.get(i))){
+      if (!newOutputs.contains(outputs.get(i))) {
         newOutputs.add(outputs.get(i));
       }
     }

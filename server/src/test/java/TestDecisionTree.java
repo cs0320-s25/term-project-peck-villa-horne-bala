@@ -1,11 +1,11 @@
+import static org.junit.jupiter.api.Assertions.*;
+
 import DecisionTree.DecisionTree;
 import Parser.Parser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDecisionTree {
 
@@ -15,7 +15,6 @@ public class TestDecisionTree {
     List<List<String>> parsedContent = parser.parse();
     assertEquals("color", parsedContent.get(0).get(0));
   }
-
 
   @Test
   public void testDecisionTreeOnTestData() {

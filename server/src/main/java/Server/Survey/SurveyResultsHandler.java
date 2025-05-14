@@ -47,7 +47,8 @@ public class SurveyResultsHandler implements Route {
           String levelName = module.get(j + 1);
           String lockedStatus = "Locked";
           String completionStatus = "Incomplete";
-          if (i < (Math.floor(placementValue) - 1) || (i < (Math.floor(placementValue) - 1) && j < (int) (placementValue * 10) % 10)) {
+          if (i < (Math.floor(placementValue) - 1)
+              || (i < (Math.floor(placementValue) - 1) && j < (int) (placementValue * 10) % 10)) {
             lockedStatus = "Unlocked";
             completionStatus = "Complete";
           }
