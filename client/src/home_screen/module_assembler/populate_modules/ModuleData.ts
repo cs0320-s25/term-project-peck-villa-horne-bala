@@ -131,7 +131,7 @@ const finalModule: ModuleInfo = {
   name: "Final Module!",
   levels: [
     {
-      levelName: "Method Syntax",
+      levelName: "Final Level",
       locked: Locked.Locked,
       routerPath: "/finalLvl",
       completionStatus: CompletionStatus.Incomplete,

@@ -32,28 +32,25 @@ public class SurveyResultsHandler implements Route {
       DecisionTree decisionTree = new DecisionTree("survey_data/survey-training-dataset.csv");
       String placement = decisionTree.getDecision(parsedResponse);
       Double placementValue = Double.parseDouble(placement);
-//      List<Map<String, Object>> modules = this.storage.getCollection(uid, "modules");
       HashMap<String, HashMap<String, ArrayList<String>>> modulesToLevels = new HashMap<>();
 
       Parser moduleParser = new Parser("module_data/module-data.csv");
       List<List<String>> parsedModules = moduleParser.parse();
 
-      for (int i = 0; i < Math.floor(placementValue); i++) {
+      for (int i = 0; i < parsedModules.size(); i++) {
         List<String> module = parsedModules.get(i);
 
-//        Map<String, Object> module = modules.get(i);
         String moduleName = module.get(0);
-//        List<Map<String, Object>> levels = (List<Map<String, Object>>) module.get("levels");
 
-        // Initialize level-to-properties map per module
         HashMap<String, ArrayList<String>> levelNameToProperties = new HashMap<>();
-
-        for (int j = 0; j < (int) (placementValue * 10) % 10; j++) {
-//          Map<String, Object> level = levels.get(j);
+        for (int j = 0; j < parsedModules.get(i).size() - 1; j++) {
           String levelName = module.get(j + 1);
-          String lockedStatus = "Unlocked";
-          String completionStatus = "Complete";
-
+          String lockedStatus = "Locked";
+          String completionStatus = "Incomplete";
+          if (i < (Math.floor(placementValue) - 1) || (i < (Math.floor(placementValue) - 1) && j < (int) (placementValue * 10) % 10)) {
+            lockedStatus = "Unlocked";
+            completionStatus = "Complete";
+          }
           ArrayList<String> levelProperties = new ArrayList<>();
           levelProperties.add(lockedStatus);
           levelProperties.add(completionStatus);

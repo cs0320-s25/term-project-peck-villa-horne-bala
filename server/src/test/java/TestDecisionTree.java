@@ -35,6 +35,22 @@ public class TestDecisionTree {
 
   @Test
   public void testDecisionTreeOnSurveyData() {
+    DecisionTree surveyTree = new DecisionTree("survey_data/survey-training-dataset.csv");
+    List<String> sampleResponse = new ArrayList<>();
+    sampleResponse.add("0");
+    sampleResponse.add("0");
+    sampleResponse.add("0");
+    sampleResponse.add("0");
+    sampleResponse.add("0");
 
+    assertEquals("1.1", surveyTree.getDecision(sampleResponse));
+
+    sampleResponse = new ArrayList<>();
+    sampleResponse.add("1");
+    sampleResponse.add("1");
+    sampleResponse.add("1");
+    sampleResponse.add("1");
+    sampleResponse.add("1");
+    System.out.println(surveyTree.getDecision(sampleResponse));
   }
 }
