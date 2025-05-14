@@ -179,6 +179,24 @@ export const storeModuleList = async (user: string, modules: ModuleInfo[]) => {
   }
 };
 
+export const sendSurveyResults = async (user: string, responses: number[], surveyAnswerKey: number[]) => {
+  try {
+    const response = await fetch(`http://localhost:3232/SurveyResults`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user,
+        surveyAnswers: responses,
+        surveyAnswerKey: surveyAnswerKey,
+      }),
+    });
+    console.log("Survey results sent successfully:" + response.status);
+  } catch (error) {
+    console.error("Error sending survey results:", error);
+  }
+};
 
 export const updateModuleList = async (user: string, modulesList: ModuleInfo[]):Promise<ModuleInfo[] > => {
   try {
