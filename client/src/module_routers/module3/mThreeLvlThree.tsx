@@ -15,7 +15,7 @@ export function MThreeLvlThree() {
   const { user } = useUser();
   const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
   const [levelInfo, setLevelInfo] = useState<LevelInfo>(
-    populateModuleList()[1].levels[3]
+    populateModuleList()[2].levels[2]
   );
 
   const [levelCompletionStatus, setLevelCompletionStatus] =
@@ -43,43 +43,86 @@ export function MThreeLvlThree() {
       setLevelCompletionStatus(levelinfo.completionStatus);
     }
   }, [modulesList]);
-  
-  
+
   const navigate = useNavigate();
 
   return (
-    <div>
-      <button onClick={() => navigate("/Home")}>Back</button>
-      <button onClick={() => navigate("/MThreeLvlTwo")}>Previous Level</button>
-      <h2>Module 3: Operators - Multiple Conditions</h2>
-      <p>
-        Sometimes we need to check more than one condition at the same time.
-        Java gives us logical operators to combine conditions:
-        <ul>
-          <li>&& means AND: – both conditions must be true </li>
-          <li>|| means OR – at least one condition must be true. </li>
-          <li>
-            ! means NOT – reverses the condition (true becomes false and vice
-            versa).
-          </li>
-        </ul>
-        <br></br>
-        <strong>
-          Task: create a variable “age” that is 20 and create a conditional
-          statement that checks if age is greater than or equal to 18 and if
-          they have a ticket. If so print “You can enter the concert”, if not
-          print “You cannot enter the concert”. Try it out!
-        </strong>
-      </p>
-      <CodeEditor
-        initialCode=""
-        questionId="module03_level03"
-        level={levelInfo}
-        modules={modulesList}
-        setLevelCompletionStatus={setLevelCompletionStatus}
-      />
+    <div className="module-page">
+      <header className="module-header">
+        <button className="back-button" onClick={() => navigate("/Home")}>
+          Back
+        </button>
+        <h1 className="module-title">
+          Module 3: Decision Making - Level 3: Multiple Conditions
+        </h1>
+      </header>
+
+      <div className="content-container">
+        <div className="instruction-box">
+          <p>
+            Sometimes we need to check more than one condition at the same time.
+            Java gives us logical operators to combine conditions:
+          </p>
+          <ul>
+            <li>
+              <span className="code-inline">&&</span> means AND: both conditions
+              must be true.
+            </li>
+            <li>
+              <span className="code-inline">||</span> means OR: at least one
+              condition must be true.
+            </li>
+            <li>
+              <span className="code-inline">!</span> means NOT: reverses the
+              condition (true becomes false and vice versa).
+            </li>
+          </ul>
+          <div className="task-highlight">
+            <strong>Task:</strong> Create a variable{" "}
+            <span className="code-inline">age</span> that is 20 and a boolean
+            called <span className="code-inline">hasTicket</span> and create a
+            conditional statement that checks if:
+            <ul>
+              <li>
+                <span className="code-inline">age</span> is greater than or
+                equal to 18
+              </li>
+              <li>They have a ticket</li>
+            </ul>
+            If both conditions are true, print{" "}
+            <span className="code-inline">"You can enter the concert."</span>.
+            Otherwise, print{" "}
+            <span className="code-inline">"Sorry, you can’t enter."</span>. Try
+            it out!
+          </div>
+        </div>
+
+        <div className="editor-box">
+          <CodeEditor
+            initialCode=""
+            questionId="module03_level03"
+            level={levelInfo}
+            modules={modulesList}
+            setLevelCompletionStatus={setLevelCompletionStatus}
+          />
+        </div>
+      </div>
+
       {levelCompletionStatus === CompletionStatus.Complete && (
-        <button onClick={() => navigate("/MFourLvlOne")}>Continue</button>
+        <div className="nav-buttons">
+          <button
+            className="previous-button"
+            onClick={() => navigate("/MThreeLvlTwo")}
+          >
+            Previous Level
+          </button>
+          <button
+            className="next-button"
+            onClick={() => navigate("/MFourLvlOne")}
+          >
+            Next Module
+          </button>
+        </div>
       )}
     </div>
   );

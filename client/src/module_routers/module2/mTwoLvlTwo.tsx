@@ -93,7 +93,6 @@ export function MTwoLvlTwo() {
         </div>
 
         <div className="editor-box">
-          <div className="code-editor-container">
             <CodeEditor
               initialCode=""
               questionId="module02_level03"
@@ -101,8 +100,6 @@ export function MTwoLvlTwo() {
               modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
-          </div>
-       
         </div>
       </div>
 

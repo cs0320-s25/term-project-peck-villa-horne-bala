@@ -12,7 +12,6 @@ import {
 } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import { Locked } from "../../types";
 
-
 export function MTwoLvlFour() {
   const { user } = useUser();
   const [modulesList, setModuleList] = useState<ModuleInfo[]>([]);
@@ -45,54 +44,77 @@ export function MTwoLvlFour() {
       setLevelCompletionStatus(levelinfo.completionStatus);
     }
   }, [modulesList]);
-  
+
   const navigate = useNavigate();
 
   return (
-    <div>
-      <button onClick={() => navigate("/Home")}>Back</button>
-      <button onClick={() => navigate("/MTwoLvlThree")}>Previous Level</button>
-      <br></br>
-      <h2>Module 2: Operators - Level 4: Order of Operations</h2>
-      <p>
-        Order of operations is the order in which calculations are performed
-        when evaluating an expression. In Java, the order of operations is as
-        follows: Parentheses, Exponents, Multiplication and Division (from left
-        to right), and Addition and Subtraction (from left to right). This means
-        that if you have an expression like 2 + 3 * 4, the multiplication will
-        be performed first, resulting in 2 + 12 = 14. If you want to change the
-        order of operations, you can use parentheses to group expressions. For
-        example, (2 + 3) * 4 will be evaluated as 5 * 4 = 20. This is important
-        because it allows you to control how calculations are performed and
-        ensure that you get the correct result.
-        <br></br>
-        <strong>
-          Task: Create a variable result and set it equal to 5 + 2 * 3. Print
-          result to see what happens! Then create another variable fixedResult
-          that uses parentheses to change the order like this: (5 + 2) * 3.
-          Print result and fixedResult with a comma inbetween!
-        </strong>
-      </p>
-      <CodeEditor
-        initialCode=""
-        questionId="module02_level04"
-        level={levelInfo}
-        modules={modulesList}
-        setLevelCompletionStatus={setLevelCompletionStatus}
-      />
+    <div className="module-page">
+      <header className="module-header">
+        <button className="back-button" onClick={() => navigate("/Home")}>
+          Back
+        </button>
+        <h1 className="module-title">
+          Module 2: Operators - Level 4: Order of Operations
+        </h1>
+      </header>
+
+      <div className="content-container">
+        <div className="instruction-box">
+          <p>
+            Order of operations is the order in which calculations are performed
+            when evaluating an expression. In Java, the order of operations is
+            as follows: Parentheses, Exponents, Multiplication and Division
+            (from left to right), and Addition and Subtraction (from left to
+            right). This means that if you have an expression like{" "}
+            <span className="code-inline">2 + 3 * 4</span>, the multiplication
+            will be performed first, resulting in{" "}
+            <span className="code-inline">2 + 12 = 14</span>. If you want to
+            change the order of operations, you can use parentheses to group
+            expressions. For example,{" "}
+            <span className="code-inline">(2 + 3) * 4</span> will be evaluated
+            as <span className="code-inline">5 * 4 = 20</span>. This is
+            important because it allows you to control how calculations are
+            performed and ensure that you get the correct result.
+          </p>
+          <div className="task-highlight">
+            <strong>Task:</strong> Create a variable{" "}
+            <span className="code-inline">result</span> and set it equal to{" "}
+            <span className="code-inline">5 + 2 * 3</span>. Print{" "}
+            <span className="code-inline">result</span> to see what happens!
+            Then create another variable{" "}
+            <span className="code-inline">fixedResult</span> that uses
+            parentheses to change the order like this:{" "}
+            <span className="code-inline">(5 + 2) * 3</span>. Print{" "}
+            <span className="code-inline">result</span> and{" "}
+            <span className="code-inline">fixedResult</span> with a comma in
+            between!
+          </div>
+        </div>
+
+        <div className="editor-box">
+            <CodeEditor
+              initialCode=""
+              questionId="module02_level04"
+              level={levelInfo}
+              modules={modulesList}
+              setLevelCompletionStatus={setLevelCompletionStatus}
+            />
+        </div>
+      </div>
+
       {levelCompletionStatus === CompletionStatus.Complete && (
         <div className="nav-buttons">
           <button
             className="previous-button"
-            onClick={() => navigate("/MTwoLvlTwo")}
+            onClick={() => navigate("/MTwoLvlThree")}
           >
             Previous Level
           </button>
           <button
             className="next-button"
-            onClick={() => navigate("/MTwoLvlFour")}
+            onClick={() => navigate("/MThreeLvlOne")}
           >
-            Next Level
+            Next Module
           </button>
         </div>
       )}

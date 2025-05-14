@@ -92,7 +92,6 @@ export function MFourLvlThree() {
         </div>
 
         <div className="editor-box">
-          <div className="code-editor-container">
             <CodeEditor
               initialCode=""
               questionId="module04_level03"
@@ -100,7 +99,6 @@ export function MFourLvlThree() {
               modules={modulesList}
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
-          </div>
           
         </div>
       </div>
