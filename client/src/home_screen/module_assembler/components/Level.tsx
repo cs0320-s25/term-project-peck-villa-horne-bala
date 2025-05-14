@@ -11,6 +11,7 @@ import { useUser } from "@clerk/clerk-react";
 import "../../../styles/Level.css"
 
 
+// returns the jsx component that is the level card, renders a lock based on the lock state of level info
 export function Level(props: LevelProp){
 
     const navigate= useNavigate();
