@@ -30,3 +30,16 @@ export const updateFirestoreUserSurveyStatus = async (user: string) => {
       console.error("Failed to check survey status:", error);
     }
 };
+
+export const submitSurveyDataResponse = async (user: string, responses: string) => {
+  try { 
+    const response = await fetch(
+      `http://localhost:3232/SurveyResults?uid=${user}&response=${responses}`
+    );
+    const result = await response.json();
+    const placement = await result.placement;
+    return placement;
+  } catch (error) {
+    console.error("Failed to get survey results:", error);
+  }
+}
