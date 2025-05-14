@@ -99,10 +99,7 @@ export function MThreeLvlOne() {
               setLevelCompletionStatus={setLevelCompletionStatus}
             />
           </div>
-          <div className="editor-actions">
-            <button className="clear-button">Clear Code</button>
-            <button className="run-button">Run Code</button>
-          </div>
+         
         </div>
       </div>
 
