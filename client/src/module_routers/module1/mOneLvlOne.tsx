@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getModuleListLocalStorage } from "../../home_screen/module_assembler/populate_modules/ModuleData";
 import "../../styles/Module.css";
 import { useUser } from "@clerk/clerk-react";
-import { ModuleInfo } from "../../types";
+import { ModuleInfo, Locked } from "../../types";
 
 export function MOneLvlOne() {
   const { user } = useUser();
@@ -22,6 +22,14 @@ export function MOneLvlOne() {
       }
     }
   }, [user]);
+
+  useEffect(()=>{
+      console.log("completion status for m one lvl one changed to: "+ levelCompletionStatus)
+      if(levelCompletionStatus==CompletionStatus.Complete){
+        const nextLvl= modulesList[0].levels[1];
+        nextLvl.locked = Locked.Unlocked;
+      }
+    }, [levelCompletionStatus])
 
   // Guard: If data not yet loaded, show loading or nothing
   if (

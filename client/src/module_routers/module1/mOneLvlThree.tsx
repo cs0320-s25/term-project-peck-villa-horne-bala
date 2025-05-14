@@ -43,9 +43,11 @@ export function MOneLvlFour() {
     }
   }, [modulesList]);
 
-  useEffect(()=>{
-    console.log("completion status for m one lvl 4 changed to: "+ levelCompletionStatus)
-  }, [levelCompletionStatus])
+  useEffect(() => {
+    console.log(
+      "completion status for m one lvl 3 changed to: " + levelCompletionStatus
+    );
+  }, [levelCompletionStatus]);
 
   const navigate = useNavigate();
 
