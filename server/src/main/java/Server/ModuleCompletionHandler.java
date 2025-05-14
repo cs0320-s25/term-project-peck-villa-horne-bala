@@ -27,7 +27,7 @@ public class ModuleCompletionHandler implements Route {
     try {
       String uid = request.queryParams("uid");
       JsonObject reqBody = JsonParser.parseString(request.body()).getAsJsonObject();
-      JsonArray modulesList = reqBody.get("modulesList").getAsJsonArray();
+      JsonArray modulesList = reqBody.get("modules").getAsJsonArray();
       HashMap<String, HashMap<String, ArrayList<String>>> modulesToLevels = new HashMap<>();
       for (int i = 0; i < modulesList.size(); i++) {
         JsonObject module = modulesList.get(i).getAsJsonObject();
