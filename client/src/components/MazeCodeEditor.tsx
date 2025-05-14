@@ -92,30 +92,40 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
   };
 
   return (
-    <div>
-    <div className="container">
-      <Editor
-        height="400px"
-        language="java"
-        theme="vs-dark"
-        value={code}
-        onChange={(value) => setCode(value ?? "")}
-      />
-      <Maze playerPosition={playerPosition} grid={maze} />
-    </div>
-    <button
-        onClick={() =>
-          setCode(
-            `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
-          )
-        }
-      >
-        Clear Code
-      </button>
-      <button onClick={handleRun}>Run Code</button>
-      <pre>{output}</pre>
-    </div>
-    
+    <>
+      <div className="maze-container">
+        {/* Maze visualization above code editor */}
+        <Maze playerPosition={playerPosition} grid={maze} />
+        
+        {/* Code editor */}
+        <div className="editor-container">
+          <Editor
+            height="400px"
+            language="java"
+            theme="vs-dark"
+            value={code}
+            onChange={(value) => setCode(value ?? "")}
+          />
+        </div>
+      </div>
+      
+      {/* Control buttons */}
+      <div className="control-buttons">
+        <button
+          onClick={() =>
+            setCode(
+              `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
+            )
+          }
+        >
+          Clear Code
+        </button>
+        <button onClick={handleRun}>Run Code</button>
+      </div>
+      
+      {/* Output display */}
+      <pre className="output-display">{output}</pre>
+    </>
   );
   function parseCommand(input: string): string[] {
     return input.split(",").map(item => item.trim());
@@ -179,43 +189,6 @@ const MazeCodeEditor = (props: CodeEditorProps) => {
       }
     }
   }
-
-  return (
-    <>
-      <div className="maze-container">
-        {/* Maze visualization above code editor */}
-        <Maze playerPosition={playerPosition} grid={maze} />
-        
-        {/* Code editor */}
-        <div className="editor-container">
-          <Editor
-            height="400px"
-            language="java"
-            theme="vs-dark"
-            value={code}
-            onChange={(value) => setCode(value ?? "")}
-          />
-        </div>
-      </div>
-      
-      {/* Control buttons */}
-      <div className="control-buttons">
-        <button
-          onClick={() =>
-            setCode(
-              `public class Main {\n public static void main(String[] args) {\n ${props.initialCode} \n}      \n}`
-            )
-          }
-        >
-          Clear Code
-        </button>
-        <button onClick={handleRun}>Run Code</button>
-      </div>
-      
-      {/* Output display */}
-      <pre className="output-display">{output}</pre>
-    </>
-  );
 };
 
 export default MazeCodeEditor;

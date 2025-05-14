@@ -202,7 +202,7 @@ export const Q16: FormatQ = {
 
 //USING THESE QUESTIONS FOR THE SURVEY TRAINING DATA
 export const Q17: FormatQ = {
-  id: 17,
+  id: 1,
   question: "int a = 5;\ndouble b = 2;\nSystem.out.println(a / b);",
   answerChoices: [
     "2",
@@ -215,7 +215,7 @@ export const Q17: FormatQ = {
 };
 
 export const Q18: FormatQ = {
-  id: 18,
+  id: 2,
   question: "What does the expression 10 % 3 evaluate to in Java?",
   answerChoices: [
     "3",
@@ -228,7 +228,7 @@ export const Q18: FormatQ = {
 };
 
 export const Q19: FormatQ = {
-  id: 19,
+  id: 3,
   question: "int x = 10;\nif (x > 5) {\n  System.out.println(\"Greater than 5\");\n}\nWhat is the output?",
   answerChoices: [
     "x > 5",
@@ -241,7 +241,7 @@ export const Q19: FormatQ = {
 };
 
 export const Q20: FormatQ = {
-  id: 20,
+  id: 4,
   question: "Which method signature correctly defines a method that takes two integers and returns nothing?",
   answerChoices: [
     "void sum(int a, int b)",
@@ -254,7 +254,7 @@ export const Q20: FormatQ = {
 };
 
 export const Q21: FormatQ = {
-  id: 21,
+  id: 5,
   question: "Which of the following is NOT a valid return type in Java?",
   answerChoices: [
     "int",

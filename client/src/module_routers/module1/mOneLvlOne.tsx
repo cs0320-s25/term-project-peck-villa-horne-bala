@@ -55,7 +55,7 @@ export function MOneLvlOne() {
           </p>
           <p>
             The next module we will learn about types but for this demonstration
-            we will start with the
+            we will start with the{" "}
             <span className="code-inline">int</span> type which tells Java that
             you are trying to store a non-decimal number.
           </p>
@@ -84,18 +84,18 @@ export function MOneLvlOne() {
 
           <div className="task-highlight">
             <strong>Task:</strong> Try on your own creating an int type variable
-            called num that stores the value 1000 and print it!
+            called <span className="code-inline">num</span> that stores the value 1000 and print it!
           </div>
         </div>
 
         <div className="editor-box">
-            <CodeEditor
-              initialCode=""
-              questionId="module01_level01"
-              level={levelInfo}
-              modules={modulesList}
-              setLevelCompletionStatus={setLevelCompletionStatus}
-            />
+          <CodeEditor
+            initialCode=""
+            questionId="module01_level01"
+            level={levelInfo}
+            modules={modulesList}
+            setLevelCompletionStatus={setLevelCompletionStatus}
+          />
         </div>
       </div>
 

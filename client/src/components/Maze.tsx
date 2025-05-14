@@ -22,7 +22,7 @@ const Maze: React.FC<MazeProps> = ({ grid, playerPosition }) => {
         <div
           className="player"
           style={{
-            transform: `translate(${playerPosition.col * 25}px, ${playerPosition.row * 25}px)`,
+            transform: `translate(${playerPosition.col * 25 + 2.5}px, ${playerPosition.row * 25 + 2.5}px)`,
           }}
         />
       </div>
