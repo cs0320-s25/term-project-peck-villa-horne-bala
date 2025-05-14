@@ -3,7 +3,9 @@ package Server.Survey;
 import DecisionTree.DecisionTree;
 import Parser.Parser;
 import Storage.StorageInterface;
+import com.google.gson.Gson;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,16 +23,59 @@ public class SurveyResultsHandler implements Route {
 
   @Override
   public Object handle(Request request, Response response) throws Exception {
-    String uid = request.queryParams("uid");
-    String surveyResponse = request.queryParams("response");
-    Parser parser = new Parser(new StringReader(surveyResponse));
-    List<String> parsedResponse = parser.parse().get(0);
-    DecisionTree decisionTree = new DecisionTree("survey_data/survey-training-dataset.csv");
-    String placement = decisionTree.getDecision(parsedResponse);
-
-
     Map<String, Object> responseMap = new HashMap<>();
-    responseMap.put("response_type", "success");
+    try {
+      String uid = request.queryParams("uid");
+      String surveyResponse = request.queryParams("response");
+      Parser parser = new Parser(new StringReader(surveyResponse));
+      List<String> parsedResponse = parser.parse().get(0);
+      DecisionTree decisionTree = new DecisionTree("survey_data/survey-training-dataset.csv");
+      String placement = decisionTree.getDecision(parsedResponse);
+      Double placementValue = Double.parseDouble(placement);
+//      List<Map<String, Object>> modules = this.storage.getCollection(uid, "modules");
+      HashMap<String, HashMap<String, ArrayList<String>>> modulesToLevels = new HashMap<>();
+
+      Parser moduleParser = new Parser("module_data/module-data.csv");
+      List<List<String>> parsedModules = moduleParser.parse();
+
+      for (int i = 0; i < Math.floor(placementValue); i++) {
+        List<String> module = parsedModules.get(i);
+
+//        Map<String, Object> module = modules.get(i);
+        String moduleName = module.get(0);
+//        List<Map<String, Object>> levels = (List<Map<String, Object>>) module.get("levels");
+
+        // Initialize level-to-properties map per module
+        HashMap<String, ArrayList<String>> levelNameToProperties = new HashMap<>();
+
+        for (int j = 0; j < (int) (placementValue * 10) % 10; j++) {
+//          Map<String, Object> level = levels.get(j);
+          String levelName = module.get(j + 1);
+          String lockedStatus = "Unlocked";
+          String completionStatus = "Complete";
+
+          ArrayList<String> levelProperties = new ArrayList<>();
+          levelProperties.add(lockedStatus);
+          levelProperties.add(completionStatus);
+          levelNameToProperties.put(levelName, levelProperties);
+        }
+        modulesToLevels.put(moduleName, levelNameToProperties);
+      }
+
+      Map<String, Object> data = new HashMap<>();
+      Gson gson = new Gson();
+      String modulesJson = gson.toJson(modulesToLevels);
+      data.put("modules", modulesJson);
+
+      this.storage.addDocument(uid, "modules", "progress", data);
+
+      responseMap.put("status", "success");
+      responseMap.put("placement", placement);
+    } catch (Exception e) {
+      e.printStackTrace();
+      responseMap.put("status", "error");
+      responseMap.put("message", e.getMessage());
+    }
     return responseMap;
   }
 }
