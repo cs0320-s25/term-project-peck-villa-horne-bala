@@ -179,10 +179,38 @@ export const storeModuleList = async (user: string, modules: ModuleInfo[]) => {
   }
 };
 
-export const sendSurveyResults = async (user: string, responses: number[], surveyAnswerKey: number[]) => {
+export const sendSurveyResults = async (user: string, setModulesList: Dispatch<SetStateAction<ModuleInfo[]>>,responses: number[], modulesList: ModuleInfo[], surveyAnswerKey: number[]) => {
   try {
     const responseString = responses.join('|');
-    const response = await fetch(`http://localhost:3232/SurveyResults?uid=${user}&response=${responses}`);
+    const response = await fetch(`http://localhost:3232/SurveyResults?uid=${user}&response=${responseString}`);
+    if (response.ok){
+      var data = await response.json();
+      data = JSON.parse(data);
+      console.log("modules list from survey api:", data.modulesList)
+      modulesList.forEach((module) => {
+        const backendModule = data.modulesList[module.name];
+        if (backendModule) {
+          module.levels = module.levels.map((level) => {
+            const backendLevel = backendModule[level.levelName];
+            if (backendLevel) {
+              return {
+                ...level,
+                locked: backendLevel[0],
+                completionStatus: backendLevel[1],
+              };
+            }
+            console.log("level from what is supposed to be from api call" + level )
+            return level;
+          });
+        }
+      });
+
+      
+      console.log("Modules list updated:", modulesList);
+      setModulesList(modulesList);
+    }
+   
+
     console.log("Survey results sent successfully:" + response.status);
   } catch (error) {
     console.error("Error sending survey results:", error);

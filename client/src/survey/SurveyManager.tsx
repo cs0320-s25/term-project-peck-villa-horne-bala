@@ -6,7 +6,7 @@ import {
   SetStateAction,
 } from "react";
 import SurveyQuestionManager from "./SurveyQuesManager";
-import { Status } from "../types";
+import { ModuleInfo, Status } from "../types";
 import { loadModules } from "../home_screen/ModuleApi";
 import { useUser } from "@clerk/clerk-react";
 import { populateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
@@ -22,6 +22,7 @@ export enum SurveyStatus {
 
 interface SurveyProps {
   setMode: Dispatch<SetStateAction<Status>>;
+  setModulesList: Dispatch<SetStateAction<ModuleInfo[]>>
 }
 /**
  * This function basically oversees the flow of the survey life, so from instructions, to taking the questions, to survey results
@@ -29,7 +30,9 @@ interface SurveyProps {
  * @returns
  */
 export function Survey(props: SurveyProps) {
+  const [moduleList, setModuleList] = useState<ModuleInfo[]>([]);
   const { user } = useUser();
+
 
   const [surveyStatus, setSurveyStatus] = useState<SurveyStatus>(
     SurveyStatus.Intro
@@ -70,6 +73,7 @@ export function Survey(props: SurveyProps) {
 
       {surveyStatus == SurveyStatus.TakingSurvey && (
         <SurveyQuestionManager
+          setModulesList = {setModuleList}
           setSurveyMode={setSurveyStatus}
         ></SurveyQuestionManager>
       )}

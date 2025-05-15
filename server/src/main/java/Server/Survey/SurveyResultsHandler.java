@@ -2,6 +2,7 @@ package Server.Survey;
 
 import DecisionTree.DecisionTree;
 import Parser.Parser;
+import Server.Utils;
 import Storage.StorageInterface;
 import com.google.gson.Gson;
 import java.io.StringReader;
@@ -62,18 +63,19 @@ public class SurveyResultsHandler implements Route {
 
       Map<String, Object> data = new HashMap<>();
       Gson gson = new Gson();
-      String modulesJson = gson.toJson(modulesToLevels);
+      String modulesJson = gson.toJson(modulesToLevels.values());
       data.put("modules", modulesJson);
 
       this.storage.addDocument(uid, "modules", "progress", data);
 
       responseMap.put("status", "success");
       responseMap.put("placement", placement);
+      responseMap.put("modulesList", modulesJson);
     } catch (Exception e) {
       e.printStackTrace();
       responseMap.put("status", "error");
       responseMap.put("message", e.getMessage());
     }
-    return responseMap;
+    return Utils.toMoshiJson(responseMap);
   }
 }

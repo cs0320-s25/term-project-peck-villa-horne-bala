@@ -14,12 +14,17 @@ import { parseModuleList } from "./module_assembler/populate_modules/ModuleData"
 import "../styles/Homescreen.css";
 import { populateSurvey } from "../survey/populate_survey/PopulateSurveyData";
 
-export function Homescreen() {
+interface HomeScreenProps {
+  moduleList: ModuleInfo[]
+}
+
+export function Homescreen(props: HomeScreenProps) {
   const [moduleList, setModuleList] = useState<ModuleInfo[]>([]);
   const { user } = useUser();
 
   // this updates the moduleList using local storage or firestore based on whether there is something in the local storage
   useEffect(() => {
+    if (moduleList!== props.moduleList){
     if (user?.id) {
       console.log(user.id)
       const cachedModules = localStorage.getItem(user.id);
@@ -42,6 +47,9 @@ export function Homescreen() {
       }
     } else {
       localStorage.clear();
+    }}
+    else{
+      setModuleList(props.moduleList);
     }
   }, [user]);
 

@@ -11,18 +11,19 @@ import {
 } from "react";
 import Question from "../components/Question";
 import { SurveyStatus } from "./SurveyManager";
-import { SurveyManagerProps } from "../types";
+import { ModuleInfo, SurveyManagerProps } from "../types";
 import { FormatQ } from "../types";
 import { useUser } from "@clerk/clerk-react";
 import {updateFirestoreUserSurveyStatus} from "./SurveyApi";
 import "../styles/QuestionCards.css"
-import { sendSurveyResults } from "../home_screen/module_assembler/populate_modules/ModuleData";
+import { populateModuleList, sendSurveyResults, storeModuleList, updateModuleList } from "../home_screen/module_assembler/populate_modules/ModuleData";
 /**
  * This function is in charge of going through the survey questions.
  * @param props 
  * @returns 
  */
 export function SurveyQuestionManager(props: SurveyManagerProps) {
+  const [moduleList, setModuleList] = useState<ModuleInfo[]>([]);
   const [questionBank, setQuestionBank] = useState<FormatQ[]>([]);
   const [responses, setResponses] = useState<number[]>([]);
   const [currQ, setCurrQ] = useState<FormatQ | null>();
@@ -82,8 +83,12 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
           const surveyAnswerKey = populateSurveyAnswerChoices();
           console.log("survey answer key: "+ surveyAnswerKey);
           console.log("responses: " + responses);
+          var modulesList: ModuleInfo[] = populateModuleList()
           updateFirestoreUserSurveyStatus(user.id);
-          sendSurveyResults(user.id, responses, surveyAnswerKey);
+          sendSurveyResults(user.id, setModuleList, responses, modulesList, surveyAnswerKey);
+         
+          // modulesList = await updateModuleList(user.id, modulesList);
+
   
 
         }

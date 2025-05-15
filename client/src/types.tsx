@@ -75,6 +75,7 @@ export interface QuestionProps {
 
 export interface SurveyManagerProps {
   setSurveyMode: Dispatch<SetStateAction<SurveyStatus>>;
+  setModulesList: Dispatch<SetStateAction<ModuleInfo[]>>
 }
 
 const moduleNameArray: string[] = [

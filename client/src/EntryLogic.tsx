@@ -26,8 +26,8 @@ export function Intro() {
  
   return (
     <div className="main">
-      {mode == Status.Homescreen && <Homescreen></Homescreen>}
-      {mode == Status.Survey && <Survey setMode={setMode}></Survey>}
+      {mode == Status.Homescreen && <Homescreen moduleList={moduleList}></Homescreen>}
+      {mode == Status.Survey && <Survey setModulesList= {setModuleList}setMode={setMode}></Survey>}
     </div>
   );
 }
