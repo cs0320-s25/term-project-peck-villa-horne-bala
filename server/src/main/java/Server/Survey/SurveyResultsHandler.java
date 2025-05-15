@@ -63,7 +63,7 @@ public class SurveyResultsHandler implements Route {
 
       Map<String, Object> data = new HashMap<>();
       Gson gson = new Gson();
-      String modulesJson = gson.toJson(modulesToLevels.values());
+      String modulesJson = gson.toJson(modulesToLevels);
       data.put("modules", modulesJson);
 
       this.storage.addDocument(uid, "modules", "progress", data);

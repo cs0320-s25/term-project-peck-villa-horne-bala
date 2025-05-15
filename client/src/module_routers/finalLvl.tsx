@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Maze.css";
 import "../styles/Module.css";import { useUser } from "@clerk/clerk-react";
 import { ModuleInfo } from "../types";
-import { Locked } from "../types";
 
 
 export function finalLvl() {
@@ -18,10 +17,6 @@ export function finalLvl() {
   const levelIndex = 1;
   const {user}= useUser();
   const[modulesList, setModulesList]= useState<ModuleInfo[]>(populateModuleList());
-  if(modulesList[3].levels[2].locked === Locked.Unlocked){
-    
-    modulesList[4].levels[0].locked === Locked.Unlocked;
-  }
   
   useEffect(() => {
     if (user?.id) {

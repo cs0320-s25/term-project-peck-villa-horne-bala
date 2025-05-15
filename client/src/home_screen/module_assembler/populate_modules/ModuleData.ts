@@ -185,13 +185,17 @@ export const sendSurveyResults = async (user: string, setModulesList: Dispatch<S
     const response = await fetch(`http://localhost:3232/SurveyResults?uid=${user}&response=${responseString}`);
     if (response.ok){
       var data = await response.json();
-      data = JSON.parse(data);
+      console.log(data);
+      // data = JSON.parse(data);
       console.log("modules list from survey api:", data.modulesList)
+      const surveyModulesJSON = JSON.parse(data.modulesList);
+      console.log(surveyModulesJSON);
       modulesList.forEach((module) => {
-        const backendModule = data.modulesList[module.name];
+        const backendModule = surveyModulesJSON[module.name];
         if (backendModule) {
           module.levels = module.levels.map((level) => {
             const backendLevel = backendModule[level.levelName];
+            console.log("level from what is supposed to be from api call" + level )
             if (backendLevel) {
               return {
                 ...level,
@@ -199,7 +203,7 @@ export const sendSurveyResults = async (user: string, setModulesList: Dispatch<S
                 completionStatus: backendLevel[1],
               };
             }
-            console.log("level from what is supposed to be from api call" + level )
+            
             return level;
           });
         }

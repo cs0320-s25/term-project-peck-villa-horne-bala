@@ -85,11 +85,9 @@ export function SurveyQuestionManager(props: SurveyManagerProps) {
           console.log("responses: " + responses);
           var modulesList: ModuleInfo[] = populateModuleList()
           updateFirestoreUserSurveyStatus(user.id);
-          sendSurveyResults(user.id, setModuleList, responses, modulesList, surveyAnswerKey);
+          await sendSurveyResults(user.id, setModuleList, responses, modulesList, surveyAnswerKey);
          
-          // modulesList = await updateModuleList(user.id, modulesList);
-
-  
+          modulesList = await updateModuleList(user.id, modulesList);
 
         }
         props.setSurveyMode(SurveyStatus.Complete);
