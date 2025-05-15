@@ -1,0 +1,46 @@
+
+.level-card {
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.level-card span {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.level-card svg {
+  color: var(--accent-color);
+  margin: 0 1rem;
+}
+
+.level-card-button {
+  background-color: var(--accent-color);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.level-card-button:hover {
+  background-color: #6366f1;
+}
+
+.level-name{
+  text-align: left;
+  font-size: 1.3rem;
+}
+
+
+/* .level-card .lock-icon {
+  color: #6366f1 !important;
+} */
